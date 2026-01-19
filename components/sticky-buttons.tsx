@@ -66,6 +66,8 @@ export default function StickyButtons() {
       >
         <a
           href={`viber://chat?number=${viberNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Viber"
         >
           <MessageCircle className="h-5 w-5" />

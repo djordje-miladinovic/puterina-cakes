@@ -12,7 +12,7 @@ We need a modern, performant framework for building the Puterina Cakes website. 
 - File-based routing
 
 ## Decision
-We will use Next.js 16 with the App Router architecture for the following reasons:
+We will use Next.js with the App Router architecture for the following reasons:
 - Native support for React Server Components
 - Improved data fetching patterns with async/await
 - Better file-based routing with layouts
