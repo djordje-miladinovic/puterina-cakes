@@ -7,7 +7,7 @@ This document provides an overview of the implementation completed for the Puter
 All requirements from the problem statement have been successfully implemented:
 
 ### ✅ Core Technologies
-- **Next.js 16** with App Router
+- **Next.js** with App Router
 - **TypeScript** for type safety
 - **Tailwind CSS** for styling
 - **shadcn/ui** for UI components
