@@ -37,13 +37,18 @@ interface Product {
   allergens: string[]
 }
 
-// Mock product data (replace with Sanity query)
+// Mock product data
+// TODO: Replace with actual Sanity query by:
+// 1. Uncommenting the query below
+// 2. Importing the client: import { client } from "@/sanity/client"
+// 3. Removing the mockProducts array
+// 4. Returning the fetched product
+// Example query:
+// const product = await client.fetch(
+//   `*[_type == "product" && slug.current == $slug][0]`,
+//   { slug }
+// )
 const getProduct = async (slug: string): Promise<Product | null> => {
-  // TODO: Replace with actual Sanity query
-  // const product = await client.fetch(
-  //   `*[_type == "product" && slug.current == $slug][0]`,
-  //   { slug }
-  // )
   
   const mockProducts: Record<string, Product> = {
     "cokoladna-torta": {

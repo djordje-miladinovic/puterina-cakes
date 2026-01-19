@@ -28,7 +28,8 @@ export const product = {
       name: "pricePerKg",
       title: "Price per KG (RSD)",
       type: "number",
-      validation: (Rule: { required: () => { positive: () => unknown } }) => Rule.required().positive(),
+      validation: (Rule: { required: () => { positive: () => unknown } }) =>
+        Rule.required().positive(),
     },
     {
       name: "image",

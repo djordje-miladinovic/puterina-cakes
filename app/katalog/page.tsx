@@ -6,7 +6,10 @@ export const metadata: Metadata = {
   description: "Pregledajte našu kompletnu ponudu torti i kolača",
 }
 
-// Mock products for demonstration (replace with Sanity query)
+// Mock products for demonstration
+// TODO: Replace with Sanity query by:
+// 1. Uncommenting and using: const products = await client.fetch(`*[_type == "product"]`)
+// 2. Removing the mockProducts array below
 const products = [
   {
     _id: "1",
