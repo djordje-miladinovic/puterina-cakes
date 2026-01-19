@@ -20,7 +20,7 @@ const products = [
   },
   {
     _id: "2",
-    title: "Vocna torta",
+    title: "Voćna torta",
     slug: { current: "vocna-torta" },
     pricePerKg: 2300,
     description: "Osvežavajuća torta sa sezonskim voćem",
