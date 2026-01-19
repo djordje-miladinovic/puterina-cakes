@@ -11,13 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-
-const navigation = [
-  { name: "Početna", href: "/" },
-  { name: "Katalog", href: "/katalog" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Kontakt", href: "/kontakt" },
-]
+import { NAVIGATION } from "@/lib/constants"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -32,7 +26,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-6">
-            {navigation.map((item) => (
+            {NAVIGATION.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -46,17 +40,17 @@ export default function Header() {
           {/* Mobile Menu */}
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Otvori meni">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="w-[95vw] max-w-md transform-gpu">
+            <DialogContent className="w-[95vw] max-w-md transform-gpu" aria-describedby={undefined}>
               <DialogHeader>
                 <DialogTitle>Meni</DialogTitle>
               </DialogHeader>
               <nav className="flex flex-col gap-4 mt-4">
-                {navigation.map((item) => (
+                {NAVIGATION.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}

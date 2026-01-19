@@ -9,8 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-
-const CANONICAL_BASE = "https://puterinacakes.rs"
+import { CANONICAL_BASE, CONTACT } from "@/lib/constants"
 
 // Allergen icon mapping
 const allergenIcons: Record<string, LucideIcon> = {
@@ -48,50 +47,60 @@ interface Product {
 //   `*[_type == "product" && slug.current == $slug][0]`,
 //   { slug }
 // )
-const getProduct = async (slug: string): Promise<Product | null> => {
-  
-  const mockProducts: Record<string, Product> = {
-    "cokoladna-torta": {
-      title: "Čokoladna torta",
-      slug: { current: "cokoladna-torta" },
-      pricePerKg: 2500,
-      description:
-        "Bogata čokoladna torta sa višeslojnom kremom. Savršena kombinacija tamne čokolade i kremaste punjene.",
-      storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 3 dana.",
-      ingredients:
-        "Brašno, šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin.",
-      nutrition: {
-        energy: 380,
-        protein: 6,
-        carbs: 45,
-        fat: 18,
-        fiber: 3,
-        salt: 0.5,
-      },
-      allergens: ["gluten", "milk", "eggs"],
-    },
-    "vocna-torta": {
-      title: "Voćna torta",
-      slug: { current: "vocna-torta" },
-      pricePerKg: 2300,
-      description:
-        "Osvežavajuća torta sa sezonskim voćem. Lagana biskvit osnova sa svežim voćem i kremom.",
-      storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 2 dana.",
-      ingredients:
-        "Brašno, šećer, jaja, putar, mleko, sezonsko voće, šlag, prašak za pecivo, so, vanilin.",
-      nutrition: {
-        energy: 320,
-        protein: 5,
-        carbs: 42,
-        fat: 14,
-        fiber: 2,
-        salt: 0.4,
-      },
-      allergens: ["gluten", "milk", "eggs"],
-    },
-  }
 
+// Mock product slugs for static generation
+// TODO: Replace with actual Sanity query when CMS is connected
+const PRODUCT_SLUGS = ["cokoladna-torta", "vocna-torta"]
+
+const mockProducts: Record<string, Product> = {
+  "cokoladna-torta": {
+    title: "Čokoladna torta",
+    slug: { current: "cokoladna-torta" },
+    pricePerKg: 2500,
+    description:
+      "Bogata čokoladna torta sa višeslojnom kremom. Savršena kombinacija tamne čokolade i kremaste punjene.",
+    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 3 dana.",
+    ingredients:
+      "Brašno, šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin.",
+    nutrition: {
+      energy: 380,
+      protein: 6,
+      carbs: 45,
+      fat: 18,
+      fiber: 3,
+      salt: 0.5,
+    },
+    allergens: ["gluten", "milk", "eggs"],
+  },
+  "vocna-torta": {
+    title: "Voćna torta",
+    slug: { current: "vocna-torta" },
+    pricePerKg: 2300,
+    description:
+      "Osvežavajuća torta sa sezonskim voćem. Lagana biskvit osnova sa svežim voćem i kremom.",
+    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 2 dana.",
+    ingredients:
+      "Brašno, šećer, jaja, putar, mleko, sezonsko voće, šlag, prašak za pecivo, so, vanilin.",
+    nutrition: {
+      energy: 320,
+      protein: 5,
+      carbs: 42,
+      fat: 14,
+      fiber: 2,
+      salt: 0.4,
+    },
+    allergens: ["gluten", "milk", "eggs"],
+  },
+}
+
+const getProduct = async (slug: string): Promise<Product | null> => {
   return mockProducts[slug] || null
+}
+
+// Generate static params for all known product slugs
+// TODO: Replace with Sanity query when CMS is connected
+export async function generateStaticParams() {
+  return PRODUCT_SLUGS.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -153,7 +162,7 @@ export default async function ProizvodPage({
           </p>
 
           <Button size="lg" className="w-full md:w-auto" asChild>
-            <a href={`tel:+381653799334`}>Poručite Odmah</a>
+            <a href={`tel:${CONTACT.phone}`}>Poručite Odmah</a>
           </Button>
 
           {/* Allergens */}

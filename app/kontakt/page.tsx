@@ -1,16 +1,12 @@
 import type { Metadata } from "next"
 import { Phone, Mail, MapPin, Instagram, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CONTACT, WORKING_HOURS } from "@/lib/constants"
 
 export const metadata: Metadata = {
   title: "Kontakt",
   description: "Kontaktirajte Puterina Cakes",
 }
-
-const PHONE = "+381653799334"
-const EMAIL = "info@puterinacakes.rs"
-const ADDRESS = "Beograd, Srbija"
-const INSTAGRAM = "https://instagram.com/puterinacakes"
 
 export default function KontaktPage() {
   return (
@@ -26,10 +22,10 @@ export default function KontaktPage() {
               <div>
                 <h3 className="font-semibold mb-2">Telefon</h3>
                 <a
-                  href={`tel:${PHONE}`}
+                  href={`tel:${CONTACT.phone}`}
                   className="text-muted-foreground hover:text-primary"
                 >
-                  {PHONE}
+                  {CONTACT.phone}
                 </a>
               </div>
             </div>
@@ -39,10 +35,10 @@ export default function KontaktPage() {
               <div>
                 <h3 className="font-semibold mb-2">Email</h3>
                 <a
-                  href={`mailto:${EMAIL}`}
+                  href={`mailto:${CONTACT.email}`}
                   className="text-muted-foreground hover:text-primary"
                 >
-                  {EMAIL}
+                  {CONTACT.email}
                 </a>
               </div>
             </div>
@@ -51,7 +47,7 @@ export default function KontaktPage() {
               <MapPin className="h-6 w-6 text-primary mt-1" />
               <div>
                 <h3 className="font-semibold mb-2">Adresa</h3>
-                <p className="text-muted-foreground">{ADDRESS}</p>
+                <p className="text-muted-foreground">{CONTACT.address}</p>
               </div>
             </div>
 
@@ -60,12 +56,12 @@ export default function KontaktPage() {
               <div>
                 <h3 className="font-semibold mb-2">Instagram</h3>
                 <a
-                  href={INSTAGRAM}
+                  href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary"
                 >
-                  @puterinacakes
+                  {CONTACT.instagramHandle}
                 </a>
               </div>
             </div>
@@ -76,7 +72,7 @@ export default function KontaktPage() {
           <h2 className="text-2xl font-semibold mb-6">Načini Komunikacije</h2>
           <div className="space-y-4">
             <Button asChild className="w-full justify-start" size="lg">
-              <a href={`tel:${PHONE}`}>
+              <a href={`tel:${CONTACT.phone}`}>
                 <Phone className="mr-2 h-5 w-5" />
                 Pozovite Nas
               </a>
@@ -88,7 +84,7 @@ export default function KontaktPage() {
               size="lg"
             >
               <a
-                href={`https://wa.me/${PHONE.replace(/\+/g, "")}`}
+                href={`https://wa.me/${CONTACT.phone.replace(/\+/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -102,7 +98,7 @@ export default function KontaktPage() {
               className="w-full justify-start bg-purple-600 hover:bg-purple-700"
               size="lg"
             >
-              <a href={`viber://chat?number=${PHONE.replace(/\+/g, "")}`}>
+              <a href={`viber://chat?number=${CONTACT.phone.replace(/\+/g, "")}`}>
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Viber
               </a>
@@ -115,7 +111,7 @@ export default function KontaktPage() {
               size="lg"
             >
               <a
-                href={INSTAGRAM}
+                href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -128,11 +124,11 @@ export default function KontaktPage() {
           <div className="mt-8 p-6 bg-muted rounded-lg">
             <h3 className="font-semibold mb-2">Radno Vreme</h3>
             <p className="text-sm text-muted-foreground">
-              Ponedeljak - Petak: 9:00 - 18:00
+              {WORKING_HOURS.weekdays}
               <br />
-              Subota: 10:00 - 16:00
+              {WORKING_HOURS.saturday}
               <br />
-              Nedelja: Po dogovoru
+              {WORKING_HOURS.sunday}
             </p>
           </div>
         </section>

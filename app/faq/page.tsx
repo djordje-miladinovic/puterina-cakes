@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { CONTACT } from "@/lib/constants"
 
 export const metadata: Metadata = {
   title: "Često Postavljana Pitanja",
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
 const faqItems = [
   {
     question: "Kako mogu da poručim tortu?",
-    answer:
-      "Možete nas kontaktirati putem telefona (+381653799334), WhatsApp-a, Viber-a ili kroz našu kontakt formu. Preporučujemo da narudžbinu napravite najmanje 2-3 dana unapred.",
+    answer: `Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili kroz našu kontakt formu. Preporučujemo da narudžbinu napravite najmanje 2-3 dana unapred.`,
   },
   {
     question: "Da li vršite dostavu?",

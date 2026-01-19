@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import StickyButtons from "@/components/sticky-buttons";
+import { CANONICAL_BASE } from "@/lib/constants";
 
-const CANONICAL_BASE = "https://puterinacakes.rs";
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_BASE),
@@ -21,9 +27,12 @@ export const metadata: Metadata = {
     "cakes",
     "dostava",
     "Beograd",
+    "ručna izrada",
+    "premium kolači",
   ],
   authors: [{ name: "Puterina Cakes" }],
   creator: "Puterina Cakes",
+  publisher: "Puterina Cakes",
   openGraph: {
     type: "website",
     locale: "sr_RS",
@@ -33,9 +42,22 @@ export const metadata: Metadata = {
     description:
       "Ručno pravljene premium torte i kolači izrađeni sa ljubavlju i pažnjom.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Puterina Cakes - Premium Torte i Kolači",
+    description:
+      "Ručno pravljene premium torte i kolači izrađeni sa ljubavlju i pažnjom.",
+  },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   alternates: {
     canonical: CANONICAL_BASE,
@@ -49,9 +71,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sr">
-      <body className="antialiased">
+      <body className="antialiased flex min-h-screen flex-col">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="flex-1">{children}</main>
+        <Footer />
         <StickyButtons />
       </body>
     </html>

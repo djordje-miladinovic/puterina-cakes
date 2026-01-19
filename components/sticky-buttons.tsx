@@ -2,9 +2,7 @@
 
 import { Instagram, Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const PHONE = "+381653799334"
-const INSTAGRAM_URL = "https://instagram.com/puterinacakes"
+import { CONTACT } from "@/lib/constants"
 
 export default function StickyButtons() {
   return (
@@ -13,11 +11,11 @@ export default function StickyButtons() {
       <Button
         asChild
         size="icon"
-        className="h-12 w-12 rounded-full shadow-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+        className="h-12 w-12 rounded-full shadow-lg bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
         title="Instagram"
       >
         <a
-          href={INSTAGRAM_URL}
+          href={CONTACT.instagram}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
@@ -33,7 +31,7 @@ export default function StickyButtons() {
         className="h-12 w-12 rounded-full shadow-lg bg-green-600 hover:bg-green-700"
         title="Telefon"
       >
-        <a href={`tel:${PHONE}`} aria-label="Pozovite nas">
+        <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
           <Phone className="h-5 w-5" />
         </a>
       </Button>
@@ -46,7 +44,7 @@ export default function StickyButtons() {
         title="WhatsApp"
       >
         <a
-          href={`https://wa.me/${PHONE.replace(/\+/g, "")}`}
+          href={`https://wa.me/${CONTACT.phone.replace(/\+/g, "")}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"
@@ -63,7 +61,7 @@ export default function StickyButtons() {
         title="Viber"
       >
         <a
-          href={`viber://chat?number=${PHONE.replace(/\+/g, "")}`}
+          href={`viber://chat?number=${CONTACT.phone.replace(/\+/g, "")}`}
           aria-label="Viber"
         >
           <MessageCircle className="h-5 w-5" />
