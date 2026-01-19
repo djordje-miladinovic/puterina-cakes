@@ -45,7 +45,7 @@ export default function Header() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="w-[95vw] max-w-md transform-gpu" aria-describedby={undefined}>
+            <DialogContent className="w-[95vw] max-w-md transform-gpu">
               <DialogHeader>
                 <DialogTitle>Meni</DialogTitle>
               </DialogHeader>
