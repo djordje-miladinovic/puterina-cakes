@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button"
 import { CONTACT } from "@/lib/constants"
 
 export default function StickyButtons() {
+  const phoneE164 = CONTACT.phone // npr "+381653799334"
+  const waPhone = phoneE164.replace("+", "")
+  const viberNumber = encodeURIComponent(phoneE164)
+
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
       {/* Instagram */}
@@ -31,7 +35,7 @@ export default function StickyButtons() {
         className="h-12 w-12 rounded-full shadow-lg bg-green-600 hover:bg-green-700"
         title="Telefon"
       >
-        <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
+        <a href={`tel:${phoneE164}`} aria-label="Pozovite nas">
           <Phone className="h-5 w-5" />
         </a>
       </Button>
@@ -44,7 +48,7 @@ export default function StickyButtons() {
         title="WhatsApp"
       >
         <a
-          href={`https://wa.me/${CONTACT.phone.replace(/\+/g, "")}`}
+          href={`https://wa.me/${waPhone}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"
@@ -61,7 +65,7 @@ export default function StickyButtons() {
         title="Viber"
       >
         <a
-          href={`viber://chat?number=${CONTACT.phone.replace(/\+/g, "")}`}
+          href={`viber://chat?number=${viberNumber}`}
           aria-label="Viber"
         >
           <MessageCircle className="h-5 w-5" />
