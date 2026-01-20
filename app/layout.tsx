@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StickyButtons from "@/components/sticky-buttons";
 import { CANONICAL_BASE } from "@/lib/constants";
+import { SanityLive } from "@/lib/sanity";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -76,6 +77,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyButtons />
+        <SanityLive />
       </body>
     </html>
   );

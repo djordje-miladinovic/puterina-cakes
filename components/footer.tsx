@@ -3,7 +3,7 @@ import { Instagram, Phone, Mail } from "lucide-react"
 import { CONTACT, NAVIGATION, WORKING_HOURS } from "@/lib/constants"
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = 2026;
 
   return (
     <footer className="border-t bg-muted/50">
