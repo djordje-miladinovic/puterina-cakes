@@ -15,15 +15,13 @@ export default function KontaktPage() {
 
       <div className="grid md:grid-cols-2 gap-8">
         <section>
-          <h2 className="text-2xl font-semibold mb-6">Kontaktirajte Nas</h2>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <Phone className="h-6 w-6 text-primary mt-1" />
               <div>
-                <h3 className="font-semibold mb-2">Telefon</h3>
                 <a
                   href={`tel:${CONTACT.phone}`}
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-muted-foreground hover:text-primary font-semibold mb-2"
                 >
                   {CONTACT.phone}
                 </a>
@@ -33,10 +31,9 @@ export default function KontaktPage() {
             <div className="flex items-start gap-4">
               <Mail className="h-6 w-6 text-primary mt-1" />
               <div>
-                <h3 className="font-semibold mb-2">Email</h3>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="text-muted-foreground hover:text-primary"
+                  className="font-semibold mb-2 text-muted-foreground hover:text-primary"
                 >
                   {CONTACT.email}
                 </a>
@@ -46,20 +43,18 @@ export default function KontaktPage() {
             <div className="flex items-start gap-4">
               <MapPin className="h-6 w-6 text-primary mt-1" />
               <div>
-                <h3 className="font-semibold mb-2">Adresa</h3>
-                <p className="text-muted-foreground">{CONTACT.address}</p>
+                <p className="font-semibold mb-2 text-muted-foreground">{CONTACT.address}</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
               <Instagram className="h-6 w-6 text-primary mt-1" />
               <div>
-                <h3 className="font-semibold mb-2">Instagram</h3>
                 <a
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary"
+                  className="font-semibold mb-2 text-muted-foreground hover:text-primary"
                 >
                   {CONTACT.instagramHandle}
                 </a>

@@ -39,24 +39,6 @@ const faqItems = [
   },
 ]
 
-const deklaracijaItems = [
-  {
-    question: "Nutritivne informacije",
-    answer:
-      "Sve nutritivne informacije (energetska vrednost, proteini, ugljeni hidrati, masti, vlakna, so) za svaki proizvod su navedene na stranici proizvoda i iskazane su na 100g proizvoda.",
-  },
-  {
-    question: "Alergeni",
-    answer:
-      "Naši proizvodi mogu sadržati: gluten, mleko, jaja, orašaste plodove, soju i susam. Detaljne informacije o alergenima za svaki proizvod su prikazane ikonama na stranici proizvoda.",
-  },
-  {
-    question: "Čuvanje proizvoda",
-    answer:
-      "Preporuke za čuvanje: čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja zavisi od vrste proizvoda i naveden je na pakovanju.",
-  },
-]
-
 export default function FaqPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
@@ -66,18 +48,6 @@ export default function FaqPage() {
         <Accordion type="single" collapsible className="w-full">
           {faqItems.map((item, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent>{item.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
-
-      <section>
-        <h2 className="text-3xl font-bold mb-6">Deklaracija</h2>
-        <Accordion type="single" collapsible className="w-full">
-          {deklaracijaItems.map((item, index) => (
-            <AccordionItem key={index} value={`dek-${index}`}>
               <AccordionTrigger>{item.question}</AccordionTrigger>
               <AccordionContent>{item.answer}</AccordionContent>
             </AccordionItem>
