@@ -2,11 +2,6 @@ import type { Metadata } from "next"
 import { Phone, Mail, MapPin, Instagram, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CONTACT, WORKING_HOURS } from "@/lib/constants"
-import { client as sanityClient } from "@/lib/sanity/client"
-
-const data = await sanityClient.fetch(`*[_type == "sanity.imageAsset"][0]`);
-console.log("SANITY TEST:", data);
-
 export const metadata: Metadata = {
   title: "Kontakt",
   description: "Kontaktirajte Puterina Cakes",
