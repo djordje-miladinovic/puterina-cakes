@@ -72,18 +72,18 @@ export const product = defineType({
       of: [
         defineArrayMember({
           type: 'string',
-          options: {
-            list: [
-              { title: 'Gluten', value: 'gluten' },
-              { title: 'Milk', value: 'milk' },
-              { title: 'Eggs', value: 'eggs' },
-              { title: 'Nuts', value: 'nuts' },
-              { title: 'Soy', value: 'soy' },
-              { title: 'Sesame', value: 'sesame' },
-            ],
-          },
         }),
       ],
+      options: {
+        list: [
+          { title: 'Gluten', value: 'gluten' },
+          { title: 'Milk', value: 'milk' },
+          { title: 'Eggs', value: 'eggs' },
+          { title: 'Nuts', value: 'nuts' },
+          { title: 'Soy', value: 'soy' },
+          { title: 'Sesame', value: 'sesame' },
+        ],
+      },
     }),
   ],
 })
