@@ -1,8 +1,9 @@
-import { createClient } from "next-sanity"
+import { createClient } from 'next-sanity'
 
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  apiVersion: "2025-01-19",
-  useCdn: process.env.NODE_ENV === "production",
+  projectId: 'uo9eeei7',
+  dataset: 'production',
+  apiVersion: '2025-01-19',
+  useCdn: true, // Set to false for server-side or if you need guaranteed fresh data
 })
+
