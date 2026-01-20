@@ -54,7 +54,7 @@ export default function KontaktPage() {
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=" font-semibold mb-2 text-muted-foreground hover:text-primary"
+                  className="font-semibold mb-2 text-muted-foreground hover:text-primary"
                 >
                   {CONTACT.instagramHandle}
                 </a>
