@@ -15,7 +15,7 @@ export default function StickyButtons() {
       <Button
         asChild
         size="icon"
-        className="h-12 w-12 rounded-full shadow-lg bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+        className="h-12 w-12 rounded-full shadow-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
         title="Instagram"
       >
         <a
