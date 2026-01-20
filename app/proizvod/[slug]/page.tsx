@@ -39,7 +39,7 @@ interface Product {
 // Mock product data
 // TODO: Replace with actual Sanity query by:
 // 1. Uncommenting the query below
-// 2. Importing the client: import { client } from "@/sanity/client"
+// 2. Importing the client: import { client } from "@/lib/sanity/client"
 // 3. Removing the mockProducts array
 // 4. Returning the fetched product
 // Example query:
