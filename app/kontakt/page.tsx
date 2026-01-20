@@ -43,7 +43,7 @@ export default function KontaktPage() {
             <div className="flex items-start gap-4">
               <MapPin className="h-6 w-6 text-primary mt-1" />
               <div>
-                <p className=" font-semibold mb-2 text-muted-foreground">{CONTACT.address}</p>
+                <p className="font-semibold mb-2 text-muted-foreground">{CONTACT.address}</p>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ export default function KontaktPage() {
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=" font-semibold mb-2 text-muted-foreground hover:text-primary"
+                  className="font-semibold mb-2 text-muted-foreground hover:text-primary"
                 >
                   {CONTACT.instagramHandle}
                 </a>
