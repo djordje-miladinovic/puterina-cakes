@@ -45,10 +45,6 @@ export default function ProductInfo({
   declaration,
 }: ProductInfoProps) {
   const phoneE164 = CONTACT.phone
-  const waPhone = phoneE164.replace("+", "")
-  const whatsappMessage = encodeURIComponent(
-    `Zdravo, zanima me torta ${title}. Da li biste mi mogli reći više o njoj?`
-  )
 
   // Format price with thousands separator
   const formattedPrice = pricePerKg.toLocaleString("sr-RS")
@@ -82,23 +78,7 @@ export default function ProductInfo({
           </a>
         </Button>
 
-        {/* Secondary CTAs */}
-        <Button 
-          size="lg" 
-          variant="outline" 
-          className="flex-1 min-w-[140px]"
-          asChild
-        >
-          <a
-            href={`https://wa.me/${waPhone}?text=${whatsappMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            WhatsApp
-          </a>
-        </Button>
-
+        {/* Secondary CTA */}
         <Button 
           size="icon"
           variant="outline"

@@ -86,11 +86,7 @@ Sajt ne sme da bude plastičan. Mora da ima teksturu (papir, brašno, potez špa
 Obavezna "O meni" sekcija koja priča priču o Puterini - kako je sve počelo, zašto puter, filozofija kvaliteta.
 > **Izvor**: pitanja-i-odgovori.ini
 
-### Princip 13: Smart Contact (WhatsApp Pre-fill)
-Dugme "Pošalji upit" otvara WhatsApp sa unapred upisanom porukom: "Zdravo, zanima me torta za [DATUM], sviđa mi se model..."
-> **Izvor**: pitanja-i-odgovori.ini
-
-### Princip 14: Vizuelni "Kako do Torte" Vodič
+### Princip 13: Vizuelni "Kako do Torte" Vodič
 Grafička sekcija koja objašnjava proces u 3 koraka (npr. 1. Izaberi ukus, 2. Pozovi nas, 3. Preuzmi/Dostava).
 > **Izvor**: aspoonfullasugar.com, pitanja-i-odgovori.ini
 
@@ -303,9 +299,7 @@ Vizuali i komunikacija naglašavaju puter krem, ne fondan. "Šta ne radimo" sekc
         
 Redosled (od gore ka dole):
 1. Phone (Poziv) - primarno
-2. WhatsApp
-3. Viber
-4. Instagram
+2. Instagram
 ```
 
 ---
@@ -325,7 +319,7 @@ Redosled (od gore ka dole):
 - **Naziv proizvoda** (h1)
 - **Cena** (RSD po kilogramu)
 - **Kratak opis**
-- **CTA dugme**: "Pošalji upit" (WhatsApp pre-fill)
+- **CTA dugme**: "Pošalji upit" preko telefona
 
 #### 3. Detalji Ispod Cene (Expandable/Accordion)
 

@@ -45,7 +45,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a. Biće nam zadovoljstvo da zajedno osmislimo Vašu savršenu tortu.`,
+            text: `Možete nas kontaktirati putem telefona (${CONTACT.phone}) ili Instagram DM-a. Biće nam zadovoljstvo da zajedno osmislimo Vašu savršenu tortu.`,
           },
         ],
       },
@@ -77,7 +77,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone}, Instagram DM-a (${CONTACT.instagramHandle}), WhatsApp-a ili Viber-a. Odgovaramo radnim danima od 08:00 do 20:00.`,
+            text: `Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone} ili Instagram DM-a (${CONTACT.instagramHandle}). Odgovaramo radnim danima od 08:00 do 20:00.`,
           },
         ],
       },
@@ -272,7 +272,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Dostupni smo za poruke i pozive radnim danima od 08:00 do 20:00. Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a.`,
+            text: `Dostupni smo za poruke i pozive radnim danima od 08:00 do 20:00. Možete nas kontaktirati putem telefona (${CONTACT.phone}) ili Instagram DM-a.`,
           },
         ],
       },
@@ -431,15 +431,19 @@ export default async function FaqPage() {
               Pozovite nas
             </a>
             <a
-              href={`https://wa.me/${CONTACT.phone.replace(/\+/g, "")}`}
+              href={CONTACT.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md bg-green-600 px-6 py-3 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              WhatsApp
+              Instagram
             </a>
-            <a
-              href={CONTACT.instagram}
+          </div>
+        </section>
+      </div>
+    </>
+  )
+}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"

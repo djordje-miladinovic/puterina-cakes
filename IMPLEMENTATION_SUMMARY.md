@@ -37,8 +37,6 @@ Implemented for two sections:
 Fixed position buttons in bottom-right corner with smooth hover effects:
 - **Instagram** button - Links to @puterinacakes
 - **Phone** button - Direct call to +381653799334
-- **WhatsApp** button - Opens WhatsApp chat
-- **Viber** button - Opens Viber chat
 
 All buttons use proper `tel:` and app-specific URL schemes.
 
@@ -206,8 +204,6 @@ All quality checks passed:
 
 All contact methods are properly integrated:
 - **Phone**: +381653799334 (tel: links)
-- **WhatsApp**: +381653799334 (wa.me links)
-- **Viber**: +381653799334 (viber:// links)
 - **Instagram**: @puterinacakes
 - **Email**: info@puterinacakes.rs (on contact page)
 

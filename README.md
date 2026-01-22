@@ -67,8 +67,7 @@ This project follows an **agile, milestone-based approach** to ensure steady pro
 - [ ] Mobile-responsive design
 
 #### Phase 3: Features & Polish 📋 (Upcoming)
-- [ ] Sticky contact buttons (Phone, WhatsApp, Viber, Instagram)
-- [ ] WhatsApp pre-fill integration
+- [ ] Sticky contact buttons (Phone, Instagram)
 - [ ] Image galleries with hover effects
 - [ ] Customer testimonials section
 - [ ] Performance optimization (Lighthouse > 90)
@@ -310,11 +309,9 @@ The site implements a **contact-first** approach (no e-commerce):
 
 - **Sticky Buttons**: Fixed in bottom-right corner
   1. 📞 Phone (primary)
-  2. 💬 WhatsApp
-  3. 📱 Viber
-  4. 📷 Instagram
+  2. � Instagram
 
-- **WhatsApp Pre-fill**: Inquiry button opens WhatsApp with pre-filled message:
+- **Direct Contact**: Inquiry buttons enable direct phone calls
   ```
   Zdravo, zanima me torta za [DATUM], 
   sviđa mi se model [PROIZVOD]...
@@ -329,7 +326,7 @@ The site implements a **contact-first** approach (no e-commerce):
 - [ ] Home page loads correctly
 - [ ] Products display from Sanity CMS
 - [ ] Product detail pages render with all information
-- [ ] Contact buttons work (WhatsApp pre-fill)
+- [ ] Contact buttons work
 - [ ] Mobile responsive on all pages
 - [ ] Images load optimized (WebP)
 - [ ] Navigation smooth (no fade animations)
@@ -400,8 +397,6 @@ This is a private project for Puterina Cakes. For development inquiries, please 
 
 ### Client (Puterina Cakes)
 - **Phone**: [+381 65 379 9334](tel:+381653799334)
-- **WhatsApp**: [+381 65 379 9334](https://wa.me/381653799334)
-- **Viber**: +381 65 379 9334
 - **Instagram**: [@puterinacakes](https://instagram.com/puterinacakes)
 - **Location**: Belgrade, Serbia
 

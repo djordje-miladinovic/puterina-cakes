@@ -33,7 +33,7 @@
 ### Success Metrics
 - Doubled order volume within 3-6 months
 - Reduced FAQ-related inquiries by 50%
-- Increased direct WhatsApp/phone inquiries
+- Increased direct phone inquiries
 - Improved brand perception as premium boutique
 
 ## Technical Architecture
@@ -83,8 +83,7 @@ The complete design system is documented in `/docs/design/design-dna.md`, includ
 10. Vertical scroll galleries
 11. Textured, authentic feel (not plastic)
 12. Storytelling section (brand story)
-13. Smart contact (WhatsApp pre-fill)
-14. Visual "How to Order" guide
+13. Visual "How to Order" guide
 
 ### Color Palette
 
@@ -140,12 +139,12 @@ See `/docs/design/design-dna.md` for complete reference mapping and specificatio
   - Nutritional values (per 100g)
   - Allergen icons
   - Storage instructions
-- WhatsApp pre-fill inquiry button
+- Contact inquiry buttons
 - Related products
 
 #### 4. Contact Page (`/kontakt`)
 - Primary CTA: Phone call button
-- Secondary CTAs: WhatsApp, Viber, Instagram DM
+- Secondary CTA: Instagram DM
 - Contact form (optional)
 - Working hours: Mon-Fri, 08:00-20:00
 - Service area: Belgrade (flexible for special orders)
@@ -164,15 +163,13 @@ See `/docs/design/design-dna.md` for complete reference mapping and specificatio
 #### 6. Sticky Contact Buttons
 Fixed buttons in bottom-right corner:
 1. Phone (primary)
-2. WhatsApp
-3. Viber
-4. Instagram
+2. Instagram
 
 ### Business Rules
 
 #### Ordering Process
 - **No e-commerce**: No shopping cart or online checkout
-- **Contact-based**: All orders via phone, WhatsApp, Viber, or Instagram
+- **Contact-based**: All orders via phone or Instagram
 - **Lead time**: Minimum 10 days advance notice
 - **Customization**: Fully customizable with butter cream only (no fondant)
 - **Pricing**: Per kilogram base price + custom decoration charges
@@ -211,7 +208,6 @@ We follow an agile, milestone-based approach:
 
 #### Phase 3: Features & Polish
 - [ ] Sticky contact buttons
-- [ ] WhatsApp pre-fill integration
 - [ ] Image galleries with hover effects
 - [ ] Testimonials section
 - [ ] Performance optimization
@@ -250,8 +246,6 @@ We follow an agile, milestone-based approach:
 
 ### Client
 - **Phone**: +381 65 379 9334
-- **WhatsApp**: +381 65 379 9334
-- **Viber**: +381 65 379 9334
 - **Instagram**: [@puterinacakes](https://instagram.com/puterinacakes)
 
 ### Development Team

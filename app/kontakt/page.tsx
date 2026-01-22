@@ -74,36 +74,6 @@ export default function KontaktPage() {
 
             <Button
               asChild
-              className="w-full justify-start bg-green-600 hover:bg-green-700"
-              size="lg"
-            >
-              <a
-                href={`https://wa.me/${CONTACT.phone.replace(/\+/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp
-              </a>
-            </Button>
-
-            <Button
-              asChild
-              className="w-full justify-start bg-purple-600 hover:bg-purple-700"
-              size="lg"
-            >
-              <a
-                href={`viber://chat?number=${CONTACT.phone.replace(/\+/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Viber
-              </a>
-            </Button>
-
-            <Button
-              asChild
               variant="outline"
               className="w-full justify-start"
               size="lg"
