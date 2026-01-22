@@ -7,10 +7,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { sanityFetch } from "@/lib/sanity"
+import { sanityFetch, FAQ_QUERY } from "@/lib/sanity"
 import { CONTACT, CANONICAL_BASE } from "@/lib/constants"
 
-// Padding for fixed header: pt-20 (h-16) on mobile, pt-24 (h-20) on desktop
+// Revalidate every 60 seconds for fresh content
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "Često Postavljana Pitanja",
@@ -284,15 +285,6 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
   },
 ]
 
-// GROQ query to fetch FAQs from Sanity
-const FAQ_QUERY = `*[_type == "faq"] | order(category asc, order asc) {
-  _id,
-  question,
-  answer,
-  category,
-  order
-}`
-
 // Convert block content to plain text for JSON-LD
 function blockContentToPlainText(blocks: PortableTextBlock[]): string {
   if (!blocks || !Array.isArray(blocks)) return ""
@@ -349,8 +341,9 @@ export default async function FaqPage() {
     faqItems = await sanityFetch<FaqItem[]>({
       query: FAQ_QUERY,
     })
-  } catch {
+  } catch (error) {
     // If fetch fails (e.g., network error), use fallback data
+    console.error("Error fetching FAQs from Sanity:", error)
     faqItems = []
   }
 

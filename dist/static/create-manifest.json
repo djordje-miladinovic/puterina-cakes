@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "createdAt": "2026-01-22T21:56:34.382Z",
+  "workspaces": [
+    {
+      "name": "puterina-cakes-studio",
+      "title": "Puterina Cakes Studio",
+      "basePath": "/studio",
+      "projectId": "uo9eeei7",
+      "dataset": "production",
+      "icon": null,
+      "mediaLibrary": {
+        "enabled": false
+      },
+      "schema": "6f110875.create-schema.json",
+      "tools": "d8640c31.create-tools.json"
+    }
+  ],
+  "studioVersion": "5.5.0"
+}
