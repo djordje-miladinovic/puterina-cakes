@@ -6,44 +6,51 @@ import { CONTACT } from "@/lib/constants"
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
-      {/* Background with warm cream texture */}
-      <div className="absolute inset-0 bg-cream bg-paper-texture -z-10" />
-      
-      {/* Decorative watercolor accent */}
-      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] opacity-30 -z-10 pointer-events-none">
+    <section className="relative w-full min-h-screen">
+      {/* 
+        FULL-SCREEN HERO IMAGE
+        - Slika pokriva ceo viewport (100vw × 100vh minimum)
+        - object-cover osigurava da slika ispunjava prostor bez deformacije
+        - Na svim uređajima: slika ide od ivice do ivice ekrana
+      */}
+      <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/textures/watercolor-accent.svg"
-          alt=""
+          src="/images/hero-placeholder.svg"
+          alt="Puterina signature torta - pistaci-malina"
           fill
-          className="object-contain"
-          aria-hidden="true"
+          priority
+          className="object-cover"
+          sizes="100vw"
+          quality={90}
         />
+        {/* 
+          Gradient overlay za bolju čitljivost teksta
+          Koristi se subtilni gradient od dna ka gore
+        */}
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
       </div>
-      
-      {/* Main content container */}
-      <div className="container mx-auto px-4 py-8 md:py-16 flex flex-col items-center text-center">
-        {/* Signature cake image - full bleed style */}
-        <div className="relative w-full max-w-2xl aspect-[3/2] mb-8 md:mb-12">
-          <Image
-            src="/images/hero-placeholder.svg"
-            alt="Puterina signature torta - pistaci-malina"
-            fill
-            priority
-            className="object-contain drop-shadow-xl"
-            sizes="(max-width: 768px) 100vw, 672px"
-          />
-        </div>
-        
-        {/* Text overlay box with rounded corners */}
-        <div className="bg-soft-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-10 shadow-lg max-w-xl">
-          {/* Headline */}
-          <h1 className="text-2xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
-            Puterina — butik torti iz srca Beograda
+
+      {/* 
+        CONTENT OVERLAY
+        - Pozicioniran preko slike
+        - Centriran vertikalno i horizontalno
+        - Flex container za raspored elemenata
+      */}
+      <div className="relative z-10 flex flex-col items-center justify-end min-h-screen pb-24 md:pb-32 px-4">
+        {/* Text content - positioned at bottom for premium look */}
+        <div className="text-center max-w-3xl mx-auto">
+          {/* Headline - bela boja za kontrast na tamnom overlay-u */}
+          <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 md:mb-6 text-white drop-shadow-lg font-semibold tracking-tight">
+            Puterina
           </h1>
           
-          {/* Description - using "Vi" addressing */}
-          <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
+          {/* Tagline */}
+          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-2 md:mb-3 font-light tracking-wide">
+            Butik torti iz srca Beograda
+          </p>
+          
+          {/* Description */}
+          <p className="text-sm md:text-base lg:text-lg text-white/80 mb-8 md:mb-10 leading-relaxed max-w-xl mx-auto">
             Vaša posebna prilika zaslužuje posebnu tortu. Ručno pravimo premium 
             torte sa najfinijim sastojcima i puno ljubavi.
           </p>
@@ -51,26 +58,38 @@ export default function HeroSection() {
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             {/* Primary CTA - Phone call */}
-            <Button asChild size="lg" className="gap-2">
+            <Button 
+              asChild 
+              size="lg" 
+              className="gap-2 bg-white text-warm-brown hover:bg-white/90 border-0 px-8 py-6 text-base font-medium"
+            >
               <a href={`tel:${CONTACT.phone}`}>
                 <Phone className="h-4 w-4" />
-                Pozovite
+                Pozovite Nas
               </a>
             </Button>
             
             {/* Secondary CTA - Catalog link */}
-            <Button asChild variant="outline" size="lg">
+            <Button 
+              asChild 
+              variant="outline" 
+              size="lg"
+              className="border-white/80 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-base font-medium"
+            >
               <Link href="/katalog">
-                Pogledajte Katalog →
+                Pogledajte Katalog
               </Link>
             </Button>
           </div>
         </div>
       </div>
       
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-warm-brown/60" />
+      {/* 
+        Scroll indicator - animiran chevron
+        Pozicioniran na dnu ekrana
+      */}
+      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <ChevronDown className="h-8 w-8 md:h-10 md:w-10 text-white/70" />
         <span className="sr-only">Skrolujte nadole</span>
       </div>
     </section>
