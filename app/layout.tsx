@@ -9,7 +9,7 @@ import { SanityLive } from "@/lib/sanity";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#F5F0E8",
 };
 
 export const metadata: Metadata = {

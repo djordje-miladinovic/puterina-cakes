@@ -2,43 +2,55 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Puterina Cakes Design DNA */
-    /* Primary */
-    --color-cream: 37 50% 94%;           /* #F5F0E8 */
-    --color-butter-gold: 30 51% 64%;     /* #D4A574 */
-    --color-warm-brown: 30 28% 43%;      /* #8B6F4E */
-    --color-soft-white: 40 50% 98%;      /* #FDFBF7 */
+    /* Brand Primary Colors (from Design DNA) */
+    --color-cream: #F5F0E8;           /* Main background */
+    --color-butter-gold: #D4A574;     /* Accents, CTA */
+    --color-warm-brown: #8B6F4E;      /* Text, headings */
+    --color-soft-white: #FDFBF7;      /* Cards, sections */
     
-    /* Secondary */
-    --color-blush-pink: 5 55% 89%;       /* #F2D7D5 */
-    --color-pistachio: 120 18% 80%;      /* #C5D5C5 */
-    --color-raspberry: 346 49% 64%;      /* #D4738C */
+    /* Brand Secondary Colors */
+    --color-blush-pink: #F2D7D5;      /* Accents, hovers */
+    --color-pistachio: #C5D5C5;       /* Signature highlight */
+    --color-raspberry: #D4738C;       /* CTA alternative */
     
-    /* Neutral */
-    --color-charcoal: 0 0% 20%;          /* #333333 */
-    --color-medium-gray: 0 0% 40%;       /* #666666 */
-    --color-light-gray: 0 0% 90%;        /* #E5E5E5 */
+    /* Brand Neutral Colors */
+    --color-charcoal: #333333;        /* Body text */
+    --color-medium-gray: #666666;     /* Secondary text */
+    --color-light-gray: #E5E5E5;      /* Borders, dividers */
     
-    /* Semantic Mapping - Using brand colors */
-    --background: var(--color-cream);
-    --foreground: var(--color-charcoal);
-    --card: var(--color-soft-white);
-    --card-foreground: var(--color-charcoal);
-    --popover: var(--color-soft-white);
-    --popover-foreground: var(--color-charcoal);
-    --primary: var(--color-butter-gold);
-    --primary-foreground: var(--color-soft-white);
-    --secondary: var(--color-blush-pink);
-    --secondary-foreground: var(--color-warm-brown);
-    --muted: var(--color-cream);
-    --muted-foreground: var(--color-medium-gray);
-    --accent: var(--color-pistachio);
-    --accent-foreground: var(--color-warm-brown);
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: var(--color-light-gray);
-    --input: var(--color-light-gray);
-    --ring: var(--color-butter-gold);
+    /* Semantic Color Variables (HSL values for Tailwind compatibility) */
+    /* Cream: #F5F0E8 = hsl(37, 33%, 94%) */
+    --background: 37 33% 94%;
+    /* Charcoal: #333333 = hsl(0, 0%, 20%) */
+    --foreground: 0 0% 20%;
+    /* Soft White: #FDFBF7 = hsl(40, 60%, 98%) */
+    --card: 40 60% 98%;
+    --card-foreground: 0 0% 20%;
+    --popover: 40 60% 98%;
+    --popover-foreground: 0 0% 20%;
+    /* Butter Gold: #D4A574 = hsl(30, 50%, 64%) */
+    --primary: 30 50% 64%;
+    /* Primary foreground - soft white for contrast */
+    --primary-foreground: 40 60% 98%;
+    /* Blush Pink: #F2D7D5 = hsl(5, 52%, 89%) */
+    --secondary: 5 52% 89%;
+    /* Warm Brown: #8B6F4E = hsl(31, 28%, 43%) */
+    --secondary-foreground: 31 28% 43%;
+    /* Cream for muted backgrounds */
+    --muted: 37 33% 94%;
+    /* Medium Gray: #666666 = hsl(0, 0%, 40%) */
+    --muted-foreground: 0 0% 40%;
+    /* Pistachio: #C5D5C5 = hsl(120, 18%, 81%) */
+    --accent: 120 18% 81%;
+    --accent-foreground: 31 28% 43%;
+    /* Raspberry: #D4738C = hsl(346, 50%, 64%) */
+    --destructive: 346 50% 64%;
+    --destructive-foreground: 40 60% 98%;
+    /* Light Gray: #E5E5E5 = hsl(0, 0%, 90%) */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    /* Butter Gold for ring/focus */
+    --ring: 30 50% 64%;
     --radius: 0.5rem;
   }
 }
@@ -60,14 +72,17 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   
-  /* Brand colors exposed to Tailwind - using :root definitions */
-  --color-cream: hsl(var(--color-cream));
-  --color-butter-gold: hsl(var(--color-butter-gold));
-  --color-warm-brown: hsl(var(--color-warm-brown));
-  --color-soft-white: hsl(var(--color-soft-white));
-  --color-blush-pink: hsl(var(--color-blush-pink));
-  --color-pistachio: hsl(var(--color-pistachio));
-  --color-raspberry: hsl(var(--color-raspberry));
+  /* Brand colors for direct Tailwind usage */
+  --color-cream: #F5F0E8;
+  --color-butter-gold: #D4A574;
+  --color-warm-brown: #8B6F4E;
+  --color-soft-white: #FDFBF7;
+  --color-blush-pink: #F2D7D5;
+  --color-pistachio: #C5D5C5;
+  --color-raspberry: #D4738C;
+  --color-charcoal: #333333;
+  --color-medium-gray: #666666;
+  --color-light-gray: #E5E5E5;
 }
 
 body {
