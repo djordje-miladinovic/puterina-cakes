@@ -67,7 +67,11 @@ const mockProducts: Record<string, Product> = {
     },
     allergens: ["gluten", "milk", "eggs"],
     declaration: "Proizvođač: Puterina Cakes, Beograd, Srbija\nSastojci: Brašno (pšenično), šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin ekstrakt.\nMože sadržati tragove orašastih plodova.\nČuvati na temperaturi od +4°C do +8°C.\nNeto masa: varira prema porudžbini.\nDatum proizvodnje: naveden na ambalaži.",
-    gallery: [],
+    gallery: [
+      { src: "/images/products/cokoladna-torta-1.jpg", alt: "Čokoladna torta - glavni pogled" },
+      { src: "/images/products/cokoladna-torta-2.jpg", alt: "Čokoladna torta - presek" },
+      { src: "/images/products/cokoladna-torta-3.jpg", alt: "Čokoladna torta - detalj dekoracije" },
+    ],
   },
   "vocna-torta": {
     title: "Voćna torta",
@@ -92,7 +96,11 @@ const mockProducts: Record<string, Product> = {
     },
     allergens: ["gluten", "milk", "eggs"],
     declaration: "Proizvođač: Puterina Cakes, Beograd, Srbija\nSastojci: Brašno (pšenično), šećer, jaja, putar, mleko, sezonsko voće, šlag, mascarpone, prašak za pecivo, so, vanilin ekstrakt.\nMože sadržati tragove orašastih plodova.\nČuvati na temperaturi od +4°C do +8°C.\nNeto masa: varira prema porudžbini.\nDatum proizvodnje: naveden na ambalaži.",
-    gallery: [],
+    gallery: [
+      { src: "/images/products/vocna-torta-1.jpg", alt: "Voćna torta - glavni pogled" },
+      { src: "/images/products/vocna-torta-2.jpg", alt: "Voćna torta - presek" },
+      { src: "/images/products/vocna-torta-3.jpg", alt: "Voćna torta - detalj voća" },
+    ],
   },
 }
 
@@ -135,12 +143,19 @@ export async function generateMetadata({
 }
 
 // Generate Product JSON-LD for SEO
-function generateProductJsonLd(product: Product) {
+function generateProductJsonLd(product: Product, slug: string) {
+  const productUrl = `${CANONICAL_BASE}/proizvod/${slug}`
+  const mainImage = product.gallery?.[0]?.src 
+    ? `${CANONICAL_BASE}${product.gallery[0].src}`
+    : undefined
+
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.title,
     description: product.shortDescription,
+    url: productUrl,
+    ...(mainImage && { image: mainImage }),
     offers: {
       "@type": "Offer",
       price: product.pricePerKg,
@@ -153,10 +168,16 @@ function generateProductJsonLd(product: Product) {
         unitText: "kg",
       },
       availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Puterina Cakes",
+        url: CANONICAL_BASE,
+      },
     },
     brand: {
       "@type": "Brand",
       name: "Puterina Cakes",
+      url: CANONICAL_BASE,
     },
   }
 }
@@ -173,7 +194,7 @@ export default async function ProizvodPage({
     notFound()
   }
 
-  const productJsonLd = generateProductJsonLd(product)
+  const productJsonLd = generateProductJsonLd(product, slug)
 
   return (
     <>
@@ -188,7 +209,7 @@ export default async function ProizvodPage({
         {/* Desktop: 60/40 split, Mobile: stacked */}
         <div className="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12">
           {/* Product Gallery - Left Side */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
             <ProductGallery 
               images={product.gallery || []} 
               productName={product.title} 

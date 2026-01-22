@@ -134,7 +134,7 @@ export default function AllergenIcons({ contains, showAll = true }: AllergenIcon
               {/* Crossed out line for allergens NOT present */}
               {!isPresent && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-10 h-0.5 bg-muted-foreground/40 rotate-45 transform" />
+                  <div className="w-8 h-0.5 bg-muted-foreground/40 rotate-45 transform" />
                 </div>
               )}
             </div>

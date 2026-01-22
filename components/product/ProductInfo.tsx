@@ -174,25 +174,21 @@ export default function ProductInfo({
           )}
 
           {/* Allergens */}
-          <AccordionItem value="allergens">
-            <AccordionTrigger className="text-base font-semibold hover:no-underline">
-              Alergeni
-            </AccordionTrigger>
-            <AccordionContent>
-              {allergens.length > 0 ? (
+          {allergens.length > 0 && (
+            <AccordionItem value="allergens">
+              <AccordionTrigger className="text-base font-semibold hover:no-underline">
+                Alergeni
+              </AccordionTrigger>
+              <AccordionContent>
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Precrtane ikonice označavaju alergene koje proizvod <strong>NE</strong> sadrži.
+                    Ikonice sa amber pozadinom označavaju alergene koje proizvod sadrži. Precrtane ikonice označavaju alergene koje proizvod ne sadrži.
                   </p>
                   <AllergenIcons contains={allergens} showAll={true} />
                 </div>
-              ) : (
-                <p className="text-muted-foreground">
-                  Za informacije o alergenima, kontaktirajte nas.
-                </p>
-              )}
-            </AccordionContent>
-          </AccordionItem>
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
           {/* Declaration */}
           {declaration && (
