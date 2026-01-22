@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { PortableText } from "@portabletext/react"
+import type { PortableTextBlock } from "@portabletext/types"
 import {
   Accordion,
   AccordionContent,
@@ -28,8 +29,7 @@ type FaqCategory = keyof typeof FAQ_CATEGORIES
 interface FaqItem {
   _id: string
   question: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  answer: any[]
+  answer: PortableTextBlock[]
   category: FaqCategory
   order: number
 }
@@ -292,15 +292,13 @@ const FAQ_QUERY = `*[_type == "faq"] | order(category asc, order asc) {
 }`
 
 // Convert block content to plain text for JSON-LD
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function blockContentToPlainText(blocks: any[]): string {
+function blockContentToPlainText(blocks: PortableTextBlock[]): string {
   if (!blocks || !Array.isArray(blocks)) return ""
   return blocks
     .map((block) => {
       if (block._type !== "block" || !block.children) return ""
       return block.children
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((child: any) => child.text || "")
+        .map((child) => ("text" in child ? child.text : ""))
         .join("")
     })
     .join("\n")
