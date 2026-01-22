@@ -49,12 +49,6 @@ export default function HeroSection() {
             Butik torti iz srca Beograda
           </p>
           
-          {/* Description */}
-          <p className="text-sm md:text-base lg:text-lg text-white/80 mb-8 md:mb-10 leading-relaxed max-w-xl mx-auto">
-            Vaša posebna prilika zaslužuje posebnu tortu. Ručno pravimo premium 
-            torte sa najfinijim sastojcima i puno ljubavi.
-          </p>
-          
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             {/* Primary CTA - Phone call */}
@@ -65,7 +59,7 @@ export default function HeroSection() {
             >
               <a href={`tel:${CONTACT.phone}`}>
                 <Phone className="h-4 w-4" />
-                Pozovite Nas
+                Kontakt
               </a>
             </Button>
             
@@ -77,7 +71,7 @@ export default function HeroSection() {
               className="border-white/80 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-base font-medium"
             >
               <Link href="/katalog">
-                Pogledajte Katalog
+                Katalog
               </Link>
             </Button>
           </div>
