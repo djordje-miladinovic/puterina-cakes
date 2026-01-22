@@ -16,10 +16,10 @@ Textures are referenced in CSS/Tailwind as background images:
 - Must not interfere with text readability
 
 ## Planned Textures
-- `paper-light.png` - Subtle paper texture for backgrounds
-- `watercolor-subtle.png` - Soft watercolor wash for sections
-- `flour-powder.png` - Flour/powder texture for footer
-- `marble-discrete.png` - Subtle marble for premium areas
+- `paper-light.webp` - Subtle paper texture for backgrounds
+- `watercolor-subtle.webp` - Soft watercolor wash for sections
+- `flour-powder.webp` - Flour/powder texture for footer
+- `marble-discreet.webp` - Subtle marble for premium areas
 
 Note: Texture files will be added during the design implementation phase.
 
