@@ -6,7 +6,7 @@ import { CONTACT } from "@/lib/constants"
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[50vh] md:min-h-[80vh] flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
       {/* Background with warm cream texture */}
       <div className="absolute inset-0 bg-cream bg-paper-texture -z-10" />
       
