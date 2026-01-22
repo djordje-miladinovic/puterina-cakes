@@ -86,9 +86,42 @@
 }
 
 body {
-  background: hsl(var(--background));
+  background-color: hsl(var(--background));
+  /* Subtle paper texture for authenticity */
+  background-image: url('/textures/paper-light.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
   color: hsl(var(--foreground));
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Texture utility classes as per Design DNA */
+.bg-paper-texture {
+  background-color: hsl(var(--color-cream));
+  background-image: url('/textures/paper-light.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* Watercolor decorative element (use sparingly) */
+.watercolor-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.watercolor-accent::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -15%;
+  width: min(400px, 50vw);
+  height: min(400px, 50vw);
+  background-image: url('/textures/watercolor-accent.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes accordion-down {
