@@ -2,25 +2,43 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    /* Brand Colors - Puterina Cakes Design DNA */
+    /* Primary */
+    --color-cream: 37 50% 94%;           /* #F5F0E8 */
+    --color-butter-gold: 30 51% 64%;     /* #D4A574 */
+    --color-warm-brown: 30 28% 43%;      /* #8B6F4E */
+    --color-soft-white: 40 50% 98%;      /* #FDFBF7 */
+    
+    /* Secondary */
+    --color-blush-pink: 5 55% 89%;       /* #F2D7D5 */
+    --color-pistachio: 120 18% 80%;      /* #C5D5C5 */
+    --color-raspberry: 346 49% 64%;      /* #D4738C */
+    
+    /* Neutral */
+    --color-charcoal: 0 0% 20%;          /* #333333 */
+    --color-medium-gray: 0 0% 40%;       /* #666666 */
+    --color-light-gray: 0 0% 90%;        /* #E5E5E5 */
+    
+    /* Semantic Mapping - Using brand colors */
+    --background: var(--color-cream);
+    --foreground: var(--color-charcoal);
+    --card: var(--color-soft-white);
+    --card-foreground: var(--color-charcoal);
+    --popover: var(--color-soft-white);
+    --popover-foreground: var(--color-charcoal);
+    --primary: var(--color-butter-gold);
+    --primary-foreground: var(--color-soft-white);
+    --secondary: var(--color-blush-pink);
+    --secondary-foreground: var(--color-warm-brown);
+    --muted: var(--color-cream);
+    --muted-foreground: var(--color-medium-gray);
+    --accent: var(--color-pistachio);
+    --accent-foreground: var(--color-warm-brown);
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --border: var(--color-light-gray);
+    --input: var(--color-light-gray);
+    --ring: var(--color-butter-gold);
     --radius: 0.5rem;
   }
 }
@@ -41,12 +59,54 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  
+  /* Brand colors exposed to Tailwind - using :root definitions */
+  --color-cream: hsl(var(--color-cream));
+  --color-butter-gold: hsl(var(--color-butter-gold));
+  --color-warm-brown: hsl(var(--color-warm-brown));
+  --color-soft-white: hsl(var(--color-soft-white));
+  --color-blush-pink: hsl(var(--color-blush-pink));
+  --color-pistachio: hsl(var(--color-pistachio));
+  --color-raspberry: hsl(var(--color-raspberry));
 }
 
 body {
-  background: hsl(var(--background));
+  background-color: hsl(var(--background));
+  /* Subtle paper texture for authenticity */
+  background-image: url('/textures/paper-light.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
   color: hsl(var(--foreground));
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Texture utility classes as per Design DNA */
+.bg-paper-texture {
+  background-color: hsl(var(--color-cream));
+  background-image: url('/textures/paper-light.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* Watercolor decorative element (use sparingly) */
+.watercolor-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.watercolor-accent::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -15%;
+  width: min(400px, 50vw);
+  height: min(400px, 50vw);
+  background-image: url('/textures/watercolor-accent.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes accordion-down {
