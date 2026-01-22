@@ -10,6 +10,8 @@ import {
 import { sanityFetch } from "@/lib/sanity"
 import { CONTACT, CANONICAL_BASE } from "@/lib/constants"
 
+// Padding for fixed header: pt-20 (h-16) on mobile, pt-24 (h-20) on desktop
+
 export const metadata: Metadata = {
   title: "Često Postavljana Pitanja",
   description:
@@ -45,7 +47,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem telefona (${CONTACT.phone}) ili Instagram DM-a. Biće nam zadovoljstvo da zajedno osmislimo Vašu savršenu tortu.`,
+            text: `Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a. Biće nam zadovoljstvo da zajedno osmislimo Vašu savršenu tortu.`,
           },
         ],
       },
@@ -77,7 +79,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone} ili Instagram DM-a (${CONTACT.instagramHandle}). Odgovaramo radnim danima od 08:00 do 20:00.`,
+            text: `Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone}, Instagram DM-a (${CONTACT.instagramHandle}), WhatsApp-a ili Viber-a. Odgovaramo radnim danima od 08:00 do 20:00.`,
           },
         ],
       },
@@ -272,7 +274,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Dostupni smo za poruke i pozive radnim danima od 08:00 do 20:00. Možete nas kontaktirati putem telefona (${CONTACT.phone}) ili Instagram DM-a.`,
+            text: `Dostupni smo za poruke i pozive radnim danima od 08:00 do 20:00. Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a.`,
           },
         ],
       },
@@ -374,7 +376,7 @@ export default async function FaqPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 pt-24 md:pt-28 pb-12 max-w-4xl">
         <h1 className="text-4xl font-bold mb-4">Često Postavljana Pitanja</h1>
         <p className="text-muted-foreground mb-8">
           Pronađite odgovore na najčešća pitanja o poručivanju, dostavi,
@@ -432,18 +434,6 @@ export default async function FaqPage() {
             </a>
             <a
               href={CONTACT.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              Instagram
-            </a>
-          </div>
-        </section>
-      </div>
-    </>
-  )
-}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"

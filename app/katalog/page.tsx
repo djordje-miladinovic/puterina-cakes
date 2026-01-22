@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: "Pregledajte našu kompletnu ponudu torti i kolača",
 }
 
+// Padding for fixed header: pt-20 (h-16) on mobile, pt-24 (h-20) on desktop
+
 interface Product {
   _id: string
   title: string
