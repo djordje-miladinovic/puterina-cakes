@@ -116,10 +116,10 @@ export default function ProductInfo({
         </Button>
       </div>
 
-      {/* Accordion Sections */}
+      {/* Accordion Sections - Order: Opis, Sastojci, Nutritivne vrednosti, Alergeni, Čuvanje, Deklaracija */}
       <div className="pt-6 border-t">
         <Accordion type="single" collapsible className="w-full">
-          {/* Description */}
+          {/* 1. Opis (Description) */}
           {description && (
             <AccordionItem value="description">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
@@ -133,21 +133,7 @@ export default function ProductInfo({
             </AccordionItem>
           )}
 
-          {/* Storage */}
-          {storage && (
-            <AccordionItem value="storage">
-              <AccordionTrigger className="text-base font-semibold hover:no-underline">
-                Čuvanje
-              </AccordionTrigger>
-              <AccordionContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  {storage}
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          )}
-
-          {/* Ingredients */}
+          {/* 2. Sastojci (Ingredients) */}
           {ingredients && (
             <AccordionItem value="ingredients">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
@@ -161,7 +147,7 @@ export default function ProductInfo({
             </AccordionItem>
           )}
 
-          {/* Nutritional Values */}
+          {/* 3. Nutritivne vrednosti (Nutritional Values) - TABLE format */}
           {nutrition && (
             <AccordionItem value="nutrition">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
@@ -173,7 +159,7 @@ export default function ProductInfo({
             </AccordionItem>
           )}
 
-          {/* Allergens */}
+          {/* 4. Alergeni (Allergens) - ICONS format */}
           {allergens.length > 0 && (
             <AccordionItem value="allergens">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
@@ -190,7 +176,21 @@ export default function ProductInfo({
             </AccordionItem>
           )}
 
-          {/* Declaration */}
+          {/* 5. Čuvanje (Storage) */}
+          {storage && (
+            <AccordionItem value="storage">
+              <AccordionTrigger className="text-base font-semibold hover:no-underline">
+                Čuvanje
+              </AccordionTrigger>
+              <AccordionContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  {storage}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          )}
+
+          {/* 6. Deklaracija (Declaration) */}
           {declaration && (
             <AccordionItem value="declaration">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
