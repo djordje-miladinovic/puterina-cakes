@@ -1,39 +1,30 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { Milk, Egg, Wheat, AlertCircle } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
-import { CANONICAL_BASE, CONTACT } from "@/lib/constants"
-
-// Allergen icon mapping
-const allergenIcons: Record<string, LucideIcon> = {
-  milk: Milk,
-  eggs: Egg,
-  gluten: Wheat,
-}
+import Script from "next/script"
+import { CANONICAL_BASE } from "@/lib/constants"
+import { ProductGallery, ProductInfo, type AllergenType, type GalleryImage } from "@/components/product"
 
 interface Product {
   title: string
   slug: { current: string }
   pricePerKg: number
-  description: string
-  storage: string
-  ingredients: string
-  nutrition: {
+  shortDescription: string
+  description?: string
+  storage?: string
+  ingredients?: string
+  nutrition?: {
     energy: number
     protein: number
     carbs: number
+    sugars?: number
     fat: number
-    fiber: number
+    saturatedFat?: number
+    fiber?: number
     salt: number
   }
-  allergens: string[]
+  allergens?: AllergenType[]
+  declaration?: string
+  gallery?: GalleryImage[]
 }
 
 // Mock product data
@@ -57,39 +48,59 @@ const mockProducts: Record<string, Product> = {
     title: "Čokoladna torta",
     slug: { current: "cokoladna-torta" },
     pricePerKg: 2500,
-    description:
+    shortDescription:
       "Bogata čokoladna torta sa višeslojnom kremom. Savršena kombinacija tamne čokolade i kremaste punjene.",
-    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 3 dana.",
+    description:
+      "Naša čokoladna torta je prava poslastica za ljubitelje čokolade. Tri sloja mekanog čokoladnog biskvita, prelivena bogatom ganache kremom od belgijske tamne čokolade (70% kakao).\n\nSvaki zalogaj donosi intenzivan ukus čokolade sa kremastom teksturom koja se topi u ustima. Idealna za rođendane, proslave ili jednostavno kad želite da se počastite nečim posebnim.",
+    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 3 dana od datuma izrade. Pre konzumacije ostaviti 30 minuta na sobnoj temperaturi za najbolji ukus.",
     ingredients:
-      "Brašno, šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin.",
+      "Brašno (pšenično), šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin ekstrakt.",
     nutrition: {
       energy: 380,
       protein: 6,
       carbs: 45,
+      sugars: 32,
       fat: 18,
+      saturatedFat: 10,
       fiber: 3,
       salt: 0.5,
     },
     allergens: ["gluten", "milk", "eggs"],
+    declaration: "Proizvođač: Puterina Cakes, Beograd, Srbija\nSastojci: Brašno (pšenično), šećer, jaja, putar, mleko, čokolada (70% kakao), kakao prah, prašak za pecivo, so, vanilin ekstrakt.\nMože sadržati tragove orašastih plodova.\nČuvati na temperaturi od +4°C do +8°C.\nNeto masa: varira prema porudžbini.\nDatum proizvodnje: naveden na ambalaži.",
+    gallery: [
+      { src: "/images/products/cokoladna-torta-1.jpg", alt: "Čokoladna torta - glavni pogled" },
+      { src: "/images/products/cokoladna-torta-2.jpg", alt: "Čokoladna torta - presek" },
+      { src: "/images/products/cokoladna-torta-3.jpg", alt: "Čokoladna torta - detalj dekoracije" },
+    ],
   },
   "vocna-torta": {
     title: "Voćna torta",
     slug: { current: "vocna-torta" },
     pricePerKg: 2300,
-    description:
+    shortDescription:
       "Osvežavajuća torta sa sezonskim voćem. Lagana biskvit osnova sa svežim voćem i kremom.",
-    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 2 dana.",
+    description:
+      "Lagana i osvežavajuća torta idealna za letnje dane. Naš vanila biskvit je kombinovan sa svežim sezonskim voćem i laganom mascarpone kremom.\n\nSvaka torta je dekorisana ručno odabranim voćem koje menja u zavisnosti od sezone - jagode, maline, borovnice, breskve ili kombinacija.",
+    storage: "Čuvati u frižideru na temperaturi od +4°C do +8°C. Rok trajanja: 2 dana od datuma izrade.",
     ingredients:
-      "Brašno, šećer, jaja, putar, mleko, sezonsko voće, šlag, prašak za pecivo, so, vanilin.",
+      "Brašno (pšenično), šećer, jaja, putar, mleko, sezonsko voće, šlag, mascarpone, prašak za pecivo, so, vanilin ekstrakt.",
     nutrition: {
       energy: 320,
       protein: 5,
       carbs: 42,
+      sugars: 28,
       fat: 14,
+      saturatedFat: 8,
       fiber: 2,
       salt: 0.4,
     },
     allergens: ["gluten", "milk", "eggs"],
+    declaration: "Proizvođač: Puterina Cakes, Beograd, Srbija\nSastojci: Brašno (pšenično), šećer, jaja, putar, mleko, sezonsko voće, šlag, mascarpone, prašak za pecivo, so, vanilin ekstrakt.\nMože sadržati tragove orašastih plodova.\nČuvati na temperaturi od +4°C do +8°C.\nNeto masa: varira prema porudžbini.\nDatum proizvodnje: naveden na ambalaži.",
+    gallery: [
+      { src: "/images/products/vocna-torta-1.jpg", alt: "Voćna torta - glavni pogled" },
+      { src: "/images/products/vocna-torta-2.jpg", alt: "Voćna torta - presek" },
+      { src: "/images/products/vocna-torta-3.jpg", alt: "Voćna torta - detalj voća" },
+    ],
   },
 }
 
@@ -119,14 +130,54 @@ export async function generateMetadata({
 
   return {
     title: product.title,
-    description: product.description,
+    description: product.shortDescription,
     alternates: {
       canonical: `${CANONICAL_BASE}/proizvod/${slug}`,
     },
     openGraph: {
       title: product.title,
-      description: product.description,
+      description: product.shortDescription,
       url: `${CANONICAL_BASE}/proizvod/${slug}`,
+    },
+  }
+}
+
+// Generate Product JSON-LD for SEO
+function generateProductJsonLd(product: Product, slug: string) {
+  const productUrl = `${CANONICAL_BASE}/proizvod/${slug}`
+  const mainImage = product.gallery?.[0]?.src 
+    ? `${CANONICAL_BASE}${product.gallery[0].src}`
+    : undefined
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.shortDescription,
+    url: productUrl,
+    ...(mainImage && { image: mainImage }),
+    offers: {
+      "@type": "Offer",
+      price: product.pricePerKg,
+      priceCurrency: "RSD",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: product.pricePerKg,
+        priceCurrency: "RSD",
+        unitCode: "KGM",
+        unitText: "kg",
+      },
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Puterina Cakes",
+        url: CANONICAL_BASE,
+      },
+    },
+    brand: {
+      "@type": "Brand",
+      name: "Puterina Cakes",
+      url: CANONICAL_BASE,
     },
   }
 }
@@ -143,130 +194,44 @@ export default async function ProizvodPage({
     notFound()
   }
 
+  const productJsonLd = generateProductJsonLd(product, slug)
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* Product Image Placeholder */}
-        <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-          <p className="text-muted-foreground">Slika proizvoda</p>
-        </div>
+    <>
+      {/* Product JSON-LD for SEO */}
+      <Script
+        id="product-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
 
-        {/* Product Info */}
-        <div>
-          <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
-          <p className="text-3xl font-bold text-primary mb-6">
-            {product.pricePerKg} RSD/kg
-          </p>
-          <p className="text-lg text-muted-foreground mb-8">
-            {product.description}
-          </p>
+      <div className="container mx-auto px-4 pt-24 pb-8 md:pt-28 md:pb-12 max-w-6xl">
+        {/* Desktop: 60/40 split, Mobile: stacked */}
+        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12">
+          {/* Product Gallery - Left Side */}
+          <div className="lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+            <ProductGallery 
+              images={product.gallery || []} 
+              productName={product.title} 
+            />
+          </div>
 
-          <Button size="lg" className="w-full md:w-auto" asChild>
-            <a href={`tel:${CONTACT.phone}`}>Poručite Odmah</a>
-          </Button>
-
-          {/* Allergens */}
-          {product.allergens && product.allergens.length > 0 && (
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-              <div className="flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-amber-900 mb-2">
-                    Sadrži alergene:
-                  </h3>
-                  <div className="flex gap-4">
-                    {product.allergens.map((allergen: string) => {
-                      const Icon = allergenIcons[allergen] || AlertCircle
-                      return (
-                        <div key={allergen} className="flex items-center gap-2">
-                          <Icon className="h-5 w-5 text-amber-700" />
-                          <span className="text-sm text-amber-900 capitalize">
-                            {allergen === "gluten" && "Gluten"}
-                            {allergen === "milk" && "Mleko"}
-                            {allergen === "eggs" && "Jaja"}
-                            {allergen === "nuts" && "Orašasti plodovi"}
-                            {allergen === "soy" && "Soja"}
-                            {allergen === "sesame" && "Susam"}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* Product Info - Right Side */}
+          <div>
+            <ProductInfo
+              title={product.title}
+              pricePerKg={product.pricePerKg}
+              shortDescription={product.shortDescription}
+              description={product.description}
+              storage={product.storage}
+              ingredients={product.ingredients}
+              nutrition={product.nutrition}
+              allergens={product.allergens}
+              declaration={product.declaration}
+            />
+          </div>
         </div>
       </div>
-
-      {/* Additional Information */}
-      <div className="mt-12">
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="ingredients">
-            <AccordionTrigger className="text-lg font-semibold">
-              Sastojci
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-muted-foreground">{product.ingredients}</p>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="nutrition">
-            <AccordionTrigger className="text-lg font-semibold">
-              Nutritivne Informacije (na 100g)
-            </AccordionTrigger>
-            <AccordionContent>
-              <table className="w-full">
-                <tbody className="text-muted-foreground">
-                  <tr className="border-b">
-                    <td className="py-2">Energija</td>
-                    <td className="py-2 text-right">
-                      {product.nutrition.energy} kcal
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2">Proteini</td>
-                    <td className="py-2 text-right">
-                      {product.nutrition.protein} g
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2">Ugljeni hidrati</td>
-                    <td className="py-2 text-right">
-                      {product.nutrition.carbs} g
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2">Masti</td>
-                    <td className="py-2 text-right">{product.nutrition.fat} g</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2">Vlakna</td>
-                    <td className="py-2 text-right">
-                      {product.nutrition.fiber} g
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-2">So</td>
-                    <td className="py-2 text-right">
-                      {product.nutrition.salt} g
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="storage">
-            <AccordionTrigger className="text-lg font-semibold">
-              Čuvanje i Rok Trajanja
-            </AccordionTrigger>
-            <AccordionContent>
-              <p className="text-muted-foreground">{product.storage}</p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    </div>
+    </>
   )
 }
