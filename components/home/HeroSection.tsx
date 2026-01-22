@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-cream bg-paper-texture -z-10" />
       
       {/* Decorative watercolor accent */}
-      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] opacity-30 -z-5 pointer-events-none">
+      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] opacity-30 -z-10 pointer-events-none">
         <Image
           src="/textures/watercolor-accent.svg"
           alt=""
@@ -27,7 +27,7 @@ export default function HeroSection() {
         <div className="relative w-full max-w-2xl aspect-[3/2] mb-8 md:mb-12">
           <Image
             src="/images/hero-placeholder.svg"
-            alt="Puterina signature torta - pistać-malina"
+            alt="Puterina signature torta - pistaci-malina"
             fill
             priority
             className="object-contain drop-shadow-xl"
