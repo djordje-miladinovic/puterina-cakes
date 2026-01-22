@@ -1,10 +1,25 @@
 import type { Metadata, Viewport } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StickyButtons from "@/components/sticky-buttons";
 import { CANONICAL_BASE } from "@/lib/constants";
 import { SanityLive } from "@/lib/sanity";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -71,7 +86,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sr">
+    <html lang="sr" className={`${playfairDisplay.variable} ${inter.variable}`}>
       <body className="antialiased flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">{children}</main>

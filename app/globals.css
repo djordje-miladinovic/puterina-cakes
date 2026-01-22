@@ -2,6 +2,10 @@
 
 @layer base {
   :root {
+    /* Typography - Font Families */
+    --font-heading: var(--font-playfair), Georgia, serif;
+    --font-body: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
     /* Brand Primary Colors (from Design DNA) */
     --color-cream: #F5F0E8;           /* Main background */
     --color-butter-gold: #D4A574;     /* Accents, CTA */
@@ -53,6 +57,54 @@
     --ring: 30 50% 64%;
     --radius: 0.5rem;
   }
+  
+  /* Typography Scale - Headings */
+  h1, .h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--color-warm-brown);
+  }
+  
+  h2, .h2 {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-warm-brown);
+  }
+  
+  h3, .h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--color-warm-brown);
+  }
+  
+  h4, .h4 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--color-warm-brown);
+  }
+  
+  /* Mobile Typography */
+  @media (max-width: 768px) {
+    h1, .h1 {
+      font-size: 2.25rem;
+    }
+    
+    h2, .h2 {
+      font-size: 1.75rem;
+    }
+    
+    h3, .h3 {
+      font-size: 1.25rem;
+    }
+  }
 }
 
 @theme inline {
@@ -92,7 +144,29 @@ body {
   background-repeat: repeat;
   background-size: 300px 300px;
   color: hsl(var(--foreground));
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* Body Text Utility Classes */
+.body-large {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.body-small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
 }
 
 /* Texture utility classes as per Design DNA */
