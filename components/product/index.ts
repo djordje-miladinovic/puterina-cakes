@@ -1,0 +1,6 @@
+export { default as ProductGallery } from "./ProductGallery"
+export { default as ProductInfo } from "./ProductInfo"
+export { default as NutritionalTable } from "./NutritionalTable"
+export { default as AllergenIcons } from "./AllergenIcons"
+export type { AllergenType } from "./AllergenIcons"
+export type { GalleryImage } from "./ProductGallery"
