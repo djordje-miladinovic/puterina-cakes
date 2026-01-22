@@ -2,25 +2,55 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    /* Brand Primary Colors (from Design DNA) */
+    --color-cream: #F5F0E8;           /* Main background */
+    --color-butter-gold: #D4A574;     /* Accents, CTA */
+    --color-warm-brown: #8B6F4E;      /* Text, headings */
+    --color-soft-white: #FDFBF7;      /* Cards, sections */
+    
+    /* Brand Secondary Colors */
+    --color-blush-pink: #F2D7D5;      /* Accents, hovers */
+    --color-pistachio: #C5D5C5;       /* Signature highlight */
+    --color-raspberry: #D4738C;       /* CTA alternative */
+    
+    /* Brand Neutral Colors */
+    --color-charcoal: #333333;        /* Body text */
+    --color-medium-gray: #666666;     /* Secondary text */
+    --color-light-gray: #E5E5E5;      /* Borders, dividers */
+    
+    /* Semantic Color Variables (HSL values for Tailwind compatibility) */
+    /* Cream: #F5F0E8 = hsl(37, 33%, 94%) */
+    --background: 37 33% 94%;
+    /* Charcoal: #333333 = hsl(0, 0%, 20%) */
+    --foreground: 0 0% 20%;
+    /* Soft White: #FDFBF7 = hsl(40, 60%, 98%) */
+    --card: 40 60% 98%;
+    --card-foreground: 0 0% 20%;
+    --popover: 40 60% 98%;
+    --popover-foreground: 0 0% 20%;
+    /* Butter Gold: #D4A574 = hsl(30, 50%, 64%) */
+    --primary: 30 50% 64%;
+    /* Primary foreground - soft white for contrast */
+    --primary-foreground: 40 60% 98%;
+    /* Blush Pink: #F2D7D5 = hsl(5, 52%, 89%) */
+    --secondary: 5 52% 89%;
+    /* Warm Brown: #8B6F4E = hsl(31, 28%, 43%) */
+    --secondary-foreground: 31 28% 43%;
+    /* Cream for muted backgrounds */
+    --muted: 37 33% 94%;
+    /* Medium Gray: #666666 = hsl(0, 0%, 40%) */
+    --muted-foreground: 0 0% 40%;
+    /* Pistachio: #C5D5C5 = hsl(120, 18%, 81%) */
+    --accent: 120 18% 81%;
+    --accent-foreground: 31 28% 43%;
+    /* Raspberry: #D4738C = hsl(346, 50%, 64%) */
+    --destructive: 346 50% 64%;
+    --destructive-foreground: 40 60% 98%;
+    /* Light Gray: #E5E5E5 = hsl(0, 0%, 90%) */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    /* Butter Gold for ring/focus */
+    --ring: 30 50% 64%;
     --radius: 0.5rem;
   }
 }
@@ -41,6 +71,18 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  
+  /* Brand colors for direct Tailwind usage */
+  --color-cream: #F5F0E8;
+  --color-butter-gold: #D4A574;
+  --color-warm-brown: #8B6F4E;
+  --color-soft-white: #FDFBF7;
+  --color-blush-pink: #F2D7D5;
+  --color-pistachio: #C5D5C5;
+  --color-raspberry: #D4738C;
+  --color-charcoal: #333333;
+  --color-medium-gray: #666666;
+  --color-light-gray: #E5E5E5;
 }
 
 body {
