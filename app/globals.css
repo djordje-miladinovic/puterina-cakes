@@ -215,3 +215,24 @@ body {
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
 }
+
+/* Dashed line utilities for step connectors */
+.dashed-line-horizontal {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-light-gray) 0,
+    var(--color-light-gray) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.dashed-line-vertical {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--color-light-gray) 0,
+    var(--color-light-gray) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
