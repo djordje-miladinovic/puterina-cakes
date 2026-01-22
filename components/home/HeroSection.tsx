@@ -48,33 +48,6 @@ export default function HeroSection() {
           <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-2 md:mb-3 font-light tracking-wide">
             Butik torti iz srca Beograda
           </p>
-          
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            {/* Primary CTA - Phone call */}
-            <Button 
-              asChild 
-              size="lg" 
-              className="gap-2 bg-white text-warm-brown hover:bg-white/90 border-0 px-8 py-6 text-base font-medium"
-            >
-              <a href={`tel:${CONTACT.phone}`}>
-                <Phone className="h-4 w-4" />
-                Kontakt
-              </a>
-            </Button>
-            
-            {/* Secondary CTA - Catalog link */}
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg"
-              className="border-white/80 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-base font-medium"
-            >
-              <Link href="/katalog">
-                Katalog
-              </Link>
-            </Button>
-          </div>
         </div>
       </div>
       
