@@ -254,16 +254,6 @@ export default function OrderProcessSection() {
             ))}
           </div>
         </div>
-
-        {/* Important note about advance ordering */}
-        <div className="mt-10 md:mt-14 text-center">
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-blush-pink/30 border border-blush-pink/50">
-            <span className="text-lg" role="img" aria-label="Kalendar">📅</span>
-            <p className="text-sm md:text-base text-warm-brown">
-              <span className="font-medium">Napomena:</span> Preporučujemo poručivanje minimum {MINIMUM_ORDER_DAYS} dana unapred.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   )

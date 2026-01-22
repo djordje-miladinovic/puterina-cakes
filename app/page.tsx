@@ -7,9 +7,9 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <OrderProcessSection />
-
       <PhilosophySection />
+
+      <OrderProcessSection />
     </>
   )
 }
