@@ -60,9 +60,9 @@ export default function ProductInfo({
       </p>
 
       {/* Short Description */}
-      <p className="text-lg text-muted-foreground leading-relaxed">
+      {/* <p className="text-lg text-muted-foreground leading-relaxed">
         {shortDescription}
-      </p>
+      </p> */}
 
       {/* CTA Buttons */}
       <div className="flex flex-wrap gap-3 pt-2">
@@ -96,11 +96,21 @@ export default function ProductInfo({
         </Button>
       </div>
 
-      {/* Accordion Sections - Order: Opis, Sastojci, Nutritivne vrednosti, Alergeni, Čuvanje, Deklaracija */}
-      <div className="pt-6 border-t">
+      {/* Opis (Description) - Always visible */}
+      {description && (
+        <div className="pt-4">
+          {/* <h2 className="text-base font-semibold mb-2">Opis</h2> */}
+          <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+            {description}
+          </p>
+        </div>
+      )}
+      
+      {/* Accordion Sections - Order: Sastojci, Nutritivne vrednosti, Alergeni, Čuvanje, Deklaracija */}
+      <div className="pt-6">
         <Accordion type="single" collapsible className="w-full">
           {/* 1. Opis (Description) */}
-          {description && (
+          {/* {description && (
             <AccordionItem value="description">
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
                 Opis
@@ -111,7 +121,7 @@ export default function ProductInfo({
                 </p>
               </AccordionContent>
             </AccordionItem>
-          )}
+          )} */}
 
           {/* 2. Sastojci (Ingredients) */}
           {ingredients && (
@@ -123,18 +133,6 @@ export default function ProductInfo({
                 <p className="text-muted-foreground leading-relaxed">
                   {ingredients}
                 </p>
-              </AccordionContent>
-            </AccordionItem>
-          )}
-
-          {/* 3. Nutritivne vrednosti (Nutritional Values) - TABLE format */}
-          {nutrition && (
-            <AccordionItem value="nutrition">
-              <AccordionTrigger className="text-base font-semibold hover:no-underline">
-                Nutritivne vrednosti
-              </AccordionTrigger>
-              <AccordionContent>
-                <NutritionalTable nutrition={nutrition} />
               </AccordionContent>
             </AccordionItem>
           )}
@@ -165,20 +163,6 @@ export default function ProductInfo({
               <AccordionContent>
                 <p className="text-muted-foreground leading-relaxed">
                   {storage}
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          )}
-
-          {/* 6. Deklaracija (Declaration) */}
-          {declaration && (
-            <AccordionItem value="declaration">
-              <AccordionTrigger className="text-base font-semibold hover:no-underline">
-                Deklaracija
-              </AccordionTrigger>
-              <AccordionContent>
-                <p className="text-muted-foreground leading-relaxed text-sm whitespace-pre-line">
-                  {declaration}
                 </p>
               </AccordionContent>
             </AccordionItem>
