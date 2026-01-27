@@ -1,13 +1,25 @@
 "use client"
 
-import { useState } from "react"
-import { Instagram, Phone, X, MessageCircle } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { Instagram, Phone, X, Plus } from "lucide-react"
 import { CONTACT } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export default function StickyButtons() {
   const [isExpanded, setIsExpanded] = useState(false)
   const phoneE164 = CONTACT.phone
+
+  // Close on Escape key press
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape" && isExpanded) {
+      setIsExpanded(false)
+    }
+  }, [isExpanded])
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [handleKeyDown])
 
   return (
     <>
@@ -27,8 +39,9 @@ export default function StickyButtons() {
             href={`tel:${phoneE164}`}
             aria-label="Pozovite nas"
             title="Pozovite nas"
+            tabIndex={isExpanded ? 0 : -1}
             onClick={() => setIsExpanded(false)}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#D4A574] text-white shadow-lg transition-all duration-200 ease-out hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#D4A574] focus:ring-offset-2"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-200 ease-out hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             <Phone className="h-5 w-5" />
           </a>
@@ -40,6 +53,7 @@ export default function StickyButtons() {
             rel="noopener noreferrer"
             aria-label="Posetite nas na Instagramu"
             title="Instagram"
+            tabIndex={isExpanded ? 0 : -1}
             onClick={() => setIsExpanded(false)}
             className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-all duration-200 ease-out hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             style={{
@@ -58,14 +72,14 @@ export default function StickyButtons() {
           className={cn(
             "flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2",
             isExpanded
-              ? "bg-gray-700 text-white rotate-0 focus:ring-gray-500"
-              : "bg-[#D4A574] text-white hover:bg-[#C49464] focus:ring-[#D4A574]"
+              ? "bg-gray-700 text-white rotate-45 focus:ring-gray-500"
+              : "bg-primary text-white hover:bg-primary/90 focus:ring-primary"
           )}
         >
           {isExpanded ? (
             <X className="h-6 w-6" />
           ) : (
-            <MessageCircle className="h-6 w-6" />
+            <Plus className="h-6 w-6" />
           )}
         </button>
       </div>
@@ -75,7 +89,10 @@ export default function StickyButtons() {
         <div 
           className="fixed inset-0 bg-black/20 z-40 md:hidden"
           onClick={() => setIsExpanded(false)}
-          aria-hidden="true"
+          onKeyDown={(e) => e.key === "Escape" && setIsExpanded(false)}
+          role="button"
+          tabIndex={0}
+          aria-label="Zatvori kontakt opcije"
         />
       )}
     </>

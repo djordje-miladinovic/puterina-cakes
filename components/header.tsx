@@ -130,7 +130,6 @@ export default function Header() {
             >
               <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
                 <Phone className="h-4 w-4" />
-                <span className="sr-only sm:not-sr-only sm:ml-1">POZOVITE</span>
               </a>
             </Button>
             
@@ -177,7 +176,7 @@ export default function Header() {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-primary py-2"
                   >
-                    <Instagram className="h-5 w-5" style={{ color: '#E1306C' }} />
+                    <Instagram className="h-5 w-5 text-pink-500" />
                     Instagram
                   </a>
                   
@@ -187,7 +186,7 @@ export default function Header() {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-primary py-2"
                   >
-                    <Phone className="h-5 w-5" style={{ color: '#D4A574' }} />
+                    <Phone className="h-5 w-5 text-primary" />
                     Pozovite nas
                   </a>
                 </nav>
