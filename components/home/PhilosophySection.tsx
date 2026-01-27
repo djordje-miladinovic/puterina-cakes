@@ -38,26 +38,26 @@ const philosophyItems: PhilosophyItem[] = [
 
 export default function PhilosophySection() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-4">
-        {/* Main content box */}
+        {/* Main content box - using card-base pattern with consistent border-radius */}
         <div className="bg-soft-white rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 border border-light-gray/50">
-          {/* Section header */}
+          {/* Section header with proper spacing */}
           <div className="text-center mb-10 md:mb-12">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
               Filozofija Puterine
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
               U šta verujem i kako radim — principi koji čine svaku tortu posebnom.
             </p>
           </div>
 
-          {/* Philosophy items grid */}
+          {/* Philosophy items grid with consistent gap */}
           <div className="grid sm:grid-cols-2 gap-6 md:gap-8 mb-10 md:mb-12">
             {philosophyItems.map((item) => (
               <div
                 key={item.id}
-                className="flex gap-4 p-5 md:p-6 rounded-xl bg-cream/50 border border-light-gray/30 transition-colors hover:bg-cream/80"
+                className="flex gap-4 p-5 md:p-6 rounded-xl bg-cream/50 border border-light-gray/30 transition-all duration-200 hover:bg-cream/80 hover:border-butter-gold/30"
               >
                 <div className="shrink-0">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blush-pink/50 flex items-center justify-center">

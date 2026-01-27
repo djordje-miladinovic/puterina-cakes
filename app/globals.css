@@ -2,18 +2,55 @@
 
 @layer base {
   :root {
+    /* ============================================
+       DESIGN TOKENS - Puterina Cakes
+       ============================================ */
+    
     /* Typography - Font Families */
     --font-heading: var(--font-playfair), Georgia, serif;
     --font-body: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     
-    /* Brand Primary Colors (from Design DNA) */
+    /* ============================================
+       SPACING SYSTEM (4px/8px base)
+       Following modern design standards for consistent whitespace
+       ============================================ */
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;   /* 4px */
+    --spacing-2: 0.5rem;    /* 8px */
+    --spacing-3: 0.75rem;   /* 12px */
+    --spacing-4: 1rem;      /* 16px */
+    --spacing-5: 1.25rem;   /* 20px */
+    --spacing-6: 1.5rem;    /* 24px */
+    --spacing-8: 2rem;      /* 32px */
+    --spacing-10: 2.5rem;   /* 40px */
+    --spacing-12: 3rem;     /* 48px */
+    --spacing-16: 4rem;     /* 64px */
+    --spacing-20: 5rem;     /* 80px */
+    --spacing-24: 6rem;     /* 96px */
+    
+    /* Section spacing - "breathing" sections as per requirements */
+    --section-padding-y: var(--spacing-16);
+    --section-padding-y-md: var(--spacing-20);
+    --section-gap: var(--spacing-12);
+    
+    /* Card spacing */
+    --card-padding: var(--spacing-6);
+    --card-padding-md: var(--spacing-8);
+    --card-gap: var(--spacing-4);
+    
+    /* ============================================
+       BRAND PRIMARY COLORS (from Design DNA)
+       ============================================ */
     --color-cream: #F5F0E8;           /* Main background */
     --color-butter-gold: #D4A574;     /* Accents, CTA */
+    --color-butter-gold-hover: #C49464; /* CTA hover state */
+    --color-butter-gold-active: #B48454; /* CTA active state */
     --color-warm-brown: #8B6F4E;      /* Text, headings */
     --color-soft-white: #FDFBF7;      /* Cards, sections */
     
     /* Brand Secondary Colors */
     --color-blush-pink: #F2D7D5;      /* Accents, hovers */
+    --color-blush-pink-hover: #E8C7C5; /* Secondary hover */
     --color-pistachio: #C5D5C5;       /* Signature highlight */
     --color-raspberry: #D4738C;       /* CTA alternative */
     
@@ -22,7 +59,39 @@
     --color-medium-gray: #666666;     /* Secondary text */
     --color-light-gray: #E5E5E5;      /* Borders, dividers */
     
-    /* Semantic Color Variables (HSL values for Tailwind compatibility) */
+    /* ============================================
+       BORDER RADIUS TOKENS
+       ============================================ */
+    --radius-sm: 0.375rem;  /* 6px - small elements */
+    --radius-md: 0.5rem;    /* 8px - buttons, inputs */
+    --radius-lg: 0.75rem;   /* 12px - cards */
+    --radius-xl: 1rem;      /* 16px - larger cards */
+    --radius-2xl: 1.5rem;   /* 24px - sections */
+    --radius-full: 9999px;  /* Pills, avatars */
+    
+    /* ============================================
+       SHADOW TOKENS
+       Consistent shadows for elevation hierarchy
+       ============================================ */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    /* Premium warm shadow for hover states */
+    --shadow-butter: 0 4px 12px rgba(212, 165, 116, 0.25);
+    --shadow-butter-lg: 0 8px 24px rgba(212, 165, 116, 0.3);
+    
+    /* ============================================
+       TRANSITION TOKENS
+       Max 300ms as per Design DNA motion rules
+       ============================================ */
+    --transition-fast: 150ms ease-out;
+    --transition-base: 200ms ease-out;
+    --transition-slow: 300ms ease-out;
+    
+    /* ============================================
+       SEMANTIC COLOR VARIABLES (HSL for Tailwind)
+       ============================================ */
     /* Cream: #F5F0E8 = hsl(37, 33%, 94%) */
     --background: 37 33% 94%;
     /* Charcoal: #333333 = hsl(0, 0%, 20%) */
@@ -127,14 +196,20 @@
   /* Brand colors for direct Tailwind usage */
   --color-cream: #F5F0E8;
   --color-butter-gold: #D4A574;
+  --color-butter-gold-hover: #C49464;
   --color-warm-brown: #8B6F4E;
   --color-soft-white: #FDFBF7;
   --color-blush-pink: #F2D7D5;
+  --color-blush-pink-hover: #E8C7C5;
   --color-pistachio: #C5D5C5;
   --color-raspberry: #D4738C;
   --color-charcoal: #333333;
   --color-medium-gray: #666666;
   --color-light-gray: #E5E5E5;
+  
+  /* Shadow tokens for Tailwind */
+  --shadow-butter: 0 4px 12px rgba(212, 165, 116, 0.25);
+  --shadow-butter-lg: 0 8px 24px rgba(212, 165, 116, 0.3);
 }
 
 body {
@@ -235,4 +310,216 @@ body {
     transparent 4px,
     transparent 8px
   );
+}
+
+/* ============================================
+   SECTION SPACING UTILITIES
+   Ensures sections "breathe" with consistent whitespace
+   ============================================ */
+.section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+.section-lg {
+  padding-top: var(--section-padding-y-md);
+  padding-bottom: var(--section-padding-y-md);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--section-padding-y-md);
+    padding-bottom: var(--section-padding-y-md);
+  }
+  
+  .section-lg {
+    padding-top: var(--spacing-24);
+    padding-bottom: var(--spacing-24);
+  }
+}
+
+/* ============================================
+   CARD VARIANTS
+   Consistent card styling across the site
+   ============================================ */
+.card-base {
+  background-color: var(--color-soft-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-light-gray);
+  padding: var(--card-padding);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .card-base {
+    padding: var(--card-padding-md);
+  }
+}
+
+.card-base:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-elevated {
+  background-color: var(--color-soft-white);
+  border-radius: var(--radius-lg);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .card-elevated {
+    padding: var(--card-padding-md);
+  }
+}
+
+.card-elevated:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+.card-interactive {
+  background-color: var(--color-soft-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-light-gray);
+  padding: var(--card-padding);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .card-interactive {
+    padding: var(--card-padding-md);
+  }
+}
+
+.card-interactive:hover {
+  border-color: var(--color-butter-gold);
+  box-shadow: var(--shadow-butter);
+  transform: translateY(-2px);
+}
+
+/* Cream tinted card for subtle sections */
+.card-cream {
+  background-color: color-mix(in srgb, var(--color-cream) 50%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--color-light-gray) 30%, transparent);
+  padding: var(--card-padding);
+  transition: background-color var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .card-cream {
+    padding: var(--card-padding-md);
+  }
+}
+
+.card-cream:hover {
+  background-color: color-mix(in srgb, var(--color-cream) 80%, transparent);
+}
+
+/* ============================================
+   CTA BUTTON CONSISTENCY HELPERS
+   Ensures all CTA buttons look identical across pages
+   ============================================ */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--color-butter-gold);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.cta-primary:hover {
+  background-color: var(--color-butter-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-butter);
+}
+
+.cta-primary:active {
+  background-color: var(--color-butter-gold-active);
+  transform: translateY(0);
+}
+
+.cta-primary:focus-visible {
+  outline: 2px solid var(--color-butter-gold);
+  outline-offset: 2px;
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--color-blush-pink);
+  color: var(--color-warm-brown);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.cta-secondary:hover {
+  background-color: var(--color-blush-pink-hover);
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: transparent;
+  color: var(--color-charcoal);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.cta-ghost:hover {
+  background-color: var(--color-pistachio);
+  color: var(--color-warm-brown);
+}
+
+/* ============================================
+   FORM INPUT STYLING
+   Consistent form elements with proper touch targets
+   ============================================ */
+.input-base {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: white;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-charcoal);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  /* Minimum touch target size for mobile (44px) */
+  min-height: 44px;
+}
+
+.input-base:focus {
+  outline: none;
+  border-color: var(--color-butter-gold);
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+}
+
+.input-base::placeholder {
+  color: var(--color-medium-gray);
+}
+
+/* Label styling */
+.input-label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-warm-brown);
 }

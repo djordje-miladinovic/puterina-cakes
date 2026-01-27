@@ -108,10 +108,10 @@ export default function Header() {
               <Instagram className="h-5 w-5" />
             </a>
             
-            {/* Primary CTA - POZOVITE */}
+            {/* Primary CTA - POZOVITE - Using Button component for consistency */}
             <Button
               asChild
-              className="bg-[#D4A574] hover:bg-[#C49464] text-white font-semibold px-6 transition-all duration-200 hover:scale-105 hover:shadow-lg focus:ring-2 focus:ring-[#D4A574] focus:ring-offset-2"
+              size="lg"
             >
               <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
                 <Phone className="h-4 w-4 mr-2" />
@@ -122,11 +122,10 @@ export default function Header() {
 
           {/* Mobile: CTA + Menu */}
           <div className="flex md:hidden items-center gap-2">
-            {/* Mobile Primary CTA - POZOVITE */}
+            {/* Mobile Primary CTA - POZOVITE - Using Button component for consistency */}
             <Button
               asChild
               size="sm"
-              className="bg-[#D4A574] hover:bg-[#C49464] text-white font-semibold px-3 transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-[#D4A574] focus:ring-offset-2"
             >
               <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
                 <Phone className="h-4 w-4" />
