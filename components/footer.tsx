@@ -48,40 +48,6 @@ export default function Footer() {
               Ručno pravljene premium torte i kolači izrađeni sa ljubavlju i
               pažnjom. Vaše posebne trenutke činimo još slađima.
             </p>
-            
-            {/* Social Media Icons */}
-            <div className="mt-6">
-              <p className="text-sm font-semibold text-soft-white mb-3">Pratite nas:</p>
-              <div className="flex gap-4">
-                <a
-                  href={CONTACT.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Posetite nas na Instagramu"
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-soft-white/10 text-soft-white hover:bg-butter-gold hover:text-warm-brown transition-all duration-200"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
-                <a
-                  href={CONTACT.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Pišite nam na WhatsApp"
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-soft-white/10 text-soft-white hover:bg-[#25D366] hover:text-white transition-all duration-200"
-                >
-                  <WhatsAppIcon className="h-5 w-5" />
-                </a>
-                <a
-                  href={CONTACT.viber}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Pišite nam na Viber"
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-soft-white/10 text-soft-white hover:bg-[#7360F2] hover:text-white transition-all duration-200"
-                >
-                  <ViberIcon className="h-5 w-5" />
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Navigation Section */}
@@ -121,28 +87,6 @@ export default function Footer() {
                   <Mail className="h-4 w-4" />
                 </span>
                 <span>{CONTACT.email}</span>
-              </a>
-              <a
-                href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-soft-white/80 hover:text-butter-gold transition-colors group"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-soft-white/10 group-hover:bg-[#25D366] group-hover:text-white transition-all duration-200">
-                  <WhatsAppIcon className="h-4 w-4" />
-                </span>
-                <span>WhatsApp</span>
-              </a>
-              <a
-                href={CONTACT.viber}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-soft-white/80 hover:text-butter-gold transition-colors group"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-soft-white/10 group-hover:bg-[#7360F2] group-hover:text-white transition-all duration-200">
-                  <ViberIcon className="h-4 w-4" />
-                </span>
-                <span>Viber</span>
               </a>
               <div className="flex items-start gap-3 text-soft-white/80">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-soft-white/10 shrink-0">
