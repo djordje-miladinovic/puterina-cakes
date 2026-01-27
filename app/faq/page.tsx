@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 import { sanityFetch, FAQ_QUERY } from "@/lib/sanity"
 import { CONTACT, CANONICAL_BASE } from "@/lib/constants"
 
@@ -411,7 +412,7 @@ export default async function FaqPage() {
         })}
 
         {/* Contact CTA */}
-        <section className="mt-12 p-6 bg-muted rounded-lg text-center">
+        <section className="mt-12 p-6 md:p-8 bg-muted rounded-xl text-center">
           <h2 className="text-xl font-semibold mb-2">
             Imate dodatno pitanje?
           </h2>
@@ -419,20 +420,20 @@ export default async function FaqPage() {
             Slobodno nas kontaktirajte – radujemo se Vašoj poruci!
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href={`tel:${CONTACT.phone}`}
-              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              Pozovite nas
-            </a>
-            <a
-              href={CONTACT.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              Instagram
-            </a>
+            <Button asChild size="lg">
+              <a href={`tel:${CONTACT.phone}`}>
+                Pozovite nas
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            </Button>
           </div>
         </section>
       </div>
