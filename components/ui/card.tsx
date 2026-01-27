@@ -11,21 +11,22 @@ import { cn } from "@/lib/utils"
  * - cream: Subtle cream-tinted card for sections
  * 
  * All variants use consistent border-radius (--radius-lg = 12px)
- * and responsive padding (24px mobile, 32px desktop).
+ * and responsive padding (p-6 = 24px mobile, p-8 = 32px desktop).
+ * Note: cream variant uses p-5/p-6 for tighter spacing in nested contexts.
  */
 const cardVariants = cva(
   "rounded-xl transition-all duration-200 ease-out",
   {
     variants: {
       variant: {
-        // Standard card with subtle border
-        base: "bg-[#FDFBF7] border border-[#E5E5E5] p-6 md:p-8 hover:shadow-lg",
+        // Standard card with subtle border - uses design tokens
+        base: "bg-soft-white border border-light-gray p-6 md:p-8 hover:shadow-lg",
         // Elevated card with shadow
-        elevated: "bg-[#FDFBF7] p-6 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-0.5",
-        // Interactive/clickable card
-        interactive: "bg-[#FDFBF7] border border-[#E5E5E5] p-6 md:p-8 cursor-pointer hover:border-[#D4A574] hover:shadow-[0_4px_12px_rgba(212,165,116,0.25)] hover:-translate-y-0.5",
-        // Cream tinted for subtle sections
-        cream: "bg-[#F5F0E8]/50 border border-[#E5E5E5]/30 p-5 md:p-6 hover:bg-[#F5F0E8]/80",
+        elevated: "bg-soft-white p-6 md:p-8 shadow-md hover:shadow-xl hover:-translate-y-0.5",
+        // Interactive/clickable card with butter-gold hover
+        interactive: "bg-soft-white border border-light-gray p-6 md:p-8 cursor-pointer hover:border-butter-gold hover:shadow-[var(--shadow-butter)] hover:-translate-y-0.5",
+        // Cream tinted for subtle sections (smaller padding for nested contexts)
+        cream: "bg-cream/50 border border-light-gray/30 p-5 md:p-6 hover:bg-cream/80",
         // Ghost card - minimal styling
         ghost: "p-6 md:p-8",
       },
@@ -72,7 +73,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-lg md:text-xl font-semibold leading-none tracking-tight text-[#8B6F4E]",
+      "text-lg md:text-xl font-semibold leading-none tracking-tight text-warm-brown",
       className
     )}
     {...props}
@@ -86,7 +87,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm md:text-base text-[#666666]", className)}
+    className={cn("text-sm md:text-base text-medium-gray", className)}
     {...props}
   />
 ))

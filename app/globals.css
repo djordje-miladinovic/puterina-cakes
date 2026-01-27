@@ -402,9 +402,9 @@ body {
 
 /* Cream tinted card for subtle sections */
 .card-cream {
-  background-color: rgba(245, 240, 232, 0.5);
+  background-color: color-mix(in srgb, var(--color-cream) 50%, transparent);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(229, 229, 229, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-gray) 30%, transparent);
   padding: var(--card-padding);
   transition: background-color var(--transition-base);
 }
@@ -416,7 +416,7 @@ body {
 }
 
 .card-cream:hover {
-  background-color: rgba(245, 240, 232, 0.8);
+  background-color: color-mix(in srgb, var(--color-cream) 80%, transparent);
 }
 
 /* ============================================
@@ -448,9 +448,8 @@ body {
 }
 
 .cta-primary:focus-visible {
-  outline: none;
-  ring: 2px solid var(--color-butter-gold);
-  ring-offset: 2px;
+  outline: 2px solid var(--color-butter-gold);
+  outline-offset: 2px;
 }
 
 .cta-secondary {

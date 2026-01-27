@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils"
  * 
  * All hover effects use GPU-accelerated transforms (translateY, scale)
  * with max 300ms transitions as per motion rules.
+ * 
+ * Colors reference design tokens from globals.css for consistency.
  */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -21,20 +23,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // Primary CTA - Butter Gold, consistent across all pages
-        default: "bg-[#D4A574] text-white font-semibold hover:bg-[#C49464] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(212,165,116,0.25)] active:translate-y-0 active:bg-[#B48454]",
+        default: "bg-butter-gold text-white font-semibold hover:bg-butter-gold-hover hover:-translate-y-0.5 hover:shadow-[var(--shadow-butter)] active:translate-y-0 active:bg-[#B48454]",
         // Destructive - Raspberry for dangerous actions
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:-translate-y-0.5",
         // Outline - bordered style for secondary prominence
         outline:
-          "border border-[#E5E5E5] bg-background text-foreground hover:bg-[#F2D7D5] hover:border-[#D4A574] hover:text-[#8B6F4E]",
+          "border border-light-gray bg-background text-foreground hover:bg-blush-pink hover:border-butter-gold hover:text-warm-brown",
         // Secondary - Blush Pink for secondary actions
         secondary:
-          "bg-[#F2D7D5] text-[#8B6F4E] font-medium hover:bg-[#E8C7C5]",
+          "bg-blush-pink text-warm-brown font-medium hover:bg-blush-pink-hover",
         // Ghost - transparent with subtle hover
-        ghost: "hover:bg-[#C5D5C5] hover:text-[#8B6F4E]",
+        ghost: "hover:bg-pistachio hover:text-warm-brown",
         // Link - text link style
-        link: "text-[#D4A574] underline-offset-4 hover:underline",
+        link: "text-butter-gold underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",
