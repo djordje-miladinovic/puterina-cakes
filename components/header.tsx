@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { Menu } from "lucide-react"
+import { Menu, Phone, Instagram } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { NAVIGATION } from "@/lib/constants"
+import { NAVIGATION, CONTACT } from "@/lib/constants"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
@@ -75,7 +75,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.name}
@@ -90,40 +90,110 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Mobile Menu */}
-          <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild className="md:hidden">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                aria-label="Otvori meni"
-                className={cn(
-                  "transition-colors",
-                  isHomepage && !isScrolled ? "text-white hover:text-white/80 hover:bg-white/10" : ""
-                )}
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="w-[95vw] max-w-md transform-gpu">
-              <DialogHeader>
-                <DialogTitle>Meni</DialogTitle>
-              </DialogHeader>
-              <nav className="flex flex-col gap-4 mt-4">
-                {NAVIGATION.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
+          {/* Desktop CTA Section - Instagram + Call */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Instagram Link */}
+            <a
+              href={CONTACT.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Posetite nas na Instagramu"
+              className={cn(
+                "flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 hover:scale-110",
+                isHomepage && !isScrolled 
+                  ? "text-white hover:bg-white/20" 
+                  : "text-foreground hover:bg-secondary"
+              )}
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            
+            {/* Primary CTA - POZOVITE */}
+            <Button
+              asChild
+              className="bg-[#D4A574] hover:bg-[#C49464] text-white font-semibold px-6 transition-all duration-200 hover:scale-105 hover:shadow-lg focus:ring-2 focus:ring-[#D4A574] focus:ring-offset-2"
+            >
+              <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
+                <Phone className="h-4 w-4 mr-2" />
+                POZOVITE
+              </a>
+            </Button>
+          </div>
+
+          {/* Mobile: CTA + Menu */}
+          <div className="flex md:hidden items-center gap-2">
+            {/* Mobile Primary CTA - POZOVITE */}
+            <Button
+              asChild
+              size="sm"
+              className="bg-[#D4A574] hover:bg-[#C49464] text-white font-semibold px-3 transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-[#D4A574] focus:ring-offset-2"
+            >
+              <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas">
+                <Phone className="h-4 w-4" />
+                <span className="sr-only sm:not-sr-only sm:ml-1">POZOVITE</span>
+              </a>
+            </Button>
+            
+            {/* Mobile Menu */}
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  aria-label="Otvori meni"
+                  className={cn(
+                    "transition-colors",
+                    isHomepage && !isScrolled ? "text-white hover:text-white/80 hover:bg-white/10" : ""
+                  )}
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="w-[95vw] max-w-md transform-gpu">
+                <DialogHeader>
+                  <DialogTitle>Meni</DialogTitle>
+                </DialogHeader>
+                <nav className="flex flex-col gap-4 mt-4">
+                  {NAVIGATION.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-medium transition-colors hover:text-primary py-2"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  
+                  {/* Divider */}
+                  <div className="border-t border-border my-2" />
+                  
+                  {/* Instagram Link in Mobile Menu */}
+                  <a
+                    href={CONTACT.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium transition-colors hover:text-primary py-2"
+                    className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-primary py-2"
                   >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-            </DialogContent>
-          </Dialog>
+                    <Instagram className="h-5 w-5" style={{ color: '#E1306C' }} />
+                    Instagram
+                  </a>
+                  
+                  {/* Call Link in Mobile Menu */}
+                  <a
+                    href={`tel:${CONTACT.phone}`}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-primary py-2"
+                  >
+                    <Phone className="h-5 w-5" style={{ color: '#D4A574' }} />
+                    Pozovite nas
+                  </a>
+                </nav>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
     </header>
