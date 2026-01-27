@@ -244,15 +244,83 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* Texture utility classes as per Design DNA */
+/* ============================================
+   TEXTURE SYSTEM
+   Subtle textures using pseudo-elements for premium feel
+   without impacting layout or performance
+   ============================================ */
+
+/* Direct background texture - lightweight paper texture */
 .bg-paper-texture {
-  background-color: hsl(var(--color-cream));
+  background-color: var(--color-cream);
   background-image: url('/textures/paper-light.svg');
   background-repeat: repeat;
   background-size: 300px 300px;
 }
 
-/* Watercolor decorative element (use sparingly) */
+/* Flour grain texture - subtle bakery feel */
+.bg-flour-texture {
+  background-color: var(--color-cream);
+  background-image: url('/textures/flour-grain.svg');
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* Soft grain texture for cards/sections */
+.bg-soft-grain {
+  background-color: var(--color-soft-white);
+  background-image: url('/textures/soft-grain.svg');
+  background-repeat: repeat;
+  background-size: 250px 250px;
+}
+
+/* ============================================
+   PSEUDO-ELEMENT TEXTURE OVERLAYS
+   Use ::after for textures that don't affect content
+   ============================================ */
+
+/* Base texture overlay setup - use with specific texture modifier */
+.texture-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+/* Paper texture overlay (default, barely visible) */
+.texture-paper::after {
+  background-image: url('/textures/paper-light.svg');
+  background-size: 300px 300px;
+  opacity: 0.4;
+}
+
+/* Flour/grain texture overlay - artisan bakery feel */
+.texture-flour::after {
+  background-image: url('/textures/flour-grain.svg');
+  background-size: 200px 200px;
+  opacity: 0.35;
+}
+
+/* Soft grain overlay - premium cards and highlights */
+.texture-grain::after {
+  background-image: url('/textures/soft-grain.svg');
+  background-size: 250px 250px;
+  opacity: 0.3;
+}
+
+/* ============================================
+   DECORATIVE ACCENTS (Use sparingly)
+   ============================================ */
+
+/* Watercolor decorative element */
 .watercolor-accent {
   position: relative;
   overflow: hidden;
@@ -269,6 +337,52 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Watercolor accent positioned bottom-left */
+.watercolor-accent-bl::before {
+  top: auto;
+  right: auto;
+  bottom: -10%;
+  left: -15%;
+}
+
+/* Section with subtle cream tint and paper texture */
+.section-textured {
+  position: relative;
+  background-color: var(--color-cream);
+  isolation: isolate;
+}
+
+.section-textured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/paper-light.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Section with soft-white background and grain texture */
+.section-soft {
+  position: relative;
+  background-color: var(--color-soft-white);
+  isolation: isolate;
+}
+
+.section-soft::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/soft-grain.svg');
+  background-repeat: repeat;
+  background-size: 250px 250px;
+  opacity: 0.4;
   pointer-events: none;
   z-index: -1;
 }

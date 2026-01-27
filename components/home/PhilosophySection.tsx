@@ -38,7 +38,7 @@ const philosophyItems: PhilosophyItem[] = [
 
 export default function PhilosophySection() {
   return (
-    <section className="py-16 md:py-20 lg:py-24">
+    <section className="py-16 md:py-20 lg:py-24 section-textured">
       <div className="container mx-auto px-4">
         {/* Main content box - using card-base pattern with consistent border-radius */}
         <div className="bg-soft-white rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 border border-light-gray/50">

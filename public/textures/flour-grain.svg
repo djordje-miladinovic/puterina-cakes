@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <filter id="flour-noise" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="15" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="mono"/>
+      <feComponentTransfer in="mono" result="grain">
+        <feFuncA type="linear" slope="0.06" intercept="0"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="200" height="200" fill="#F5F0E8"/>
+  <rect width="200" height="200" filter="url(#flour-noise)" fill="#8B6F4E"/>
+</svg>
