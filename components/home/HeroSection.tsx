@@ -45,12 +45,12 @@ export default function HeroSection() {
           
           {/* Main Tagline - komunikacija premium kvaliteta */}
           <p className="text-xl md:text-2xl lg:text-3xl text-white mb-3 md:mb-4 font-light tracking-wide drop-shadow-md">
-            Svaka torta pripremljena samo za Vas — od odabranih sastojaka, s punom pažnjom
+            Torte od <span className="underline">pravih</span> sastojaka, ručno dekorisane s ljubavlju
           </p>
           
           {/* Sub-tagline - USP (Unique Selling Proposition) */}
           <p className="text-base md:text-lg lg:text-xl text-white/85 mb-8 md:mb-10 font-light tracking-wider">
-            Puter krem umesto fondana • Domaće kore pečene od nule • Beogradski butik s limitiranim kapacitetom
+            Puter krem umesto fondana • Domaće kore pečene od nule • Butik torti u srcu Beograda
           </p>
           
           {/* CTA Buttons - above the fold, minimum 44px touch target */}
@@ -63,7 +63,7 @@ export default function HeroSection() {
             >
               <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas za Vašu porudžbinu">
                 <Phone className="h-5 w-5 mr-2" />
-                POZOVITE NAS
+                Naručite
               </a>
             </Button>
             

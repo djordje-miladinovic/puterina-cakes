@@ -12,13 +12,13 @@ const brandBenefits: BrandBenefit[] = [
     id: "natural",
     icon: Leaf,
     title: "Pravi sastojci",
-    description: "Birate kvalitet bez kompromisa — svaki sastojak je pažljivo odabran",
+    description: "Samo pravi, pažljivo odabrani, kvalitetni sastojci bez aditiv",
   },
   {
     id: "handmade",
     icon: HandHeart,
     title: "Ručna izrada",
-    description: "Vaša torta nastaje u malom pogonu, posvećena isključivo Vama",
+    description: "Svaka torta je jedinstvena i pečena s ljubavlju i pažnjom",
   },
   {
     id: "small-batch",
