@@ -48,7 +48,7 @@ export default function PhilosophySection() {
               Filozofija Puterine
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-              U šta verujem i kako radim — principi koji čine svaku tortu posebnom.
+              Verujemo da svaka torta zaslužuje Vašu punu pažnju — ovo su principi po kojima radimo.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function PhilosophySection() {
             <div className="inline-flex items-center gap-2 text-muted-foreground">
               <Award className="w-4 h-4 md:w-5 md:h-5 text-butter-gold" />
               <p className="text-sm md:text-base italic">
-                Primam ograničen broj porudžbina nedeljno kako bih svakoj torti posvetila punu pažnju.
+                Primamo ograničen broj porudžbina nedeljno kako bismo svakoj torti posvetili punu pažnju koju zaslužuje.
               </p>
             </div>
           </div>
