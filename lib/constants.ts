@@ -16,6 +16,7 @@ export const CANONICAL_BASE = "https://puterinacakes.rs"
 export const NAVIGATION = [
   { name: "Početna", href: "/" },
   { name: "Katalog", href: "/katalog" },
+  { name: "Utisci", href: "/utisci" },
   { name: "FAQ", href: "/faq" },
   { name: "Kontakt", href: "/kontakt" },
 ] as const
