@@ -178,9 +178,9 @@ export default function ProductCard({
         {/* Tags */}
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {tags.slice(0, 3).map((tag) => (
+            {tags.slice(0, 3).map((tag, index) => (
               <span
-                key={tag}
+                key={`${tag}-${index}`}
                 className="px-2 py-0.5 text-xs rounded-full bg-blush-pink text-warm-brown"
               >
                 {tag}
@@ -203,7 +203,7 @@ export default function ProductCard({
             )}
           >
             Detalji
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
           </span>
         </div>
       </div>

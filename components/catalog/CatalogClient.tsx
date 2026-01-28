@@ -26,31 +26,58 @@ interface CatalogClientProps {
 }
 
 /**
- * Convert filter values to human-readable tag labels
+ * Create a lookup map for filter options (category -> value -> label)
+ * This is more efficient than repeated array.find operations
  */
-function getTagLabels(product: Product, filterCategories: FilterCategory[]): string[] {
+function createFilterLookup(filterCategories: FilterCategory[]): Map<string, Map<string, string>> {
+  const lookup = new Map<string, Map<string, string>>()
+  
+  filterCategories.forEach(category => {
+    const optionMap = new Map<string, string>()
+    category.options.forEach(option => {
+      optionMap.set(option.value, option.label)
+    })
+    lookup.set(category.id, optionMap)
+  })
+  
+  return lookup
+}
+
+/**
+ * Convert filter values to human-readable tag labels
+ * Uses a lookup map for efficient label resolution
+ */
+function getTagLabels(
+  product: Product, 
+  filterLookup: Map<string, Map<string, string>>
+): string[] {
   const tags: string[] = []
   
   // Get labels for ukus values
-  if (product.ukus && product.ukus.length > 0) {
-    const ukusCategory = filterCategories.find(c => c.id === 'ukus')
-    if (ukusCategory) {
-      product.ukus.forEach(value => {
-        const option = ukusCategory.options.find(o => o.value === value)
-        if (option) tags.push(option.label)
-      })
-    }
+  const ukusLookup = filterLookup.get('ukus')
+  if (ukusLookup && product.ukus) {
+    product.ukus.forEach(value => {
+      const label = ukusLookup.get(value)
+      if (label) tags.push(label)
+    })
   }
   
   // Get labels for prilika values
-  if (product.prilika && product.prilika.length > 0) {
-    const prilikaCategory = filterCategories.find(c => c.id === 'prilika')
-    if (prilikaCategory) {
-      product.prilika.forEach(value => {
-        const option = prilikaCategory.options.find(o => o.value === value)
-        if (option) tags.push(option.label)
-      })
-    }
+  const prilikaLookup = filterLookup.get('prilika')
+  if (prilikaLookup && product.prilika) {
+    product.prilika.forEach(value => {
+      const label = prilikaLookup.get(value)
+      if (label) tags.push(label)
+    })
+  }
+  
+  // Get labels for sezona values
+  const sezonaLookup = filterLookup.get('sezona')
+  if (sezonaLookup && product.sezona) {
+    product.sezona.forEach(value => {
+      const label = sezonaLookup.get(value)
+      if (label) tags.push(label)
+    })
   }
   
   return tags
@@ -62,6 +89,9 @@ function getTagLabels(product: Product, filterCategories: FilterCategory[]): str
  */
 export function CatalogClient({ products, filterCategories }: CatalogClientProps) {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTER_STATE)
+
+  // Create memoized lookup map for efficient tag label resolution
+  const filterLookup = useMemo(() => createFilterLookup(filterCategories), [filterCategories])
 
   // Calculate active filter count
   const activeFilterCount = useMemo(() => {
@@ -156,7 +186,7 @@ export function CatalogClient({ products, filterCategories }: CatalogClientProps
               pricePerKg={product.pricePerKg}
               primaryImage={toProductCardImage(product.primaryImage, product.title)}
               secondaryImage={toProductCardImage(product.secondaryImage, `${product.title} - presek`)}
-              tags={getTagLabels(product, filterCategories)}
+              tags={getTagLabels(product, filterLookup)}
               isSignature={product.isSignature}
             />
           ))}
