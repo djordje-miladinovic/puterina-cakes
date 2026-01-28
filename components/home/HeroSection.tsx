@@ -1,6 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
-import { Phone, ChevronDown } from "lucide-react"
+import { Phone, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CONTACT } from "@/lib/constants"
 
@@ -16,7 +15,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 w-full h-full">
         <Image
           src="/images/hero-placeholder.svg"
-          alt="Puterina signature torta - pistaci-malina"
+          alt="Puterina signature torta - ručno dekorisana premium torta sa prirodnim sastojcima"
           fill
           priority
           className="object-cover"
@@ -25,39 +24,68 @@ export default function HeroSection() {
         />
         {/* 
           Gradient overlay za bolju čitljivost teksta
-          Koristi se subtilni gradient od dna ka gore
+          Premium look sa jačim gradientom za kontrast
         */}
-        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
       </div>
 
       {/* 
         CONTENT OVERLAY
-        - Pozicioniran preko slike
         - Centriran vertikalno i horizontalno
         - Flex container za raspored elemenata
+        - CTAs above the fold
       */}
-      <div className="relative z-10 flex flex-col items-center justify-end min-h-screen pb-24 md:pb-32 px-4">
-        {/* Text content - positioned at bottom for premium look */}
-        <div className="text-center max-w-3xl mx-auto">
-          {/* Headline - bela boja za kontrast na tamnom overlay-u */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 md:mb-6 text-white drop-shadow-lg font-semibold tracking-tight">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
+        {/* Text content - centered for premium impact */}
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Brand name - elegantna tipografija */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 md:mb-6 text-white drop-shadow-lg font-semibold tracking-tight">
             Puterina
           </h1>
           
-          {/* Tagline */}
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-2 md:mb-3 font-light tracking-wide">
-            Butik torti iz srca Beograda
+          {/* Main Tagline - komunikacija premium kvaliteta */}
+          <p className="text-xl md:text-2xl lg:text-3xl text-white mb-3 md:mb-4 font-light tracking-wide drop-shadow-md">
+            Torte od pravih sastojaka, ručno dekorisane s ljubavlju
           </p>
+          
+          {/* Sub-tagline - USP (Unique Selling Proposition) */}
+          <p className="text-base md:text-lg lg:text-xl text-white/85 mb-8 md:mb-10 font-light tracking-wider">
+            100% prirodno • Premium puter krem • Butik iz srca Beograda
+          </p>
+          
+          {/* CTA Buttons - above the fold, minimum 44px touch target */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Primary CTA - POZOVITE */}
+            <Button
+              asChild
+              size="xl"
+              className="w-full sm:w-auto min-h-[48px] text-base md:text-lg px-8 md:px-10 shadow-lg hover:shadow-xl"
+            >
+              <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas za porudžbinu">
+                <Phone className="h-5 w-5 mr-2" />
+                POZOVITE
+              </a>
+            </Button>
+            
+            {/* Secondary CTA - Instagram DM */}
+            <Button
+              asChild
+              variant="outline"
+              size="xl"
+              className="w-full sm:w-auto min-h-[48px] text-base md:text-lg px-8 md:px-10 bg-white/10 border-white/40 text-white hover:bg-white/20 hover:border-white/60 hover:text-white backdrop-blur-sm"
+            >
+              <a 
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Pošaljite nam poruku na Instagramu"
+              >
+                <Instagram className="h-5 w-5 mr-2" />
+                Instagram DM
+              </a>
+            </Button>
+          </div>
         </div>
-      </div>
-      
-      {/* 
-        Scroll indicator - animiran chevron
-        Pozicioniran na dnu ekrana
-      */}
-      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <ChevronDown className="h-8 w-8 md:h-10 md:w-10 text-white/70" />
-        <span className="sr-only">Skrolujte nadole</span>
       </div>
     </section>
   )
