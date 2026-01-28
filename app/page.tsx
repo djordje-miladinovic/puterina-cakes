@@ -3,6 +3,7 @@ import BrandBenefitsSection from "@/components/home/BrandBenefitsSection"
 import FeaturedProductsSection from "@/components/home/FeaturedProductsSection"
 import PhilosophySection from "@/components/home/PhilosophySection"
 import TestimonialsSection from "@/components/home/TestimonialsSection"
+import HomeCTASection from "@/components/home/HomeCTASection"
 import {
   sanityFetch,
   FEATURED_PRODUCTS_QUERY,
@@ -94,6 +95,8 @@ export default async function Home() {
       <PhilosophySection />
 
       <TestimonialsSection />
+
+      <HomeCTASection />
     </>
   )
 }
