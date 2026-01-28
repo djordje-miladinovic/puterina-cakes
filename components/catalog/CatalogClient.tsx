@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react"
 import { ProductCard } from "@/components/product"
 import { FilterBar, ActiveFilterTags } from "./FilterBar"
+import { CatalogEmptyState } from "./CatalogEmptyState"
 import { INITIAL_FILTER_STATE, type FilterState, type FilterCategory } from "@/lib/filters"
 import { toProductCardImage, type SanityImage } from "@/lib/sanity"
 
@@ -162,21 +163,14 @@ export function CatalogClient({ products, filterCategories }: CatalogClientProps
         onResetFilters={handleResetFilters}
       />
 
-      {/* Product grid or no results message */}
+      {/* Product grid or premium empty state */}
       {filteredProducts.length === 0 ? (
-        <div className="text-center py-12 bg-soft-white rounded-lg border border-light-gray">
-          <p className="text-lg text-muted-foreground mb-4">
-            Nema proizvoda za izabrane filtere.
-          </p>
-          <button
-            onClick={handleResetFilters}
-            className="text-butter-gold hover:text-butter-gold-hover underline underline-offset-4 transition-colors duration-200"
-          >
-            Resetuj filtere
-          </button>
-        </div>
+        <CatalogEmptyState 
+          hasActiveFilters={activeFilterCount > 0}
+          onResetFilters={handleResetFilters}
+        />
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {filteredProducts.map((product) => (
             <ProductCard
               key={product._id}
