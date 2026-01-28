@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500">
+  <!-- Placeholder illustration for "About Us" section -->
+  <!-- Depicts a warm, artisan scene with nut butters and ingredients -->
+  <defs>
+    <linearGradient id="warm-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7"/>
+      <stop offset="100%" stop-color="#F5F0E8"/>
+    </linearGradient>
+    <linearGradient id="jar-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F2D7D5"/>
+      <stop offset="50%" stop-color="#FDFBF7"/>
+      <stop offset="100%" stop-color="#F2D7D5"/>
+    </linearGradient>
+    <linearGradient id="butter-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4A574"/>
+      <stop offset="100%" stop-color="#C49464"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="500" fill="url(#warm-bg)"/>
+  
+  <!-- Decorative table surface -->
+  <rect x="0" y="380" width="600" height="120" fill="#E8DCCC" rx="0"/>
+  <rect x="0" y="380" width="600" height="5" fill="#D4A574" opacity="0.3"/>
+  
+  <!-- Central jar of nut butter -->
+  <g transform="translate(220, 180)">
+    <!-- Jar body -->
+    <rect x="0" y="50" width="160" height="150" rx="15" fill="url(#jar-gradient)" stroke="#D4A574" stroke-width="2"/>
+    <!-- Jar neck -->
+    <rect x="20" y="30" width="120" height="30" rx="5" fill="url(#jar-gradient)" stroke="#D4A574" stroke-width="2"/>
+    <!-- Jar lid -->
+    <rect x="15" y="10" width="130" height="25" rx="8" fill="#8B6F4E"/>
+    <rect x="15" y="25" width="130" height="10" rx="3" fill="#6B5538"/>
+    <!-- Nut butter inside (visible through jar) -->
+    <rect x="10" y="80" width="140" height="110" rx="10" fill="url(#butter-gradient)" opacity="0.85"/>
+    <!-- Label area -->
+    <rect x="25" y="100" width="110" height="60" rx="5" fill="#FDFBF7"/>
+    <text x="80" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#8B6F4E">Puterina</text>
+    <text x="80" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">100% Natural</text>
+  </g>
+  
+  <!-- Scattered nuts - left side -->
+  <g transform="translate(50, 330)">
+    <!-- Peanuts -->
+    <ellipse cx="30" cy="30" rx="18" ry="12" fill="#C49464" transform="rotate(-15)"/>
+    <ellipse cx="70" cy="40" rx="15" ry="10" fill="#D4A574" transform="rotate(20)"/>
+    <ellipse cx="20" cy="60" rx="16" ry="11" fill="#B48454" transform="rotate(-30)"/>
+    <!-- Almonds -->
+    <ellipse cx="100" cy="25" rx="12" ry="20" fill="#D4A574" transform="rotate(10)"/>
+  </g>
+  
+  <!-- Scattered nuts - right side -->
+  <g transform="translate(430, 320)">
+    <!-- Hazelnuts -->
+    <circle cx="50" cy="40" r="14" fill="#8B6F4E"/>
+    <circle cx="90" cy="50" r="12" fill="#A07855"/>
+    <!-- Walnuts -->
+    <ellipse cx="130" cy="35" rx="18" ry="15" fill="#9B7D5A"/>
+  </g>
+  
+  <!-- Decorative wooden spoon -->
+  <g transform="translate(400, 200) rotate(25)">
+    <ellipse cx="0" cy="0" rx="25" ry="15" fill="#C49464"/>
+    <rect x="-8" y="15" width="16" height="80" rx="5" fill="#A07855"/>
+    <!-- Nut butter on spoon -->
+    <ellipse cx="0" cy="0" rx="18" ry="10" fill="url(#butter-gradient)" opacity="0.9"/>
+  </g>
+  
+  <!-- Small bowl with ingredients -->
+  <g transform="translate(80, 230)">
+    <ellipse cx="50" cy="50" rx="50" ry="20" fill="#FDFBF7" stroke="#D4A574"/>
+    <ellipse cx="50" cy="45" rx="45" ry="18" fill="#F5F0E8"/>
+    <!-- Nuts in bowl -->
+    <ellipse cx="35" cy="42" rx="10" ry="7" fill="#C49464"/>
+    <ellipse cx="55" cy="40" rx="8" ry="6" fill="#D4A574"/>
+    <ellipse cx="65" cy="44" rx="9" ry="6" fill="#B48454"/>
+  </g>
+  
+  <!-- Decorative leaf/plant -->
+  <g transform="translate(500, 280)">
+    <path d="M0 80 Q10 40 0 0 Q30 30 50 20 Q20 50 0 80 Z" fill="#C5D5C5" opacity="0.7"/>
+    <path d="M0 80 Q-10 40 0 0 Q-30 30 -50 20 Q-20 50 0 80 Z" fill="#C5D5C5" opacity="0.5"/>
+    <line x1="0" y1="80" x2="0" y2="0" stroke="#8B9B8B" stroke-width="2"/>
+  </g>
+  
+  <!-- Honey dipper (optional artisan element) -->
+  <g transform="translate(150, 280) rotate(-20)">
+    <rect x="-5" y="0" width="10" height="50" rx="3" fill="#D4A574"/>
+    <ellipse cx="0" cy="55" rx="12" ry="8" fill="#C49464"/>
+    <line x1="-8" y1="50" x2="8" y2="50" stroke="#B48454" stroke-width="2"/>
+    <line x1="-8" y1="56" x2="8" y2="56" stroke="#B48454" stroke-width="2"/>
+    <line x1="-8" y1="62" x2="8" y2="62" stroke="#B48454" stroke-width="2"/>
+  </g>
+</svg>
