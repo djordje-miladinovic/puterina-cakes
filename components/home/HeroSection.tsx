@@ -45,25 +45,25 @@ export default function HeroSection() {
           
           {/* Main Tagline - komunikacija premium kvaliteta */}
           <p className="text-xl md:text-2xl lg:text-3xl text-white mb-3 md:mb-4 font-light tracking-wide drop-shadow-md">
-            Torte od pravih sastojaka, ručno dekorisane s ljubavlju
+            Torte od <span className="underline">pravih</span> sastojaka, ručno dekorisane s ljubavlju
           </p>
           
           {/* Sub-tagline - USP (Unique Selling Proposition) */}
           <p className="text-base md:text-lg lg:text-xl text-white/85 mb-8 md:mb-10 font-light tracking-wider">
-            100% prirodno • Premium puter krem • Butik iz srca Beograda
+            Puter krem umesto fondana • Domaće kore pečene od nule • Butik torti u srcu Beograda
           </p>
           
           {/* CTA Buttons - above the fold, minimum 44px touch target */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* Primary CTA - POZOVITE */}
+            {/* Primary CTA - POZOVITE NAS */}
             <Button
               asChild
               size="xl"
               className="w-full sm:w-auto min-h-[48px] text-base md:text-lg px-8 md:px-10 shadow-lg hover:shadow-xl"
             >
-              <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas za porudžbinu">
+              <a href={`tel:${CONTACT.phone}`} aria-label="Pozovite nas za Vašu porudžbinu">
                 <Phone className="h-5 w-5 mr-2" />
-                POZOVITE
+                Naručite
               </a>
             </Button>
             
@@ -78,10 +78,10 @@ export default function HeroSection() {
                 href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Pošaljite nam poruku na Instagramu"
+                aria-label="Pišite nam putem Instagrama"
               >
                 <Instagram className="h-5 w-5 mr-2" />
-                Instagram DM
+                Pišite nam
               </a>
             </Button>
           </div>
