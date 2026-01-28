@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
-import { ProductCard } from "@/components/product"
+import { CatalogClient } from "@/components/catalog"
 import { 
   sanityFetch, 
   PRODUCTS_QUERY, 
-  toProductCardImage,
   type SanityImage 
 } from "@/lib/sanity"
 
@@ -29,6 +28,9 @@ interface SanityProduct {
     title: string
     slug: { current: string }
   }
+  ukus?: string[]
+  prilika?: string[]
+  sezona?: string[]
 }
 
 // Fallback products when CMS has no data
@@ -39,6 +41,9 @@ const fallbackProducts: SanityProduct[] = [
     slug: { current: "cokoladna-torta" },
     pricePerKg: 2500,
     shortDescription: "Bogata čokoladna torta sa višeslojnom kremom",
+    ukus: ["cokoladni"],
+    prilika: ["rodjendan", "svakodnevno"],
+    sezona: ["cele-godine"],
   },
   {
     _id: "fallback-2",
@@ -46,6 +51,9 @@ const fallbackProducts: SanityProduct[] = [
     slug: { current: "vocna-torta" },
     pricePerKg: 2300,
     shortDescription: "Osvežavajuća torta sa sezonskim voćem",
+    ukus: ["vocni"],
+    prilika: ["rodjendan"],
+    sezona: ["leto"],
   },
 ]
 
@@ -75,27 +83,7 @@ export default async function KatalogPage() {
         Svaka torta je napravljena sa pažnjom i najkvalitetnijim sastojcima.
       </p>
       
-      {products.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">
-            Trenutno nema dostupnih proizvoda. Molimo vas da nas kontaktirate.
-          </p>
-        </div>
-      ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              title={product.title}
-              slug={product.slug.current}
-              description={product.shortDescription || ""}
-              pricePerKg={product.pricePerKg}
-              primaryImage={toProductCardImage(product.primaryImage, product.title)}
-              secondaryImage={toProductCardImage(product.secondaryImage, `${product.title} - presek`)}
-            />
-          ))}
-        </div>
-      )}
+      <CatalogClient products={products} />
     </div>
   )
 }

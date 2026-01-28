@@ -28,7 +28,10 @@ export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, t
     _id,
     title,
     slug
-  }
+  },
+  ukus,
+  prilika,
+  sezona
 }`
 
 /**
