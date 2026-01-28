@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection"
 import BrandBenefitsSection from "@/components/home/BrandBenefitsSection"
+import AboutUsSection from "@/components/home/AboutUsSection"
 import FeaturedProductsSection from "@/components/home/FeaturedProductsSection"
 import PhilosophySection from "@/components/home/PhilosophySection"
 import TestimonialsSection from "@/components/home/TestimonialsSection"
@@ -89,6 +90,8 @@ export default async function Home() {
       <HeroSection />
 
       <BrandBenefitsSection />
+
+      <AboutUsSection />
 
       <FeaturedProductsSection products={transformedProducts} />
 
