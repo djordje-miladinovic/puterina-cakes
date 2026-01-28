@@ -68,6 +68,11 @@ export default function ProductInfo({
         <p className="text-2xl md:text-3xl font-bold text-butter-gold">
           {formattedPrice} <span className="text-lg font-medium">RSD/kg</span>
         </p>
+        
+        {/* Discreet note about decoration and delivery */}
+        <p className="text-sm text-medium-gray italic">
+          Detalji dekoracije i isporuke po dogovoru
+        </p>
       </div>
 
       {/* CTA Buttons - Premium styling */}
