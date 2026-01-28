@@ -29,14 +29,15 @@ interface FeaturedProductsSectionProps {
  * - Grid layout: 3 columns on desktop with signature product spanning 2 columns
  * - Horizontal scrollable carousel on mobile with touch/swipe support
  * - Uses same ProductCard design as catalog for visual consistency
- * - "Pogledaj sve" CTA leads to full catalog
+ * - "Pogledaj ceo katalog" CTA leads to full catalog
  */
 export default function FeaturedProductsSection({ products }: FeaturedProductsSectionProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
   
-  // Check scroll position to update arrow visibility
+  // Check scroll position to update arrow visibility and active indicator
   const checkScrollPosition = useCallback(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -44,7 +45,12 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
     const { scrollLeft, scrollWidth, clientWidth } = container
     setCanScrollLeft(scrollLeft > 10)
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-  }, [])
+    
+    // Calculate active product index based on scroll position
+    const cardWidth = 280 + 16 // card width + gap
+    const newIndex = Math.round(scrollLeft / cardWidth)
+    setActiveIndex(Math.max(0, Math.min(newIndex, products.length - 1)))
+  }, [products.length])
   
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -73,13 +79,9 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
     })
   }
 
-  if (!products || products.length === 0) {
+  if (products.length === 0) {
     return null
   }
-
-  // Find signature product for featured display (first one)
-  const signatureProduct = products.find(p => p.isSignature)
-  const displayProducts = products.slice(0, 6)
 
   return (
     <section className="py-12 md:py-16 lg:py-20 section-soft">
@@ -94,11 +96,13 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           </p>
         </div>
 
-        {/* Desktop Grid Layout - 3 columns with signature item larger */}
+        {/* Desktop Grid Layout - 3 columns with first signature product larger */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {displayProducts.map((product, index) => {
-            // Make first signature product span 2 columns on large screens
-            const isLargeFeatured = signatureProduct && product._id === signatureProduct._id && index === 0
+          {products.map((product, index) => {
+            // First product gets large featured treatment if it's a signature product
+            // Products are ordered by isSignature desc from the query, so the first
+            // signature product will be at index 0 if any signature products exist
+            const isLargeFeatured = index === 0 && product.isSignature
             
             return (
               <div
@@ -152,7 +156,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {displayProducts.map((product) => (
+            {products.map((product) => (
               <div
                 key={product._id}
                 data-product-card
@@ -172,12 +176,12 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
 
           {/* Scroll Indicator Dots */}
           <div className="flex justify-center gap-1.5 mt-4">
-            {displayProducts.map((product, index) => (
+            {products.map((product, index) => (
               <div
                 key={product._id}
                 className={cn(
                   "w-2 h-2 rounded-full transition-colors",
-                  index === 0 ? "bg-butter-gold" : "bg-light-gray"
+                  index === activeIndex ? "bg-butter-gold" : "bg-light-gray"
                 )}
                 aria-hidden="true"
               />
