@@ -26,6 +26,37 @@ interface CatalogClientProps {
 }
 
 /**
+ * Convert filter values to human-readable tag labels
+ */
+function getTagLabels(product: Product, filterCategories: FilterCategory[]): string[] {
+  const tags: string[] = []
+  
+  // Get labels for ukus values
+  if (product.ukus && product.ukus.length > 0) {
+    const ukusCategory = filterCategories.find(c => c.id === 'ukus')
+    if (ukusCategory) {
+      product.ukus.forEach(value => {
+        const option = ukusCategory.options.find(o => o.value === value)
+        if (option) tags.push(option.label)
+      })
+    }
+  }
+  
+  // Get labels for prilika values
+  if (product.prilika && product.prilika.length > 0) {
+    const prilikaCategory = filterCategories.find(c => c.id === 'prilika')
+    if (prilikaCategory) {
+      product.prilika.forEach(value => {
+        const option = prilikaCategory.options.find(o => o.value === value)
+        if (option) tags.push(option.label)
+      })
+    }
+  }
+  
+  return tags
+}
+
+/**
  * Client-side catalog component with filtering functionality
  * Handles all filter state and product filtering logic
  */
@@ -125,6 +156,8 @@ export function CatalogClient({ products, filterCategories }: CatalogClientProps
               pricePerKg={product.pricePerKg}
               primaryImage={toProductCardImage(product.primaryImage, product.title)}
               secondaryImage={toProductCardImage(product.secondaryImage, `${product.title} - presek`)}
+              tags={getTagLabels(product, filterCategories)}
+              isSignature={product.isSignature}
             />
           ))}
         </div>
