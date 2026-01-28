@@ -1,11 +1,16 @@
 import type { Metadata } from "next"
-import { ProductCard } from "@/components/product"
+import { CatalogClient } from "@/components/catalog"
 import { 
   sanityFetch, 
-  PRODUCTS_QUERY, 
-  toProductCardImage,
+  PRODUCTS_QUERY,
+  FILTER_OPTIONS_QUERY,
   type SanityImage 
 } from "@/lib/sanity"
+import { 
+  groupFilterOptions, 
+  FALLBACK_FILTER_CATEGORIES,
+  type SanityFilterOption 
+} from "@/lib/filters"
 
 export const metadata: Metadata = {
   title: "Katalog Proizvoda",
@@ -29,6 +34,9 @@ interface SanityProduct {
     title: string
     slug: { current: string }
   }
+  ukus?: string[]
+  prilika?: string[]
+  sezona?: string[]
 }
 
 // Fallback products when CMS has no data
@@ -39,6 +47,9 @@ const fallbackProducts: SanityProduct[] = [
     slug: { current: "cokoladna-torta" },
     pricePerKg: 2500,
     shortDescription: "Bogata čokoladna torta sa višeslojnom kremom",
+    ukus: ["cokoladni"],
+    prilika: ["rodjendan", "svakodnevno"],
+    sezona: ["cele-godine"],
   },
   {
     _id: "fallback-2",
@@ -46,26 +57,37 @@ const fallbackProducts: SanityProduct[] = [
     slug: { current: "vocna-torta" },
     pricePerKg: 2300,
     shortDescription: "Osvežavajuća torta sa sezonskim voćem",
+    ukus: ["vocni"],
+    prilika: ["rodjendan"],
+    sezona: ["leto"],
   },
 ]
 
 export default async function KatalogPage() {
-  // Fetch products from Sanity CMS
+  // Fetch products and filter options from Sanity CMS
   let products: SanityProduct[]
+  let filterOptions: SanityFilterOption[]
   
   try {
-    products = await sanityFetch<SanityProduct[]>({
-      query: PRODUCTS_QUERY,
-    })
+    [products, filterOptions] = await Promise.all([
+      sanityFetch<SanityProduct[]>({ query: PRODUCTS_QUERY }),
+      sanityFetch<SanityFilterOption[]>({ query: FILTER_OPTIONS_QUERY }),
+    ])
   } catch (error) {
-    console.error("Error fetching products from Sanity:", error)
+    console.error("Error fetching from Sanity:", error)
     products = []
+    filterOptions = []
   }
 
   // Use fallback if no products
   if (!products || products.length === 0) {
     products = fallbackProducts
   }
+
+  // Group filter options by category or use fallbacks
+  const filterCategories = filterOptions && filterOptions.length > 0
+    ? groupFilterOptions(filterOptions)
+    : FALLBACK_FILTER_CATEGORIES
 
   return (
     <div className="container mx-auto px-4 pt-24 pb-12 md:pt-28">
@@ -75,27 +97,7 @@ export default async function KatalogPage() {
         Svaka torta je napravljena sa pažnjom i najkvalitetnijim sastojcima.
       </p>
       
-      {products.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">
-            Trenutno nema dostupnih proizvoda. Molimo vas da nas kontaktirate.
-          </p>
-        </div>
-      ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              title={product.title}
-              slug={product.slug.current}
-              description={product.shortDescription || ""}
-              pricePerKg={product.pricePerKg}
-              primaryImage={toProductCardImage(product.primaryImage, product.title)}
-              secondaryImage={toProductCardImage(product.secondaryImage, `${product.title} - presek`)}
-            />
-          ))}
-        </div>
-      )}
+      <CatalogClient products={products} filterCategories={filterCategories} />
     </div>
   )
 }

@@ -150,5 +150,66 @@ export const product = defineType({
       type: 'reference',
       to: [{ type: 'category' }],
     }),
+    // Filter fields - Keep in sync with lib/filters.ts
+    defineField({
+      name: 'ukus',
+      title: 'Ukus (Taste)',
+      description: 'Filter kategorija - tip ukusa torte. Keep in sync with lib/filters.ts',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'string',
+        }),
+      ],
+      options: {
+        list: [
+          { title: 'Čokoladni', value: 'cokoladni' },
+          { title: 'Voćni', value: 'vocni' },
+          { title: 'Kremasti', value: 'kremasti' },
+          { title: 'Orašasti', value: 'orasasti' },
+          { title: 'Karamel', value: 'karamel' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'prilika',
+      title: 'Prilika (Occasion)',
+      description: 'Filter kategorija - za koju priliku je torta pogodna. Keep in sync with lib/filters.ts',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'string',
+        }),
+      ],
+      options: {
+        list: [
+          { title: 'Rođendan', value: 'rodjendan' },
+          { title: 'Venčanje', value: 'vencanje' },
+          { title: 'Korporativno', value: 'korporativno' },
+          { title: 'Praznik', value: 'praznik' },
+          { title: 'Svakodnevno', value: 'svakodnevno' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'sezona',
+      title: 'Sezona (Season)',
+      description: 'Filter kategorija - sezonska dostupnost. Keep in sync with lib/filters.ts',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'string',
+        }),
+      ],
+      options: {
+        list: [
+          { title: 'Prolećne', value: 'prolece' },
+          { title: 'Letnje', value: 'leto' },
+          { title: 'Jesenje', value: 'jesen' },
+          { title: 'Zimske / Praznične', value: 'zima' },
+          { title: 'Cele godine', value: 'cele-godine' },
+        ],
+      },
+    }),
   ],
 })

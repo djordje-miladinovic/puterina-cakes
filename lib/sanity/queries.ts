@@ -28,7 +28,10 @@ export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, t
     _id,
     title,
     slug
-  }
+  },
+  ukus,
+  prilika,
+  sezona
 }`
 
 /**
@@ -128,4 +131,20 @@ export const FEATURED_PRODUCTS_QUERY = `*[_type == "product"] | order(isSignatur
   "primaryImage": image,
   "secondaryImage": crossSectionImage,
   isSignature
+}`
+
+// ============================================================================
+// FILTER QUERIES
+// ============================================================================
+
+/**
+ * Fetch all filter options grouped by category
+ * Used for catalog page dropdown filters
+ */
+export const FILTER_OPTIONS_QUERY = `*[_type == "filterOption"] | order(category asc, order asc) {
+  _id,
+  category,
+  value,
+  label,
+  order
 }`
