@@ -38,11 +38,11 @@ Ovaj dokument definiše standardizovani šablon teksta za svaki proizvod na sajt
 #### Format Šablona:
 
 ```
-[PASUS 1: Uvod u proizvod - 2-3 rečenice]
+[Pasus 1: Uvod u proizvod - 2-3 rečenice]
 Opišite glavne karakteristike torte, njenu inspiraciju ili priču. Fokusirajte se na 
 ono što ovu tortu čini posebnom.
 
-[PASUS 2: Tekstura i doživljaj - 2-3 rečenice]
+[Pasus 2: Tekstura i doživljaj - 2-3 rečenice]
 Opišite teksturu, slojeve i gastronomski doživljaj. Koristite senzorne opise 
 koji čitaocu omogućavaju da "oseti" ukus.
 
@@ -87,7 +87,7 @@ koji čitaocu omogućavaju da "oseti" ukus.
 **Pun opis:**
 > Pistać-malina je torta po kojoj je Puterina postala prepoznatljiva. Inspirisana mediteranskom tradicijom, kombinuje dragulje sicilijanskog pistaća sa svežinom domaćih malina – ukus koji ostavlja bez daha.
 >
-> Ispod nežne pistaći glazure krije se biskvit natopljen malinama, sloj kremastog pistaći mousse-a i hrskava baza od prženog pistaća. Svaki element je tu s razlogom – da Vam pruži gastronomski doživljaj koji ćete pamtiti.
+> Ispod nežne pistaći glazure krije se biskvit natopljen malinama, sloj kremastog pistaći mousse krema i hrskava baza od prženog pistaća. Svaki element je tu s razlogom – da Vam pruži gastronomski doživljaj koji ćete pamtiti.
 >
 > **Note ukusa:**
 > • Kremasti siclijanski pistać sa zemljanim tonom
@@ -145,9 +145,9 @@ koji čitaocu omogućavaju da "oseti" ukus.
 > Dekadentna karamel torta sa slojevima slanog karamela i hrskavog pralinea. Za prave ljubitelje slatkog.
 
 **Pun opis:**
-> Ako volite karamel, ova torta je stvorena za Vas. Koristimo domaći karamel koji satima kuvamo dok ne postigne savršenu zlatnu boju i onaj karakterističan ukus koji asocira na detinjstvo – ali u premium izdanju.
+> Ako volite karamel, ova torta je stvorena za Vas. Koristimo domaći karamel koji satima kuvamo dok ne postigne savršenu zlatnu boju i onaj karakterističan ukus koji podseća na detinjstvo – ali u premium izdanju.
 >
-> Tri različite teksture karamela – tečni, kremasti i hrskavi praline – ukompovane su u slojeve koji oduševljavaju. Dodatak morske soli podiže ukus na potpuno novi nivo, balansirujući slatkoću na sofisticiran način.
+> Tri različite teksture karamela – tečni, kremasti i hrskavi praline – komponovane su u slojeve koji oduševljavaju. Dodatak morske soli podiže ukus na potpuno novi nivo, balansirujući slatkoću na sofisticiran način.
 >
 > **Note ukusa:**
 > • Bogat domaći karamel sa dubokim, toplim tonovima
@@ -165,7 +165,7 @@ Pre nego što objavite opis proizvoda, proverite sledeće:
 
 - [ ] Da li je opis napisan sa "Vi" obraćanjem?
 - [ ] Da li ima tačno 1-2 pasusa u punom opisu?
-- [ ] Da li ima tačno 3 bullet note ukusa?
+- [ ] Da li ima tačno 3 note ukusa?
 - [ ] Da li postoji "Idealno za" sekcija?
 - [ ] Da li je ton premium i konkretan (bez generičkih fraza)?
 - [ ] Da li opis evocira senzorne doživljaje (tekstura, ukus, miris)?
