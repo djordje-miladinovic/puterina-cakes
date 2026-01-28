@@ -3,8 +3,7 @@
 import { useState, useMemo } from "react"
 import { ProductCard } from "@/components/product"
 import { FilterBar, ActiveFilterTags } from "./FilterBar"
-import { FilterDrawer } from "./FilterDrawer"
-import { INITIAL_FILTER_STATE, type FilterState } from "@/lib/filters"
+import { INITIAL_FILTER_STATE, type FilterState, type FilterCategory } from "@/lib/filters"
 import { toProductCardImage, type SanityImage } from "@/lib/sanity"
 
 interface Product {
@@ -23,18 +22,23 @@ interface Product {
 
 interface CatalogClientProps {
   products: Product[]
+  filterCategories: FilterCategory[]
 }
 
 /**
  * Client-side catalog component with filtering functionality
  * Handles all filter state and product filtering logic
  */
-export function CatalogClient({ products }: CatalogClientProps) {
+export function CatalogClient({ products, filterCategories }: CatalogClientProps) {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTER_STATE)
 
   // Calculate active filter count
   const activeFilterCount = useMemo(() => {
-    return filters.ukus.length + filters.prilika.length + filters.sezona.length
+    let count = 0
+    if (filters.ukus) count++
+    if (filters.prilika) count++
+    if (filters.sezona) count++
+    return count
   }, [filters])
 
   // Filter products based on selected filters
@@ -43,40 +47,33 @@ export function CatalogClient({ products }: CatalogClientProps) {
       // If no filters are active, show all products
       if (activeFilterCount === 0) return true
 
-      // Check each filter category - product must match at least one option in each active category
-      const matchesUkus = filters.ukus.length === 0 || 
-        (product.ukus && filters.ukus.some((f) => product.ukus?.includes(f)))
+      // Check each filter category - product must match the selected option
+      const matchesUkus = !filters.ukus || 
+        (product.ukus && product.ukus.includes(filters.ukus))
       
-      const matchesPrilika = filters.prilika.length === 0 || 
-        (product.prilika && filters.prilika.some((f) => product.prilika?.includes(f)))
+      const matchesPrilika = !filters.prilika || 
+        (product.prilika && product.prilika.includes(filters.prilika))
       
-      const matchesSezona = filters.sezona.length === 0 || 
-        (product.sezona && filters.sezona.some((f) => product.sezona?.includes(f)))
+      const matchesSezona = !filters.sezona || 
+        (product.sezona && product.sezona.includes(filters.sezona))
 
       return matchesUkus && matchesPrilika && matchesSezona
     })
-  }, [products, filters])
+  }, [products, filters, activeFilterCount])
 
-  // Toggle a filter value
+  // Set a filter value (single selection with dropdown)
   const handleFilterChange = (category: keyof FilterState, value: string) => {
-    setFilters((prev) => {
-      const currentValues = prev[category]
-      const newValues = currentValues.includes(value)
-        ? currentValues.filter((v) => v !== value)
-        : [...currentValues, value]
-      
-      return {
-        ...prev,
-        [category]: newValues,
-      }
-    })
+    setFilters((prev) => ({
+      ...prev,
+      [category]: value,
+    }))
   }
 
   // Remove a single filter
-  const handleRemoveFilter = (category: keyof FilterState, value: string) => {
+  const handleRemoveFilter = (category: keyof FilterState) => {
     setFilters((prev) => ({
       ...prev,
-      [category]: prev[category].filter((v) => v !== value),
+      [category]: '',
     }))
   }
 
@@ -87,25 +84,19 @@ export function CatalogClient({ products }: CatalogClientProps) {
 
   return (
     <>
-      {/* Mobile filter button */}
-      <FilterDrawer
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        onResetFilters={handleResetFilters}
-        activeFilterCount={activeFilterCount}
-      />
-
-      {/* Desktop filter bar */}
+      {/* Single Filteri button with dropdown filters */}
       <FilterBar
         filters={filters}
+        filterCategories={filterCategories}
         onFilterChange={handleFilterChange}
         onResetFilters={handleResetFilters}
         activeFilterCount={activeFilterCount}
       />
 
-      {/* Active filter tags (visible on both mobile and desktop when filters are active) */}
+      {/* Active filter tags */}
       <ActiveFilterTags
         filters={filters}
+        filterCategories={filterCategories}
         onRemoveFilter={handleRemoveFilter}
         onResetFilters={handleResetFilters}
       />

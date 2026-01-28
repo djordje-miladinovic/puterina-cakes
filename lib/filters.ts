@@ -1,9 +1,8 @@
 /**
  * Filter options for catalog page
  * 
- * IMPORTANT: These options must be kept in sync with the Sanity product schema
- * defined in sanity/schemaTypes/product.ts. If you add, remove, or modify
- * filter options here, ensure the same changes are made in the schema.
+ * Filter options are now managed in Sanity CMS (filterOption document type).
+ * These constants serve as fallbacks when Sanity data is not available.
  */
 
 export interface FilterOption {
@@ -18,10 +17,20 @@ export interface FilterCategory {
 }
 
 /**
- * Ukus (Taste) filter options
- * Keep in sync with: sanity/schemaTypes/product.ts - 'ukus' field
+ * Sanity filter option structure
  */
-export const UKUS_OPTIONS: FilterOption[] = [
+export interface SanityFilterOption {
+  _id: string
+  category: 'ukus' | 'prilika' | 'sezona'
+  value: string
+  label: string
+  order?: number
+}
+
+/**
+ * Fallback filter options when Sanity data is not available
+ */
+export const FALLBACK_UKUS_OPTIONS: FilterOption[] = [
   { value: 'cokoladni', label: 'Čokoladni' },
   { value: 'vocni', label: 'Voćni' },
   { value: 'kremasti', label: 'Kremasti' },
@@ -29,11 +38,7 @@ export const UKUS_OPTIONS: FilterOption[] = [
   { value: 'karamel', label: 'Karamel' },
 ]
 
-/**
- * Prilika (Occasion) filter options
- * Keep in sync with: sanity/schemaTypes/product.ts - 'prilika' field
- */
-export const PRILIKA_OPTIONS: FilterOption[] = [
+export const FALLBACK_PRILIKA_OPTIONS: FilterOption[] = [
   { value: 'rodjendan', label: 'Rođendan' },
   { value: 'vencanje', label: 'Venčanje' },
   { value: 'korporativno', label: 'Korporativno' },
@@ -41,11 +46,7 @@ export const PRILIKA_OPTIONS: FilterOption[] = [
   { value: 'svakodnevno', label: 'Svakodnevno' },
 ]
 
-/**
- * Sezona (Season) filter options
- * Keep in sync with: sanity/schemaTypes/product.ts - 'sezona' field
- */
-export const SEZONA_OPTIONS: FilterOption[] = [
+export const FALLBACK_SEZONA_OPTIONS: FilterOption[] = [
   { value: 'prolece', label: 'Prolećne' },
   { value: 'leto', label: 'Letnje' },
   { value: 'jesen', label: 'Jesenje' },
@@ -53,31 +54,57 @@ export const SEZONA_OPTIONS: FilterOption[] = [
   { value: 'cele-godine', label: 'Cele godine' },
 ]
 
-export const FILTER_CATEGORIES: FilterCategory[] = [
-  { id: 'ukus', label: 'Ukus', options: UKUS_OPTIONS },
-  { id: 'prilika', label: 'Prilika', options: PRILIKA_OPTIONS },
-  { id: 'sezona', label: 'Sezona', options: SEZONA_OPTIONS },
+export const FALLBACK_FILTER_CATEGORIES: FilterCategory[] = [
+  { id: 'ukus', label: 'Ukus', options: FALLBACK_UKUS_OPTIONS },
+  { id: 'prilika', label: 'Prilika', options: FALLBACK_PRILIKA_OPTIONS },
+  { id: 'sezona', label: 'Sezona', options: FALLBACK_SEZONA_OPTIONS },
 ]
+
+/**
+ * Convert Sanity filter options to FilterCategory array
+ */
+export function groupFilterOptions(sanityOptions: SanityFilterOption[]): FilterCategory[] {
+  const categoryMap: Record<string, FilterOption[]> = {
+    ukus: [],
+    prilika: [],
+    sezona: [],
+  }
+
+  sanityOptions.forEach((opt) => {
+    if (categoryMap[opt.category]) {
+      categoryMap[opt.category].push({
+        value: opt.value,
+        label: opt.label,
+      })
+    }
+  })
+
+  const categories: FilterCategory[] = [
+    { id: 'ukus', label: 'Ukus', options: categoryMap.ukus.length > 0 ? categoryMap.ukus : FALLBACK_UKUS_OPTIONS },
+    { id: 'prilika', label: 'Prilika', options: categoryMap.prilika.length > 0 ? categoryMap.prilika : FALLBACK_PRILIKA_OPTIONS },
+    { id: 'sezona', label: 'Sezona', options: categoryMap.sezona.length > 0 ? categoryMap.sezona : FALLBACK_SEZONA_OPTIONS },
+  ]
+
+  return categories
+}
 
 /**
  * Filter state for catalog page
  * 
- * @property ukus - Array of selected taste filter values (e.g., ['cokoladni', 'vocni'])
- * @property prilika - Array of selected occasion filter values (e.g., ['rodjendan'])
- * @property sezona - Array of selected season filter values (e.g., ['leto', 'cele-godine'])
+ * @property ukus - Selected taste filter value (single selection with dropdown)
+ * @property prilika - Selected occasion filter value (single selection with dropdown)
+ * @property sezona - Selected season filter value (single selection with dropdown)
  * 
- * Empty arrays indicate no filters are active for that category.
- * Multiple selections within a category use OR logic (matches any selected option).
- * Selections across categories use AND logic (must match all active categories).
+ * Empty string indicates no filter is active for that category.
  */
 export type FilterState = {
-  ukus: string[]
-  prilika: string[]
-  sezona: string[]
+  ukus: string
+  prilika: string
+  sezona: string
 }
 
 export const INITIAL_FILTER_STATE: FilterState = {
-  ukus: [],
-  prilika: [],
-  sezona: [],
+  ukus: '',
+  prilika: '',
+  sezona: '',
 }

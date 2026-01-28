@@ -1,70 +1,87 @@
 "use client"
 
-import { X } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
+import { useState } from "react"
+import { SlidersHorizontal, X, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Select } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
-import { FILTER_CATEGORIES, type FilterState } from "@/lib/filters"
+import { type FilterState, type FilterCategory } from "@/lib/filters"
 
 interface FilterBarProps {
   filters: FilterState
+  filterCategories: FilterCategory[]
   onFilterChange: (category: keyof FilterState, value: string) => void
   onResetFilters: () => void
   activeFilterCount: number
 }
 
 /**
- * Desktop filter bar - horizontal layout above product grid
- * Shows filter categories with checkboxes in a clean, non-cluttered design
+ * Filter bar component with single "Filteri" button
+ * When clicked, reveals a row of dropdown filters
+ * Works on both desktop and mobile
  */
 export function FilterBar({
   filters,
+  filterCategories,
   onFilterChange,
   onResetFilters,
   activeFilterCount,
 }: FilterBarProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
   return (
-    <div className="hidden md:block mb-6">
-      <div className="bg-soft-white border border-light-gray rounded-lg p-4">
-        <div className="flex flex-wrap items-start gap-6">
-          {FILTER_CATEGORIES.map((category) => (
-            <div key={category.id} className="flex flex-col gap-2">
-              <span className="text-sm font-medium text-warm-brown">
-                {category.label}:
-              </span>
-              <div className="flex flex-wrap gap-3">
-                {category.options.map((option) => (
-                  <Checkbox
-                    key={option.value}
-                    label={option.label}
-                    checked={filters[category.id as keyof FilterState].includes(option.value)}
-                    onChange={() => onFilterChange(category.id as keyof FilterState, option.value)}
-                    className="text-sm"
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Active filters summary and reset */}
+    <div className="mb-6">
+      {/* Filteri button */}
+      <Button
+        variant="outline"
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full md:w-auto justify-center gap-2"
+      >
+        <SlidersHorizontal className="h-4 w-4" />
+        Filteri
         {activeFilterCount > 0 && (
-          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-light-gray">
-            <span className="text-sm text-muted-foreground">
-              Aktivni filteri: {activeFilterCount}
-            </span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onResetFilters}
-              className="text-sm h-8 px-2 gap-1"
-            >
-              <X className="h-3 w-3" />
-              Očisti sve
-            </Button>
-          </div>
+          <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-butter-gold text-white">
+            {activeFilterCount}
+          </span>
         )}
-      </div>
+        {isExpanded ? (
+          <ChevronUp className="h-4 w-4 ml-1" />
+        ) : (
+          <ChevronDown className="h-4 w-4 ml-1" />
+        )}
+      </Button>
+
+      {/* Dropdown filters row - shown when expanded */}
+      {isExpanded && (
+        <div className="mt-4 p-4 bg-soft-white border border-light-gray rounded-lg">
+          <div className="flex flex-col md:flex-row md:items-end gap-4">
+            {filterCategories.map((category) => (
+              <div key={category.id} className="flex-1 min-w-0 md:max-w-[200px]">
+                <Select
+                  label={category.label}
+                  options={category.options}
+                  value={filters[category.id as keyof FilterState]}
+                  onChange={(value) => onFilterChange(category.id as keyof FilterState, value)}
+                  placeholder={`Sve`}
+                />
+              </div>
+            ))}
+            
+            {/* Reset button */}
+            {activeFilterCount > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onResetFilters}
+                className="text-sm h-10 px-3 gap-1 whitespace-nowrap"
+              >
+                <X className="h-3 w-3" />
+                Očisti sve
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -75,39 +92,40 @@ export function FilterBar({
  */
 interface ActiveFilterTagsProps {
   filters: FilterState
-  onRemoveFilter: (category: keyof FilterState, value: string) => void
+  filterCategories: FilterCategory[]
+  onRemoveFilter: (category: keyof FilterState) => void
   onResetFilters: () => void
 }
 
 export function ActiveFilterTags({
   filters,
+  filterCategories,
   onRemoveFilter,
   onResetFilters,
 }: ActiveFilterTagsProps) {
-  const activeFilters: { category: keyof FilterState; value: string; label: string }[] = []
+  const activeFilters: { category: keyof FilterState; label: string }[] = []
   
-  FILTER_CATEGORIES.forEach((category) => {
-    const categoryFilters = filters[category.id as keyof FilterState]
-    categoryFilters.forEach((value) => {
-      const option = category.options.find((opt) => opt.value === value)
+  filterCategories.forEach((category) => {
+    const filterValue = filters[category.id as keyof FilterState]
+    if (filterValue) {
+      const option = category.options.find((opt) => opt.value === filterValue)
       if (option) {
         activeFilters.push({
           category: category.id as keyof FilterState,
-          value,
           label: `${category.label}: ${option.label}`,
         })
       }
-    })
+    }
   })
 
   if (activeFilters.length === 0) return null
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-4">
-      {activeFilters.map(({ category, value, label }) => (
+      {activeFilters.map(({ category, label }) => (
         <button
-          key={`${category}-${value}`}
-          onClick={() => onRemoveFilter(category, value)}
+          key={category}
+          onClick={() => onRemoveFilter(category)}
           className={cn(
             "inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm",
             "bg-blush-pink text-warm-brown",
@@ -118,14 +136,16 @@ export function ActiveFilterTags({
           <X className="h-3 w-3" />
         </button>
       ))}
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={onResetFilters}
-        className="text-sm h-8"
-      >
-        Očisti sve
-      </Button>
+      {activeFilters.length > 1 && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onResetFilters}
+          className="text-sm h-8"
+        >
+          Očisti sve
+        </Button>
+      )}
     </div>
   )
 }
