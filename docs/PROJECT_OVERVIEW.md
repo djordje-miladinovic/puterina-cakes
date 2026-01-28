@@ -256,6 +256,7 @@ We follow an agile, milestone-based approach:
 
 ### Documentation
 - `/docs/design/design-dna.md` - Complete design system
+- `/docs/copy/PRODUCT_DETAIL_COPY_TEMPLATE.md` - Product description copy template
 - `/docs/adr/` - Architecture decision records
 - `/docs/DEVELOPMENT.md` - Development setup guide
 - `/references/` - Client requirements and site references

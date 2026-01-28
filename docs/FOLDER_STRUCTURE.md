@@ -132,6 +132,8 @@ docs/
 │   ├── README.md              # ADR index
 │   ├── adr-001-use-nextjs-app-router.md
 │   └── adr-002-use-sanity-cms.md
+├── copy/                       # Copy and content templates
+│   └── PRODUCT_DETAIL_COPY_TEMPLATE.md  # Product description template
 ├── design/                     # Design specifications
 │   └── design-dna.md          # Complete design system
 ├── DEVELOPMENT.md              # Development setup guide
@@ -141,6 +143,7 @@ docs/
 
 **Purpose**:
 - Architectural decisions and rationale
+- Copy templates and content guidelines
 - Design system and style guide
 - Development workflows
 - Onboarding documentation
