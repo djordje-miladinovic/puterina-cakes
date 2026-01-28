@@ -49,7 +49,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a. Biće nam zadovoljstvo da zajedno osmislimo Vašu savršenu tortu.`,
+            text: `Poručivanje je jednostavno i prijatno! Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a. Zajedno ćemo osmisliti tortu koja će u potpunosti odgovarati Vašim željama – od ukusa i veličine do dizajna i dekoracije. Radujemo se svakoj novoj saradnji!`,
           },
         ],
       },
@@ -58,14 +58,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 1,
   },
   {
-    question: "Koliko unapred treba da naručim tortu?",
+    question: "Koliko unapred treba da poručim tortu?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Preporučujemo da nas kontaktirate minimum 10 dana pre željenog datuma. Za složenije dizajne ili veće porudžbine, što ranije to bolje.",
+            text: "Za najbolji rezultat, preporučujemo da nas kontaktirate minimum 7 dana pre željenog datuma. Za manje torte i u mirnijem periodu, ponekad je dovoljno i 3-4 dana unapred. Složeniji dizajni i svadbene torte zahtevaju više vremena za planiranje – idealno 2-3 nedelje unapred. Što ranije nas kontaktirate, više vremena imamo da zajedno osmislimo nešto zaista posebno za Vašu proslavu.",
           },
         ],
       },
@@ -81,7 +81,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone}, Instagram DM-a (${CONTACT.instagramHandle}), WhatsApp-a ili Viber-a. Odgovaramo radnim danima od 08:00 do 20:00.`,
+            text: `Sa zadovoljstvom ćemo odgovoriti na sva Vaša pitanja! Možete nas kontaktirati putem direktnog poziva na ${CONTACT.phone}, Instagram DM-a (${CONTACT.instagramHandle}), WhatsApp-a ili Viber-a. Trudimo se da odgovorimo u najkraćem mogućem roku, najčešće u toku istog dana.`,
           },
         ],
       },
@@ -90,31 +90,47 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 3,
   },
   {
-    question: "Da li radite torte po narudžbini / personalizovane?",
+    question: "Da li radite torte po narudžbini i personalizovane dizajne?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Apsolutno! Specijalizovani smo za potpuno personalizovane torte. Možete nam opisati ili poslati fotografiju željene torte, i naš tim će je realizovati. Radimo isključivo sa puter kremom – ne koristimo fondan.",
+            text: "Apsolutno! Upravo u tome je naša strast. Svaka torta koju pravimo je jedinstvena i prilagođena Vašim željama. Možete nam opisati svoju ideju, poslati fotografiju inspiracije, ili nam prepustiti kreativnu slobodu – uvek ćemo zajedno pronaći savršeno rešenje. Dekoracija po dogovoru je naša specijalnost, a radimo isključivo sa puter kremom koji omogućava prelepe i ukusne kreacije.",
           },
         ],
       },
     ],
     category: "porucivanje",
     order: 4,
+  },
+  {
+    question: "Da li nudite konsultacije pre porudžbine?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Naravno! Rado ćemo sa Vama razgovarati o svim detaljima pre nego što završite porudžbinu. Možemo Vam pomoći u odabiru ukusa, preporučiti veličinu torte prema broju gostiju, i predložiti dizajn koji će se uklopiti u temu Vaše proslave. Vaše zadovoljstvo nam je prioritet, i verujemo da dobra komunikacija čini svaku tortu posebnom.",
+          },
+        ],
+      },
+    ],
+    category: "porucivanje",
+    order: 5,
   },
   // Dostava
   {
-    question: "Da li vršite dostavu?",
+    question: "Da li vršite dostavu i kako funkcioniše?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Da, vršimo dostavu na teritoriji Beograda. Cena dostave zavisi od zone i biće Vam saopštena prilikom porudžbine. Za posebne klijente, moguća je i dostava van Beograda po dogovoru.",
+            text: "Da, vršimo dostavu na teritoriji Beograda. Cena dostave zavisi od lokacije i biće Vam saopštena prilikom porudžbine. Dostave se obavljaju od ponedeljka do subote, u terminu od 12:00 do 17:00 časova. Trudimo se da ispoštujemo izabrani termin isporuke, ali molimo za razumevanje ukoliko u periodu većeg obima posla dođe do manjih pomeranja. Za posebne prilike, moguća je i dostava van Beograda po dogovoru.",
           },
         ],
       },
@@ -123,14 +139,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 1,
   },
   {
-    question: "Gde se nalazite?",
+    question: "Gde se nalazite i da li mogu lično da preuzmem tortu?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Nalazimo se u Beogradu. Tačnu adresu za preuzimanje delimo nakon potvrde porudžbine.",
+            text: "Nalazimo se u Beogradu. Lično preuzimanje je uvek moguće i dobrodošlo! Tačnu adresu i vreme preuzimanja dogovaramo nakon potvrde porudžbine. Ukoliko želite lično preuzimanje, obavestite nas unapred kako bismo osigurali da Vaša torta bude spremna u dogovorenom terminu.",
           },
         ],
       },
@@ -139,31 +155,47 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 2,
   },
   {
-    question: "Da li mogu lično da preuzmem tortu?",
+    question: "Koliko košta dostava?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Naravno! Lično preuzimanje je moguće. Tačnu adresu i vreme preuzimanja dogovaramo nakon potvrde porudžbine. Dostava je dostupna ponedeljkom do subote, između 12:00 i 17:00.",
+            text: "Cena dostave zavisi od zone dostave u okviru Beograda i biće Vam precizno saopštena prilikom porudžbine. Lično preuzimanje je besplatno. Za dostave van Beograda, cena se određuje individualno u zavisnosti od udaljenosti i specifičnih zahteva.",
           },
         ],
       },
     ],
     category: "dostava",
     order: 3,
+  },
+  {
+    question: "Šta ako nisam kod kuće kada torta stigne?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Molimo Vas da obezbedite da neko bude prisutan na adresi dostave u dogovorenom terminu. Torte su delikatan proizvod koji zahteva pažljivo rukovanje i promptno skladištenje. Ukoliko dođe do promene planova, kontaktirajte nas što pre kako bismo zajedno pronašli rešenje.",
+          },
+        ],
+      },
+    ],
+    category: "dostava",
+    order: 4,
   },
   // Proizvodi
   {
-    question: "Koje sastojke koristite?",
+    question: "Koje ukuse torti nudite?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Koristimo isključivo kvalitetne i sveže sastojke. Svaki proizvod u našem katalogu ima detaljne informacije o sastojcima, alergenima i nutritivnim vrednostima. Kvalitet sastojaka je naš prioritet.",
+            text: "Nudimo širok spektar ukusa koji zadovoljavaju različite preference. Među najpopularnijim su čokolada, vanila, karamel, voćne kombinacije, te specijalne kreacije poput Ferrero, Raffaello i Oreo. Kompletan katalog ukusa sa detaljnim opisima možete pogledati na našoj stranici Katalog. Ukoliko imate posebnu želju ili ideju za ukus, rado ćemo razmotriti i prilagođene kombinacije.",
           },
         ],
       },
@@ -172,14 +204,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 1,
   },
   {
-    question: "Da li radite fondan torte?",
+    question: "Koje sastojke koristite i da li su kvalitetni?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Ne radimo torte sa fondanom. Specijalizovani smo isključivo za torte sa puter kremom (buttercream), koji daje autentičan ukus i teksturu. Ovo je svestan izbor koji garantuje kvalitet i ukus naših proizvoda.",
+            text: "Kvalitet sastojaka je temelj svega što radimo. Koristimo isključivo puter visoke kvalitete, sveža jaja, prvoklasnu čokoladu, prirodnu vanilu i sezonsko voće. Ne koristimo veštačke arome niti konzervanse. Svaki proizvod u našem katalogu ima detaljne informacije o sastojcima. Verujemo da pravi ukus dolazi samo od pravih sastojaka.",
           },
         ],
       },
@@ -188,14 +220,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 2,
   },
   {
-    question: "Koliko torta može da stoji i kako se čuva?",
+    question: "Da li torte sadrže alergene?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Naše torte su najukusnije ako se konzumiraju u roku od 2-3 dana od preuzimanja. Čuvajte ih u frižideru na temperaturi 4-8°C. Pre serviranja, izvadite tortu iz frižidera 30 minuta ranije kako bi dostigla sobnu temperaturu.",
+            text: "Da, naše torte standardno sadrže mleko, jaja, pšenično brašno (gluten) i puter. Pojedini ukusi mogu sadržati orašaste plodove, soju ili druge alergene. Informacije o alergenima za svaki proizvod nalaze se u našem katalogu. Ukoliko imate specifične alergije ili netolerancije, molimo Vas da nas obavestite prilikom porudžbine kako bismo Vam pružili detaljne informacije i eventualno prilagodili recept.",
           },
         ],
       },
@@ -204,14 +236,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 3,
   },
   {
-    question: "Da li mogu da donesem svoju figuricu ili topper?",
+    question: "Da li radite torte bez glutena ili bez laktoze?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Da, možete doneti svoj topper ili figuricu. Za figurice od fondana, sarađujemo sa proverenim dobavljačima i mogu se naručiti uz doplatu. Ukoliko imate specifične zahteve, javite nam unapred.",
+            text: "Trenutno se specijalizujemo za tradicionalne puter krem torte koje sadrže gluten i laktozu. Za goste sa specifičnim dijetetskim potrebama, preporučujemo da nas kontaktirate unapred kako bismo razmotrili mogućnosti prilagođavanja ili Vam pomogli u pronalaženju alternativnog rešenja.",
           },
         ],
       },
@@ -220,14 +252,14 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     order: 4,
   },
   {
-    question: "Da li radite probanje ukusa (tasting)?",
+    question: "Da li radite torte sa fondanom?",
     answer: [
       {
         _type: "block",
         children: [
           {
             _type: "span",
-            text: "Trenutno ne nudimo probanje ukusa pre poručivanja. Međutim, možete pogledati naš katalog proizvoda sa detaljnim opisima svakog ukusa, ili nas kontaktirati za preporuke na osnovu Vaših preferencija.",
+            text: "Ne radimo torte sa fondanom – ovo je naš svestan izbor. Specijalizovani smo isključivo za torte sa puter kremom (buttercream), koji pruža nenadmašan ukus i teksturu. Puter krem omogućava prelepe dekoracije, a istovremeno garantuje da Vaša torta bude ne samo vizuelno atraktivna, već i izuzetno ukusna.",
           },
         ],
       },
@@ -235,7 +267,87 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
     category: "proizvodi",
     order: 5,
   },
+  {
+    question: "Koliko torta može da stoji i kako se pravilno čuva?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Naše torte su najukusnije kada se konzumiraju u roku od 2-3 dana nakon preuzimanja. Čuvajte ih u frižideru na temperaturi 4-8°C, pokrivene originalnom kutijom ili poklopcem kako bi se sačuvala svežina i sprečilo upijanje mirisa. Pre serviranja, izvadite tortu iz frižidera 30-45 minuta ranije kako bi dostigla sobnu temperaturu – tada će puter krem biti savršene teksture i punog ukusa.",
+          },
+        ],
+      },
+    ],
+    category: "proizvodi",
+    order: 6,
+  },
+  {
+    question: "Da li mogu da donesem svoju figuricu ili topper za tortu?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Svakako! Sa zadovoljstvom ćemo na Vašu tortu postaviti topper, figuricu ili drugi ukras koji donesete. Ukoliko Vam je potrebna figurica od fondana, sarađujemo sa proverenim dobavljačima i možemo je nabaviti uz doplatu. Samo nas obavestite unapred o Vašim željama kako bismo sve savršeno uklopili u dizajn torte.",
+          },
+        ],
+      },
+    ],
+    category: "proizvodi",
+    order: 7,
+  },
+  {
+    question: "Da li nudite probanje ukusa pre poručivanja?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Trenutno ne nudimo zvanično probanje ukusa, ali verujemo da ćete se zaljubiti u naše torte već pri prvom zalogaju! Na stranici Katalog možete pronaći detaljne opise svakog ukusa. Ukoliko ste neodlučni, rado ćemo Vam dati personalizovane preporuke na osnovu Vaših preferencija – samo nam javite šta volite, a mi ćemo Vam predložiti savršen ukus.",
+          },
+        ],
+      },
+    ],
+    category: "proizvodi",
+    order: 8,
+  },
   // Uslovi
+  {
+    question: "Kako se formira cena torte?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Cena torte se formira na osnovu nekoliko faktora: težine (cena po kilogramu), složenosti dekoracije i eventualnih dodatnih elemenata. Osnovna cena uključuje tortu sa standardnom puter krem dekoracijom. Složenija dekoracija (ručno crtanje, jestivi papir sa printom), kao i dodatni elementi (figurice, topperi, sveže cveće) naplaćuju se posebno. Dostava se takođe obračunava zasebno. Konačnu cenu uvek dogovaramo unapred, pre potvrde porudžbine.",
+          },
+        ],
+      },
+    ],
+    category: "uslovi",
+    order: 1,
+  },
+  {
+    question: "Koji su načini plaćanja?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Plaćanje je moguće gotovinski prilikom preuzimanja ili dostave. Za potvrdu porudžbine potreban je avans koji se uplaćuje unapred. Detalje o avansu i načinu uplate dogovaramo prilikom porudžbine. Za posebne aranžmane ili veće porudžbine, mogući su i drugi načini plaćanja po dogovoru.",
+          },
+        ],
+      },
+    ],
+    category: "uslovi",
+    order: 2,
+  },
   {
     question: "Koja je politika otkazivanja ili izmena porudžbine?",
     answer: [
@@ -244,45 +356,45 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: "Izmene porudžbine su moguće najkasnije 5 dana pre dogovorenog datuma preuzimanja/dostave. U slučaju otkazivanja, avans se ne vraća ako se otkaže kasnije od navedenog roka. Za sve detalje, kontaktirajte nas direktno.",
-          },
-        ],
-      },
-    ],
-    category: "uslovi",
-    order: 1,
-  },
-  {
-    question: "Šta sve uključuje cena?",
-    answer: [
-      {
-        _type: "block",
-        children: [
-          {
-            _type: "span",
-            text: "Osnovna cena se računa po kilogramu i uključuje tortu sa standardnom dekoracijom. Složenija dekoracija (crtanje na torti, jestivi papir) i dodatni elementi (figurice, cvetovi, topperi) se naplaćuju posebno. Dostava se takođe dogovara posebno.",
-          },
-        ],
-      },
-    ],
-    category: "uslovi",
-    order: 2,
-  },
-  {
-    question: "Kada mogu da Vas kontaktiram?",
-    answer: [
-      {
-        _type: "block",
-        children: [
-          {
-            _type: "span",
-            text: `Dostupni smo za poruke i pozive radnim danima od 08:00 do 20:00. Možete nas kontaktirati putem telefona (${CONTACT.phone}), WhatsApp-a, Viber-a ili Instagram DM-a.`,
+            text: "Razumemo da se planovi ponekad menjaju. Izmene porudžbine (veličina, ukus, dekoracija) su moguće najkasnije 5 dana pre dogovorenog datuma preuzimanja ili dostave. U slučaju otkazivanja u tom roku, avans se može iskoristiti za buduću porudžbinu. Za otkazivanja nakon navedenog roka, nažalost nismo u mogućnosti da vratimo avans jer je priprema već u toku. Molimo Vas za razumevanje i da nas što pre obavestite o eventualnim promenama.",
           },
         ],
       },
     ],
     category: "uslovi",
     order: 3,
+  },
+  {
+    question: "Šta ako torta stigne oštećena?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Vaše zadovoljstvo nam je izuzetno važno. Ukoliko torta prilikom dostave stigne oštećena, molimo Vas da nas odmah kontaktirate uz fotografiju. Učinićemo sve da pronađemo odgovarajuće rešenje. Napominjemo da nakon preuzimanja odgovornost za rukovanje i čuvanje torte prelazi na Vas.",
+          },
+        ],
+      },
+    ],
+    category: "uslovi",
+    order: 4,
+  },
+  {
+    question: "Kada i kako mogu da Vas kontaktiram?",
+    answer: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: `Dostupni smo svakog dana za poruke putem WhatsApp-a, Viber-a i Instagram DM-a. Na pozive i poruke odgovaramo u toku dana, najčešće u roku od nekoliko sati. Možete nas kontaktirati putem telefona (${CONTACT.phone}), Instagram profila (${CONTACT.instagramHandle}), ili nam pisati na WhatsApp i Viber. Radujemo se Vašoj poruci!`,
+          },
+        ],
+      },
+    ],
+    category: "uslovi",
+    order: 5,
   },
 ]
 
@@ -373,13 +485,14 @@ export default async function FaqPage() {
       <div className="container mx-auto px-4 pt-24 md:pt-28 pb-12 max-w-4xl">
         <h1 className="text-4xl font-bold mb-4">Često Postavljana Pitanja</h1>
         <p className="text-muted-foreground mb-8">
-          Pronađite odgovore na najčešća pitanja o poručivanju, dostavi,
-          proizvodima i uslovima saradnje. Ukoliko ne pronađete odgovor koji
-          tražite, slobodno nas{" "}
+          Ovde smo prikupili odgovore na pitanja koja nam najčešće postavljate u
+          vezi poručivanja, dostave i naših proizvoda. Želimo da Vam olakšamo
+          svaki korak ka Vašoj savršenoj torti. Ukoliko ne pronađete odgovor
+          koji tražite, slobodno nas{" "}
           <a href="/kontakt" className="text-primary hover:underline">
             kontaktirajte
-          </a>
-          .
+          </a>{" "}
+          – radujemo se Vašoj poruci!
         </p>
 
         {/* FAQ sections by category */}
