@@ -114,3 +114,18 @@ export const PRODUCTS_BY_CATEGORY_QUERY = `*[_type == "product" && category->slu
   "secondaryImage": crossSectionImage,
   isSignature
 }`
+
+/**
+ * Fetch featured products for homepage display
+ * Prioritizes signature products, limited to 6 items max
+ */
+export const FEATURED_PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, title asc) [0...6] {
+  _id,
+  title,
+  slug,
+  shortDescription,
+  pricePerKg,
+  "primaryImage": image,
+  "secondaryImage": crossSectionImage,
+  isSignature
+}`
