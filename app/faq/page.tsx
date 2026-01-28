@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { PortableText } from "@portabletext/react"
 import type { PortableTextBlock } from "@portabletext/types"
+import { HelpCircle, Phone, Instagram } from "lucide-react"
 import {
   Accordion,
   AccordionContent,
@@ -526,15 +527,19 @@ export default async function FaqPage() {
 
         {/* Contact CTA */}
         <section className="mt-12 p-6 md:p-8 bg-muted rounded-xl text-center">
-          <h2 className="text-xl font-semibold mb-2">
-            Imate dodatno pitanje?
-          </h2>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <HelpCircle className="h-6 w-6 text-primary" aria-hidden="true" />
+            <h2 className="text-xl font-semibold">
+              Imate dodatno pitanje?
+            </h2>
+          </div>
           <p className="text-muted-foreground mb-4">
-            Slobodno nas kontaktirajte – radujemo se Vašoj poruci!
+            Slobodno nam se javite, tu smo za sva pitanja oko vaših torti iz snova!
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild size="lg">
               <a href={`tel:${CONTACT.phone}`}>
+                <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
                 Pozovite nas
               </a>
             </Button>
@@ -544,7 +549,8 @@ export default async function FaqPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Instagram
+                <Instagram className="mr-2 h-5 w-5" aria-hidden="true" />
+                Instagram DM
               </a>
             </Button>
           </div>
