@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight, Quote, Star, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -293,6 +294,29 @@ export default function TestimonialsSection() {
         <p className="text-center text-sm text-muted-foreground mt-4 md:hidden">
           Prevucite levo ili desno za više utisaka
         </p>
+
+        {/* Link to all testimonials */}
+        <div className="text-center mt-8 md:mt-10">
+          <Link
+            href="/utisci"
+            className="inline-flex items-center gap-2 text-warm-brown hover:text-butter-gold font-medium transition-colors duration-200"
+          >
+            <span>Pogledajte sve utiske</span>
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
+        </div>
       </div>
     </section>
   )
