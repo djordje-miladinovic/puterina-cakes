@@ -150,10 +150,11 @@ export const product = defineType({
       type: 'reference',
       to: [{ type: 'category' }],
     }),
+    // Filter fields - Keep in sync with lib/filters.ts
     defineField({
       name: 'ukus',
       title: 'Ukus (Taste)',
-      description: 'Filter kategorija - tip ukusa torte',
+      description: 'Filter kategorija - tip ukusa torte. Keep in sync with lib/filters.ts',
       type: 'array',
       of: [
         defineArrayMember({
@@ -173,7 +174,7 @@ export const product = defineType({
     defineField({
       name: 'prilika',
       title: 'Prilika (Occasion)',
-      description: 'Filter kategorija - za koju priliku je torta pogodna',
+      description: 'Filter kategorija - za koju priliku je torta pogodna. Keep in sync with lib/filters.ts',
       type: 'array',
       of: [
         defineArrayMember({
@@ -193,7 +194,7 @@ export const product = defineType({
     defineField({
       name: 'sezona',
       title: 'Sezona (Season)',
-      description: 'Filter kategorija - sezonska dostupnost',
+      description: 'Filter kategorija - sezonska dostupnost. Keep in sync with lib/filters.ts',
       type: 'array',
       of: [
         defineArrayMember({

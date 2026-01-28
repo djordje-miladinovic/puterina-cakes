@@ -55,7 +55,7 @@ export function CatalogClient({ products }: CatalogClientProps) {
 
       return matchesUkus && matchesPrilika && matchesSezona
     })
-  }, [products, filters, activeFilterCount])
+  }, [products, filters])
 
   // Toggle a filter value
   const handleFilterChange = (category: keyof FilterState, value: string) => {
@@ -114,7 +114,7 @@ export function CatalogClient({ products }: CatalogClientProps) {
       {filteredProducts.length === 0 ? (
         <div className="text-center py-12 bg-soft-white rounded-lg border border-light-gray">
           <p className="text-lg text-muted-foreground mb-4">
-            Nema proizvoda za izabrani filter.
+            Nema proizvoda za izabrane filtere.
           </p>
           <button
             onClick={handleResetFilters}
