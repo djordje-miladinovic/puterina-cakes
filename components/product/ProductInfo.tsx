@@ -1,10 +1,15 @@
+"use client"
+
+import { useState } from "react"
 import { 
   Phone, 
   Instagram, 
   Leaf, 
   BarChart3, 
   AlertTriangle, 
-  Thermometer 
+  Thermometer,
+  Copy,
+  Check
 } from "lucide-react"
 import {
   Accordion,
@@ -51,10 +56,37 @@ export default function ProductInfo({
   allergens = [],
   declaration,
 }: ProductInfoProps) {
+  const [copied, setCopied] = useState(false)
   const phoneE164 = CONTACT.phone
+  
+  // Generate Instagram DM template message
+  const dmTemplate = `Zdravo, zanima me ${title}, ___kg, datum ___`
 
   // Format price with thousands separator
   const formattedPrice = pricePerKg.toLocaleString("sr-RS")
+  
+  // Handle copy to clipboard
+  const handleCopyTemplate = async () => {
+    try {
+      await navigator.clipboard.writeText(dmTemplate)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      // Fallback for older browsers
+      try {
+        const textArea = document.createElement("textarea")
+        textArea.value = dmTemplate
+        document.body.appendChild(textArea)
+        textArea.select()
+        document.execCommand("copy")
+        document.body.removeChild(textArea)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (fallbackError) {
+        console.error("Failed to copy to clipboard:", error, fallbackError)
+      }
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -71,35 +103,61 @@ export default function ProductInfo({
       </div>
 
       {/* CTA Buttons - Premium styling */}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col gap-3">
         {/* Primary CTA - Phone */}
         <Button 
           size="lg" 
-          className="flex-1 min-w-[160px] h-12 text-base shadow-[var(--shadow-butter)] hover:shadow-[var(--shadow-butter-lg)]" 
+          className="w-full h-12 text-base shadow-[var(--shadow-butter)] hover:shadow-[var(--shadow-butter-lg)]" 
           asChild
         >
           <a href={`tel:${phoneE164}`}>
             <Phone className="mr-2 h-5 w-5" />
-            Pozovite nas
+            POZOVITE
           </a>
         </Button>
 
-        {/* Secondary CTA - Instagram */}
+        {/* Secondary CTA - Instagram DM */}
         <Button 
-          size="icon"
+          size="lg"
           variant="outline"
-          className="h-12 w-12 border-light-gray hover:border-butter-gold hover:bg-blush-pink/30"
+          className="w-full h-12 text-base border-light-gray hover:border-butter-gold hover:bg-blush-pink/30"
           asChild
         >
           <a
-            href={CONTACT.instagram}
+            href={CONTACT.instagramDm}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Posetite nas na Instagram-u"
+            aria-label="Otvorite Instagram poruke"
           >
-            <Instagram className="h-5 w-5" />
+            <Instagram className="mr-2 h-5 w-5" />
+            Instagram DM
           </a>
         </Button>
+        
+        {/* Copyable template message - fallback for Instagram DM */}
+        <div className="bg-soft-white rounded-lg p-4 border border-light-gray">
+          <p className="text-sm text-muted-foreground mb-2">
+            Kopirajte šablon poruke za Instagram DM:
+          </p>
+          <div className="flex items-center gap-2">
+            <code className="flex-1 text-sm bg-white rounded px-3 py-2 border border-light-gray text-warm-brown">
+              {dmTemplate}
+            </code>
+            <Button
+              size="icon"
+              variant="outline"
+              className="h-10 w-10 shrink-0 border-light-gray hover:border-butter-gold hover:bg-blush-pink/30"
+              onClick={handleCopyTemplate}
+              aria-label={copied ? "Kopirano" : "Kopiraj šablon poruke"}
+            >
+              {copied ? (
+                <Check className="h-4 w-4 text-green-600" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Description - Always visible, premium card style */}
