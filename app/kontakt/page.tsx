@@ -7,6 +7,7 @@ import {
   Clock,
   MessageCircle,
   CheckCircle2,
+  ClipboardList,
 } from "lucide-react"
 import { WhatsAppIcon, ViberIcon } from "@/components/icons"
 import { CONTACT, WORKING_HOURS } from "@/lib/constants"
@@ -106,6 +107,69 @@ export default function KontaktPage() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Šta da pošaljete Checklist Section */}
+      <section className="mb-16" aria-label="Šta da pošaljete">
+        <div className="p-6 md:p-8 bg-soft-white rounded-2xl border-2 border-butter-gold/20">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-butter-gold/10">
+              <ClipboardList className="h-6 w-6 text-butter-gold" />
+            </span>
+            <div>
+              <h2 className="text-xl md:text-2xl font-semibold text-warm-brown">
+                Šta da pošaljete?
+              </h2>
+              <p className="text-sm text-medium-gray">
+                Pripremite ove informacije za brži odgovor
+              </p>
+            </div>
+          </div>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Datum</strong> – kada Vam
+                treba torta
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Povod</strong> – rođendan,
+                svadba, krštenje...
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Broj osoba ili kg</strong> –
+                koliko gostiju očekujete
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Željeni stil</strong> – ukus,
+                izgled, inspiracija
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Alergeni</strong> – ako ima
+                posebnih zahteva
+              </span>
+            </li>
+            <li className="flex items-start gap-2 text-charcoal">
+              <CheckCircle2 className="h-5 w-5 text-butter-gold mt-0.5 shrink-0" />
+              <span>
+                <strong className="text-warm-brown">Lokacija</strong> – ako je
+                potrebna dostava
+              </span>
+            </li>
+          </ul>
         </div>
       </section>
 
