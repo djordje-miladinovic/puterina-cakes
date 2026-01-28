@@ -41,17 +41,20 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
     
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft" && selectedIndex > 0) {
+        e.preventDefault() // Prevent page scrolling
         setSelectedIndex(selectedIndex - 1)
       } else if (e.key === "ArrowRight" && selectedIndex < images.length - 1) {
+        e.preventDefault() // Prevent page scrolling
         setSelectedIndex(selectedIndex + 1)
       } else if (e.key === "Escape") {
+        e.preventDefault()
         setLightboxOpen(false)
       }
     }
     
     window.addEventListener("keydown", handleGlobalKeyDown)
     return () => window.removeEventListener("keydown", handleGlobalKeyDown)
-  }, [lightboxOpen, selectedIndex, images.length])
+  }, [lightboxOpen, selectedIndex, images.length, setSelectedIndex, setLightboxOpen])
   
   // If no images provided, show placeholder
   if (!images || images.length === 0) {
