@@ -54,6 +54,9 @@ export function FilterBar({
       {/* Dropdown filters row - shown when expanded */}
       {isExpanded && (
         <div className="mt-4 p-4 bg-soft-white border border-light-gray rounded-lg">
+          <p className="text-sm text-muted-foreground mb-4">
+            Pronađite savršenu tortu — filtrirajte po ukusu, prilici ili sezoni.
+          </p>
           <div className="flex flex-col md:flex-row md:items-end gap-4">
             {filterCategories.map((category) => (
               <div key={category.id} className="flex-1 min-w-0 md:max-w-[200px]">

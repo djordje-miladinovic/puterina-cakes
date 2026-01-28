@@ -69,8 +69,8 @@ export default async function KatalogPage() {
     <div className="container mx-auto px-4 pt-24 pb-12 md:pt-28">
       <h1 className="text-4xl font-bold mb-4">Katalog Proizvoda</h1>
       <p className="text-muted-foreground mb-8 max-w-2xl">
-        Otkrijte našu kolekciju ručno pravljenih torti sa puter kremom. 
-        Svaka torta je napravljena sa pažnjom i najkvalitetnijim sastojcima.
+        Svaka torta nastaje ručno, sa strpljenjem i pažnjom prema detaljima. 
+        Pravimo ih od najfinijeg putera i prirodnih sastojaka — jer za prave gurmane, kvalitet se oseti u svakom zalogaju.
       </p>
       
       <CatalogClient products={products} filterCategories={filterCategories} />
