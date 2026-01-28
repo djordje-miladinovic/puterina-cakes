@@ -39,30 +39,6 @@ interface SanityProduct {
   sezona?: string[]
 }
 
-// Fallback products when CMS has no data
-const fallbackProducts: SanityProduct[] = [
-  {
-    _id: "fallback-1",
-    title: "Čokoladna torta",
-    slug: { current: "cokoladna-torta" },
-    pricePerKg: 2500,
-    shortDescription: "Bogata čokoladna torta sa višeslojnom kremom",
-    ukus: ["cokoladni"],
-    prilika: ["rodjendan", "svakodnevno"],
-    sezona: ["cele-godine"],
-  },
-  {
-    _id: "fallback-2",
-    title: "Voćna torta",
-    slug: { current: "vocna-torta" },
-    pricePerKg: 2300,
-    shortDescription: "Osvežavajuća torta sa sezonskim voćem",
-    ukus: ["vocni"],
-    prilika: ["rodjendan"],
-    sezona: ["leto"],
-  },
-]
-
 export default async function KatalogPage() {
   // Fetch products and filter options from Sanity CMS
   let products: SanityProduct[]
@@ -79,9 +55,9 @@ export default async function KatalogPage() {
     filterOptions = []
   }
 
-  // Use fallback if no products
-  if (!products || products.length === 0) {
-    products = fallbackProducts
+  // Normalize products to empty array if undefined
+  if (!products) {
+    products = []
   }
 
   // Group filter options by category or use fallbacks
