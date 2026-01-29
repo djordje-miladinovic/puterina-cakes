@@ -227,37 +227,6 @@ export default function KontaktPage() {
             </li>
           </ul>
         </div>
-
-        {/* Contact Info Card */}
-        <div className="p-6 bg-blush-pink/10 rounded-xl border border-blush-pink/30 md:col-span-2 lg:col-span-1">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blush-pink/20">
-              <Mail className="h-5 w-5 text-raspberry" />
-            </span>
-            <h2 className="text-lg font-semibold text-warm-brown">
-              Dodatni Kontakt
-            </h2>
-          </div>
-          <ul className="space-y-2 text-charcoal">
-            <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-raspberry mt-1 shrink-0" />
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="hover:text-raspberry hover:underline transition-colors"
-              >
-                {CONTACT.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-raspberry mt-1 shrink-0" />
-              <span>Odgovaramo u toku istog dana</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-raspberry mt-1 shrink-0" />
-              <span>Konsultacije pre porudžbine</span>
-            </li>
-          </ul>
-        </div>
       </section>
 
       {/* Bottom Note */}
