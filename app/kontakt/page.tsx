@@ -175,7 +175,7 @@ export default function KontaktPage() {
 
       {/* Info Bullets Section */}
       <section
-        className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-8 md:grid-cols-2"
         aria-label="Korisne informacije"
       >
         {/* Working Hours Card */}
@@ -205,24 +205,24 @@ export default function KontaktPage() {
         </div>
 
         {/* Location Card */}
-        <div className="p-6 bg-pistachio/10 rounded-xl border border-pistachio/30">
+        <div className="p-6 bg-butter-gold/5 rounded-xl border border-butter-gold/20">
           <div className="flex items-center gap-3 mb-4">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pistachio/20">
-              <MapPin className="h-5 w-5 text-warm-brown" />
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-butter-gold/10">
+              <MapPin className="h-5 w-5 text-butter-gold" />
             </span>
             <h2 className="text-lg font-semibold text-warm-brown">Lokacija</h2>
           </div>
           <ul className="space-y-2 text-charcoal">
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-warm-brown mt-1 shrink-0" />
+              <CheckCircle2 className="h-4 w-4 text-butter-gold mt-1 shrink-0" />
               <span>{CONTACT.address}</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-warm-brown mt-1 shrink-0" />
+              <CheckCircle2 className="h-4 w-4 text-butter-gold mt-1 shrink-0" />
               <span>Lično preuzimanje moguće</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-warm-brown mt-1 shrink-0" />
+              <CheckCircle2 className="h-4 w-4 text-butter-gold mt-1 shrink-0" />
               <span>Dostava na teritoriji Beograda</span>
             </li>
           </ul>
