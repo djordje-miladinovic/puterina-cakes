@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
-import PreFooter from "@/components/pre-footer";
 import Footer from "@/components/footer";
 import StickyButtons from "@/components/sticky-buttons";
 import { CANONICAL_BASE } from "@/lib/constants";
@@ -91,7 +90,6 @@ export default function RootLayout({
       <body className="antialiased flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">{children}</main>
-        <PreFooter />
         <Footer />
         <StickyButtons />
         <SanityLive />
