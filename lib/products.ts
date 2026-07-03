@@ -8,9 +8,11 @@ import {
 
 /**
  * Jedinstven izvor proizvoda za sve stranice tokom pregleda dizajna:
- * Sanity podaci (naslov/cena) imaju prednost kad postoje, ali slike su
- * uvek lokalne dummy fotografije — dok ne stigne profesionalno
- * fotografisanje (T0.1), Sanity slike su premale za full-bleed dizajn.
+ * kurirani dummy copy + lokalne fotografije pobeđuju, Sanity daje cenu.
+ *
+ * TODO(V3): kada vlasnica unese prave tekstove i profesionalne fotke u
+ * Sanity, okrenuti merge u korist Sanity-ja (copy, slike preko urlFor)
+ * i isprazniti DUMMY_PRODUCTS — vidi docs/RUNBOOK-novi-proizvod.md.
  */
 
 interface SanityProductRow {

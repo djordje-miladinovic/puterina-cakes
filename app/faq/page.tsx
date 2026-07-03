@@ -460,13 +460,15 @@ export default async function FaqPage() {
     faqItems = []
   }
 
-  // Use fallback data if CMS returns empty or fetch failed
-  if (!faqItems || faqItems.length === 0) {
-    faqItems = fallbackFaqItems.map((item, index) => ({
-      ...item,
-      _id: `fallback-${index}`,
-    }))
-  }
+  // Spoji Sanity pitanja sa fallback setom (dedup po tekstu pitanja) —
+  // 1 CMS unos ne sme da sakrije ostalih ~20 kuriranih pitanja.
+  const cmsQuestions = new Set(
+    (faqItems ?? []).map((f) => f.question.trim().toLowerCase())
+  )
+  const missingFallback = fallbackFaqItems
+    .filter((f) => !cmsQuestions.has(f.question.trim().toLowerCase()))
+    .map((item, index) => ({ ...item, _id: `fallback-${index}` }))
+  faqItems = [...(faqItems ?? []), ...missingFallback]
 
   // Group FAQs by category
   const groupedFaqs = groupFaqsByCategory(faqItems)

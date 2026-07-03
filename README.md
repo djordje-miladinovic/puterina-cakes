@@ -1,9 +1,12 @@
-# Puterina Cakes 🍰
+# Puterina 🍰
 
-Official website for **Puterina Cakes** - a premium home-made confectionery boutique specializing in handcrafted, buttery cakes made with exceptional ingredients.
+Official website for **Puterina** — butik torti, Beograd. A premium home-made confectionery boutique specializing in handcrafted, buttery cakes made with exceptional ingredients.
 
-> *"Puteraste torte za vaše najvažnije trenutke"*  
-> *Premium home-made cakes for your most important moments*
+> *"Torte sa dušom i puterom."*
+
+> **⚠ STATUS (2026-07-03): V2 redizajn ("Buttercream Editorial") je implementiran — delovi ovog README-a ispod su zastareli.**
+> Aktuelni izvori istine: `C:\Puterina\PLAN-REDIZAJNA.md` (sekcija 0.5 V3 DOPUNA), `docs/copy/COPY-DECK-V3.md` (svi tekstovi), `docs/RUNBOOK-novi-proizvod.md` (dodavanje proizvoda), `lib/dummy-data.ts` (dummy katalog za pregled).
+> Brend je isključivo **"Puterina"** (nikad "Puterina Cakes"). Radno vreme: **radnim danima 08–20h**. Fotografije u `public/images/dummy/` su privremene (v. CREDITS.md).
 
 ## 📖 About the Project
 

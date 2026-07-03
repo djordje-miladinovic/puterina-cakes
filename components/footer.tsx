@@ -8,7 +8,8 @@ import { CONTACT, SITE } from "@/lib/constants"
 export default function Footer() {
   return (
     <footer className="bg-warm-brown text-soft-white">
-      <div className="container-site flex flex-col items-center gap-4 py-10 text-center md:flex-row md:justify-between md:text-left">
+      {/* pb-28 na mobilnom: prostor za sticky "Pozovite" traku da ne prekrije sadržaj */}
+      <div className="container-site flex flex-col items-center gap-4 py-10 pb-28 text-center sm:pb-10 md:flex-row md:justify-between md:text-left">
         <p className="body-small opacity-90">{SITE.brandLine}</p>
         <a
           href={CONTACT.instagram}

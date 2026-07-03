@@ -48,5 +48,3 @@ export const SITE = {
   deliveryNote:
     "Beograd — lično preuzimanje ili dostava (doplata po zoni dostave).",
 } as const
-
-export const MINIMUM_ORDER_DAYS = 10

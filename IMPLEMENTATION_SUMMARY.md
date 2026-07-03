@@ -1,6 +1,8 @@
 # Implementation Summary
 
-This document provides an overview of the implementation completed for the Puterina Cakes website.
+> **⚠ ZASTARELO (2026-07-03):** Ovaj dokument opisuje V1 implementaciju pre "Buttercream Editorial" redizajna. Aktuelno stanje: `C:\Puterina\PLAN-REDIZAJNA.md` §0.5 (V3 DOPUNA) + `docs/copy/COPY-DECK-V3.md`.
+
+This document provides an overview of the implementation completed for the Puterina website (V1).
 
 ## Requirements Fulfilled
 

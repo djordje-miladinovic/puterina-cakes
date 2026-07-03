@@ -39,13 +39,6 @@ export interface SanityImage {
 }
 
 /**
- * Type for gallery image item
- */
-export interface SanityGalleryImage extends SanityImage {
-  _key?: string
-}
-
-/**
  * Helper to get a responsive image URL with proper sizing
  * @param image - Sanity image object
  * @param width - Desired width
@@ -68,42 +61,6 @@ export function getImageUrl(
   } catch {
     return undefined
   }
-}
-
-/**
- * Convert Sanity image to ProductCard format
- */
-export function toProductCardImage(
-  image: SanityImage | null | undefined,
-  fallbackAlt: string = ''
-): { src: string; alt: string } | undefined {
-  if (!image?.asset) return undefined
-  
-  const url = getImageUrl(image, 600, 600)
-  if (!url) return undefined
-  
-  return {
-    src: url,
-    alt: image.alt || fallbackAlt,
-  }
-}
-
-/**
- * Convert Sanity gallery images to GalleryImage format
- */
-export function toGalleryImages(
-  images: SanityGalleryImage[] | null | undefined,
-  productName: string = ''
-): { src: string; alt: string }[] {
-  if (!images || !Array.isArray(images)) return []
-  
-  return images
-    .filter((img) => img?.asset)
-    .map((img, index) => ({
-      src: getImageUrl(img, 800) || '',
-      alt: img.alt || `${productName} - slika ${index + 1}`,
-    }))
-    .filter((img) => img.src)
 }
 
 export { client } from './client'

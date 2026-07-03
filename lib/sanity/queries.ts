@@ -29,46 +29,6 @@ export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, t
   }
 }`
 
-/**
- * Fetch a single product by slug for the product detail page
- */
-export const PRODUCT_BY_SLUG_QUERY = `*[_type == "product" && slug.current == $slug][0] {
-  _id,
-  title,
-  slug,
-  shortDescription,
-  "description": fullDescription,
-  pricePerKg,
-  "image": image,
-  gallery[]{
-    _key,
-    asset,
-    alt,
-    "url": asset->url
-  },
-  crossSectionImage{
-    asset,
-    alt,
-    "url": asset->url
-  },
-  storage,
-  ingredients,
-  nutrition,
-  allergens,
-  declaration,
-  isSignature,
-  category->{
-    _id,
-    title,
-    slug
-  }
-}`
-
-/**
- * Fetch all product slugs for static generation
- */
-export const PRODUCT_SLUGS_QUERY = `*[_type == "product" && defined(slug.current)].slug.current`
-
 // ============================================================================
 // FAQ QUERIES
 // ============================================================================
