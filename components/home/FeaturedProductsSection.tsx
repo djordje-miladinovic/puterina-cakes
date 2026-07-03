@@ -1,203 +1,74 @@
-"use client"
-
-import { useRef, useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
-import { ProductCard, type ProductCardImage } from "@/components/product"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-
-export interface FeaturedProduct {
-  _id: string
-  title: string
-  slug: { current: string }
-  shortDescription?: string
-  pricePerKg: number
-  primaryImage?: ProductCardImage
-  secondaryImage?: ProductCardImage
-  isSignature?: boolean
-}
-
-interface FeaturedProductsSectionProps {
-  products: FeaturedProduct[]
-}
+import Reveal from "@/components/reveal"
+import { SITE } from "@/lib/constants"
+import { formatPrice } from "@/lib/utils"
+import type { CatalogProduct } from "@/lib/products"
 
 /**
- * FeaturedProductsSection - "Naša ponuda" section for homepage
- * 
- * Features:
- * - Grid layout: 3 columns on desktop with signature product spanning 2 columns
- * - Horizontal scrollable carousel on mobile with touch/swipe support
- * - Uses same ProductCard design as catalog for visual consistency
- * - "Pogledaj ceo katalog" CTA leads to full catalog
+ * „Iz naše ponude" (ZA-PUTERINU §3.4): 4–6 najlepših torti, čiste
+ * fotografije bez okvira/kartica, hover otkriva presek, ime + cena/kg.
  */
-export default function FeaturedProductsSection({ products }: FeaturedProductsSectionProps) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
-  
-  // Check scroll position to update arrow visibility and active indicator
-  const checkScrollPosition = useCallback(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    const { scrollLeft, scrollWidth, clientWidth } = container
-    setCanScrollLeft(scrollLeft > 10)
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-    
-    // Calculate active product index based on scroll position
-    const cardWidth = 280 + 16 // card width + gap
-    const newIndex = Math.round(scrollLeft / cardWidth)
-    setActiveIndex(Math.max(0, Math.min(newIndex, products.length - 1)))
-  }, [products.length])
-  
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    checkScrollPosition()
-    container.addEventListener("scroll", checkScrollPosition, { passive: true })
-    window.addEventListener("resize", checkScrollPosition)
-    
-    return () => {
-      container.removeEventListener("scroll", checkScrollPosition)
-      window.removeEventListener("resize", checkScrollPosition)
-    }
-  }, [checkScrollPosition])
-  
-  const scroll = (direction: "left" | "right") => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    const cardWidth = container.querySelector("[data-product-card]")?.getBoundingClientRect().width || 280
-    const scrollAmount = cardWidth + 16 // card width + gap
-    
-    container.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    })
-  }
+export default function FeaturedProductsSection({
+  products,
+}: {
+  products: CatalogProduct[]
+}) {
+  const featured = [
+    ...products.filter((p) => p.category === "torte" && !p.isSignature),
+  ].slice(0, 6)
 
-  if (products.length === 0) {
-    return null
-  }
+  if (featured.length === 0) return null
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 section-soft">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-warm-brown mb-3">
-            Naša ponuda
+    <section
+      className="section-block section-soft-white"
+      aria-labelledby="ponuda-naslov"
+    >
+      <div className="container-site">
+        <Reveal>
+          <h2 id="ponuda-naslov" className="mb-14 md:mb-20">
+            Iz naše ponude
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            Otkrijte naše najpopularnije torte, ručno pravljene sa ljubavlju i najkvalitetnijim sastojcima
-          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-10 md:gap-y-16">
+          {featured.map((product, i) => (
+            <Reveal key={product.slug} delay={((i % 3) as 0 | 1 | 2)}>
+              <Link href={`/proizvod/${product.slug}`} className="group block">
+                <div className="img-frame relative aspect-square">
+                  <Image
+                    src={product.image}
+                    alt={`${product.title} — Puterina, butik torti Beograd`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="puterina-img object-cover"
+                  />
+                  <Image
+                    src={product.crossSectionImage}
+                    alt={`${product.title}, presek`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="puterina-img object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
+                <h3 className="mt-4 text-lg md:text-xl group-hover:text-warm-brown-deep transition-colors">
+                  {product.title}
+                </h3>
+                <p className="body-small mt-1 text-charcoal/70">
+                  {formatPrice(product.pricePerKg)} RSD/kg
+                </p>
+              </Link>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Desktop Grid Layout - 3 columns with first signature product larger */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {products.map((product, index) => {
-            // First product gets large featured treatment if it's a signature product
-            // Products are ordered by isSignature desc from the query, so the first
-            // signature product will be at index 0 if any signature products exist
-            const isLargeFeatured = index === 0 && product.isSignature
-            
-            return (
-              <div
-                key={product._id}
-                className={cn(
-                  isLargeFeatured && "lg:col-span-2 lg:row-span-1"
-                )}
-              >
-                <ProductCard
-                  title={product.title}
-                  slug={product.slug.current}
-                  description={product.shortDescription || ""}
-                  pricePerKg={product.pricePerKg}
-                  primaryImage={product.primaryImage}
-                  secondaryImage={product.secondaryImage}
-                  className={cn(
-                    "h-full",
-                    isLargeFeatured && "lg:[&_.aspect-square]:aspect-[2/1]"
-                  )}
-                />
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Mobile Horizontal Carousel */}
-        <div className="md:hidden relative">
-          {/* Navigation Arrows - only show when scrollable */}
-          {canScrollLeft && (
-            <button
-              onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-soft-white/90 border border-light-gray shadow-md hover:bg-white transition-colors"
-              aria-label="Prethodni proizvod"
-            >
-              <ChevronLeft className="w-5 h-5 text-warm-brown" />
-            </button>
-          )}
-          {canScrollRight && (
-            <button
-              onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-soft-white/90 border border-light-gray shadow-md hover:bg-white transition-colors"
-              aria-label="Sledeći proizvod"
-            >
-              <ChevronRight className="w-5 h-5 text-warm-brown" />
-            </button>
-          )}
-
-          {/* Scrollable Container */}
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {products.map((product) => (
-              <div
-                key={product._id}
-                data-product-card
-                className="flex-shrink-0 w-[280px] snap-start"
-              >
-                <ProductCard
-                  title={product.title}
-                  slug={product.slug.current}
-                  description={product.shortDescription || ""}
-                  pricePerKg={product.pricePerKg}
-                  primaryImage={product.primaryImage}
-                  secondaryImage={product.secondaryImage}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Scroll Indicator Dots */}
-          <div className="flex justify-center gap-1.5 mt-4">
-            {products.map((product, index) => (
-              <div
-                key={product._id}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
-                  index === activeIndex ? "bg-butter-gold" : "bg-light-gray"
-                )}
-                aria-hidden="true"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* CTA to Catalog */}
-        <div className="text-center mt-8 md:mt-10">
-          <Button asChild variant="outline" size="lg" className="group">
-            <Link href="/katalog">
-              Pogledaj ceo katalog
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
+        <Reveal className="mt-14 flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+          <p className="body-small text-charcoal/60">{SITE.catalogPriceNote}</p>
+          <Link href="/katalog" className="cta-outline">
+            Pogledajte ceo katalog →
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

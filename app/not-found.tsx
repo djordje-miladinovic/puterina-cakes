@@ -1,21 +1,21 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <div className="container mx-auto px-4 py-24 text-center">
-      <h1 className="text-6xl font-bold mb-4">404</h1>
-      <h2 className="text-2xl font-semibold mb-4">Stranica nije pronađena</h2>
-      <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-        Žao nam je, stranica koju tražite ne postoji ili je uklonjena.
+    <div className="section-cream flex min-h-[70vh] flex-col items-center justify-center px-4 pt-24 text-center">
+      <p className="display-hero" aria-hidden>
+        404
       </p>
-      <div className="flex gap-4 justify-center">
-        <Button asChild>
-          <Link href="/">Početna stranica</Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href="/katalog">Pogledajte katalog</Link>
-        </Button>
+      <h1 className="!text-2xl md:!text-3xl mt-4">
+        Ova stranica se istopila kao puter.
+      </h1>
+      <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+        <Link href="/" className="cta-primary">
+          Nazad na početnu
+        </Link>
+        <Link href="/katalog" className="cta-outline">
+          Pogledajte katalog
+        </Link>
       </div>
     </div>
   )

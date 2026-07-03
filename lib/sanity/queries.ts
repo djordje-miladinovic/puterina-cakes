@@ -1,10 +1,9 @@
 /**
  * GROQ Queries for Sanity CMS
- * 
+ *
  * Centralized queries for fetching:
- * - Products (for katalog and product detail pages)
- * - FAQs (for FAQ page)
- * - Categories (for filtering products)
+ * - Products (katalog + product detail)
+ * - FAQs (FAQ page)
  */
 
 // ============================================================================
@@ -13,7 +12,6 @@
 
 /**
  * Fetch all products for the catalog page
- * Returns essential fields needed for ProductCard components
  */
 export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, title asc) {
   _id,
@@ -28,15 +26,11 @@ export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, t
     _id,
     title,
     slug
-  },
-  ukus,
-  prilika,
-  sezona
+  }
 }`
 
 /**
  * Fetch a single product by slug for the product detail page
- * Returns all fields needed for full product display
  */
 export const PRODUCT_BY_SLUG_QUERY = `*[_type == "product" && slug.current == $slug][0] {
   _id,
@@ -87,64 +81,5 @@ export const FAQ_QUERY = `*[_type == "faq"] | order(category asc, order asc) {
   question,
   answer,
   category,
-  order
-}`
-
-// ============================================================================
-// CATEGORY QUERIES
-// ============================================================================
-
-/**
- * Fetch all categories
- */
-export const CATEGORIES_QUERY = `*[_type == "category"] | order(title asc) {
-  _id,
-  title,
-  slug,
-  description
-}`
-
-/**
- * Fetch products by category slug
- */
-export const PRODUCTS_BY_CATEGORY_QUERY = `*[_type == "product" && category->slug.current == $categorySlug] | order(isSignature desc, title asc) {
-  _id,
-  title,
-  slug,
-  shortDescription,
-  pricePerKg,
-  "primaryImage": image,
-  "secondaryImage": crossSectionImage,
-  isSignature
-}`
-
-/**
- * Fetch featured products for homepage display
- * Prioritizes signature products, limited to 6 items max
- */
-export const FEATURED_PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, title asc) [0...6] {
-  _id,
-  title,
-  slug,
-  shortDescription,
-  pricePerKg,
-  "primaryImage": image,
-  "secondaryImage": crossSectionImage,
-  isSignature
-}`
-
-// ============================================================================
-// FILTER QUERIES
-// ============================================================================
-
-/**
- * Fetch all filter options grouped by category
- * Used for catalog page dropdown filters
- */
-export const FILTER_OPTIONS_QUERY = `*[_type == "filterOption"] | order(category asc, order asc) {
-  _id,
-  category,
-  value,
-  label,
   order
 }`

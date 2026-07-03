@@ -1,105 +1,36 @@
 import HeroSection from "@/components/home/HeroSection"
-import BrandBenefitsSection from "@/components/home/BrandBenefitsSection"
-import AboutUsSection from "@/components/home/AboutUsSection"
+import SignatureSection from "@/components/home/SignatureSection"
+import OrderStepsSection from "@/components/home/OrderStepsSection"
 import FeaturedProductsSection from "@/components/home/FeaturedProductsSection"
-import PhilosophySection from "@/components/home/PhilosophySection"
+import StoryTeaserSection from "@/components/home/StoryTeaserSection"
+import WhatIDontDoSection from "@/components/home/WhatIDontDoSection"
 import TestimonialsSection from "@/components/home/TestimonialsSection"
-import HomeCTASection from "@/components/home/HomeCTASection"
-import {
-  sanityFetch,
-  FEATURED_PRODUCTS_QUERY,
-  toProductCardImage,
-  type SanityImage,
-} from "@/lib/sanity"
+import InstagramSection from "@/components/home/InstagramSection"
+import FinalCTASection from "@/components/home/FinalCTASection"
+import { getAllProducts } from "@/lib/products"
 
-// Revalidate every 60 seconds for fresh content
 export const revalidate = 60
 
-interface SanityFeaturedProduct {
-  _id: string
-  title: string
-  slug: { current: string }
-  shortDescription?: string
-  pricePerKg: number
-  primaryImage?: SanityImage
-  secondaryImage?: SanityImage
-  isSignature?: boolean
-}
-
-// Fallback products when CMS has no data
-const fallbackFeaturedProducts: SanityFeaturedProduct[] = [
-  {
-    _id: "featured-1",
-    title: "Čokoladna torta",
-    slug: { current: "cokoladna-torta" },
-    pricePerKg: 2500,
-    shortDescription: "Bogata čokoladna torta sa višeslojnom puter kremom",
-    isSignature: true,
-  },
-  {
-    _id: "featured-2",
-    title: "Voćna torta",
-    slug: { current: "vocna-torta" },
-    pricePerKg: 2300,
-    shortDescription: "Osvežavajuća torta sa sezonskim voćem",
-  },
-  {
-    _id: "featured-3",
-    title: "Vanila torta",
-    slug: { current: "vanila-torta" },
-    pricePerKg: 2200,
-    shortDescription: "Klasična vanila torta sa nežnom kremom",
-  },
-]
-
+/**
+ * Naslovna — 9 sekcija po ZA-PUTERINU-pregled-dizajna.md §3:
+ * hero → signature → 3 koraka → ponuda → priča → šta ne radim →
+ * utisci → sa Instagrama → završni CTA.
+ * Color-block ritam: krem → blush → soft-white → pistać → krem → krem → soft-white → gold.
+ */
 export default async function Home() {
-  // Fetch featured products from Sanity CMS
-  let featuredProducts: SanityFeaturedProduct[]
-
-  try {
-    featuredProducts = await sanityFetch<SanityFeaturedProduct[]>({
-      query: FEATURED_PRODUCTS_QUERY,
-    })
-  } catch (error) {
-    console.error("Error fetching featured products from Sanity:", error)
-    featuredProducts = []
-  }
-
-  // Use fallback if no products
-  if (!featuredProducts || featuredProducts.length === 0) {
-    featuredProducts = fallbackFeaturedProducts
-  }
-
-  // Transform products to component format
-  const transformedProducts = featuredProducts.map((product) => ({
-    _id: product._id,
-    title: product.title,
-    slug: product.slug,
-    shortDescription: product.shortDescription,
-    pricePerKg: product.pricePerKg,
-    primaryImage: toProductCardImage(product.primaryImage, product.title),
-    secondaryImage: toProductCardImage(
-      product.secondaryImage,
-      `${product.title} - presek`
-    ),
-    isSignature: product.isSignature,
-  }))
+  const products = await getAllProducts()
 
   return (
     <>
       <HeroSection />
-
-      <BrandBenefitsSection />
-
-      <AboutUsSection />
-
-      <FeaturedProductsSection products={transformedProducts} />
-
-      <PhilosophySection />
-
+      <SignatureSection products={products} />
+      <OrderStepsSection />
+      <FeaturedProductsSection products={products} />
+      <StoryTeaserSection />
+      <WhatIDontDoSection />
       <TestimonialsSection />
-
-      <HomeCTASection />
+      <InstagramSection />
+      <FinalCTASection />
     </>
   )
 }

@@ -3,176 +3,136 @@
 @layer base {
   :root {
     /* ============================================
-       DESIGN TOKENS - Puterina Cakes
+       DESIGN TOKENS v2 — "Buttercream Editorial"
+       PLAN-REDIZAJNA.md §2 · 2026-07-02
        ============================================ */
-    
-    /* Typography - Font Families */
-    --font-heading: var(--font-playfair), Georgia, serif;
-    --font-body: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    
-    /* ============================================
-       SPACING SYSTEM (4px/8px base)
-       Following modern design standards for consistent whitespace
-       ============================================ */
-    --spacing-0: 0;
-    --spacing-1: 0.25rem;   /* 4px */
-    --spacing-2: 0.5rem;    /* 8px */
-    --spacing-3: 0.75rem;   /* 12px */
-    --spacing-4: 1rem;      /* 16px */
-    --spacing-5: 1.25rem;   /* 20px */
-    --spacing-6: 1.5rem;    /* 24px */
-    --spacing-8: 2rem;      /* 32px */
-    --spacing-10: 2.5rem;   /* 40px */
-    --spacing-12: 3rem;     /* 48px */
-    --spacing-16: 4rem;     /* 64px */
-    --spacing-20: 5rem;     /* 80px */
-    --spacing-24: 6rem;     /* 96px */
-    
-    /* Section spacing - "breathing" sections as per requirements */
-    --section-padding-y: var(--spacing-16);
-    --section-padding-y-md: var(--spacing-20);
-    --section-gap: var(--spacing-12);
-    
-    /* Card spacing */
-    --card-padding: var(--spacing-6);
-    --card-padding-md: var(--spacing-8);
-    --card-gap: var(--spacing-4);
-    
-    /* ============================================
-       BRAND PRIMARY COLORS (from Design DNA)
-       ============================================ */
-    --color-cream: #F5F0E8;           /* Main background */
-    --color-butter-gold: #D4A574;     /* Accents, CTA */
-    --color-butter-gold-hover: #C49464; /* CTA hover state */
-    --color-butter-gold-active: #B48454; /* CTA active state */
-    --color-warm-brown: #8B6F4E;      /* Text, headings */
-    --color-soft-white: #FDFBF7;      /* Cards, sections */
-    
-    /* Brand Secondary Colors */
-    --color-blush-pink: #F2D7D5;      /* Accents, hovers */
-    --color-blush-pink-hover: #E8C7C5; /* Secondary hover */
-    --color-pistachio: #C5D5C5;       /* Signature highlight */
-    --color-raspberry: #D4738C;       /* CTA alternative */
-    
-    /* Brand Neutral Colors */
-    --color-charcoal: #333333;        /* Body text */
-    --color-medium-gray: #666666;     /* Secondary text */
-    --color-light-gray: #E5E5E5;      /* Borders, dividers */
-    
-    /* ============================================
-       BORDER RADIUS TOKENS
-       ============================================ */
-    --radius-sm: 0.375rem;  /* 6px - small elements */
-    --radius-md: 0.5rem;    /* 8px - buttons, inputs */
-    --radius-lg: 0.75rem;   /* 12px - cards */
-    --radius-xl: 1rem;      /* 16px - larger cards */
-    --radius-2xl: 1.5rem;   /* 24px - sections */
-    --radius-full: 9999px;  /* Pills, avatars */
-    
-    /* ============================================
-       SHADOW TOKENS
-       Consistent shadows for elevation hierarchy
-       ============================================ */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    /* Premium warm shadow for hover states */
-    --shadow-butter: 0 4px 12px rgba(212, 165, 116, 0.25);
-    --shadow-butter-lg: 0 8px 24px rgba(212, 165, 116, 0.3);
-    
-    /* ============================================
-       TRANSITION TOKENS
-       Max 300ms as per Design DNA motion rules
-       ============================================ */
-    --transition-fast: 150ms ease-out;
-    --transition-base: 200ms ease-out;
-    --transition-slow: 300ms ease-out;
-    
-    /* ============================================
-       SEMANTIC COLOR VARIABLES (HSL for Tailwind)
-       ============================================ */
-    /* Cream: #F5F0E8 = hsl(37, 33%, 94%) */
+
+    /* Typography */
+    --font-heading: var(--font-fraunces), Georgia, serif;
+    --font-body: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-script: var(--font-caveat), "Segoe Script", cursive;
+
+    /* Spacing (4/8px baza) */
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    --spacing-20: 5rem;
+    --spacing-24: 6rem;
+    --spacing-32: 8rem;
+
+    /* Sekcije dišu — beline 1.5x u odnosu na v1 (benchmark #13) */
+    --section-padding-y: var(--spacing-20);
+    --section-padding-y-md: var(--spacing-32);
+
+    /* Brand paleta */
+    --color-cream: #f5f0e8;
+    --color-butter-gold: #d4a574;
+    --color-butter-gold-hover: #c49464;
+    --color-butter-gold-active: #b48454;
+    --color-warm-brown: #8b6f4e;
+    --color-warm-brown-deep: #6f5738;
+    --color-soft-white: #fdfbf7;
+    --color-blush-pink: #f2d7d5;
+    --color-blush-pink-hover: #e8c7c5;
+    --color-pistachio: #c5d5c5;
+    --color-raspberry: #d4738c;
+    --color-charcoal: #333333;
+    --color-medium-gray: #666666;
+    --color-light-gray: #e5e5e5;
+
+    /* Radius — v2: dugmad su pilule, slike blago zaobljene, bez kartica */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Motion — ≤400ms, GPU, bez fade na navigaciji */
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-fast: 150ms var(--ease-out-soft);
+    --transition-base: 250ms var(--ease-out-soft);
+    --transition-slow: 400ms var(--ease-out-soft);
+
+    /* Semantic HSL (shadcn/Tailwind konvencija) */
     --background: 37 33% 94%;
-    /* Charcoal: #333333 = hsl(0, 0%, 20%) */
     --foreground: 0 0% 20%;
-    /* Soft White: #FDFBF7 = hsl(40, 60%, 98%) */
     --card: 40 60% 98%;
     --card-foreground: 0 0% 20%;
     --popover: 40 60% 98%;
     --popover-foreground: 0 0% 20%;
-    /* Butter Gold: #D4A574 = hsl(30, 50%, 64%) */
     --primary: 30 50% 64%;
-    /* Primary foreground - soft white for contrast */
     --primary-foreground: 40 60% 98%;
-    /* Blush Pink: #F2D7D5 = hsl(5, 52%, 89%) */
     --secondary: 5 52% 89%;
-    /* Warm Brown: #8B6F4E = hsl(31, 28%, 43%) */
     --secondary-foreground: 31 28% 43%;
-    /* Cream for muted backgrounds */
     --muted: 37 33% 94%;
-    /* Medium Gray: #666666 = hsl(0, 0%, 40%) */
     --muted-foreground: 0 0% 40%;
-    /* Pistachio: #C5D5C5 = hsl(120, 18%, 81%) */
     --accent: 120 18% 81%;
     --accent-foreground: 31 28% 43%;
-    /* Raspberry: #D4738C = hsl(346, 50%, 64%) */
     --destructive: 346 50% 64%;
     --destructive-foreground: 40 60% 98%;
-    /* Light Gray: #E5E5E5 = hsl(0, 0%, 90%) */
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    /* Butter Gold for ring/focus */
     --ring: 30 50% 64%;
     --radius: 0.5rem;
   }
-  
-  /* Typography Scale - Headings */
-  h1, .h1 {
+
+  /* ============================================
+     TIPOGRAFSKA SKALA v2 — Fraunces editorial
+     ============================================ */
+  h1,
+  .h1 {
     font-family: var(--font-heading);
-    font-size: 3rem;
-    line-height: 1.2;
-    font-weight: 600;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 560;
+    color: var(--color-warm-brown);
+    font-variation-settings: "SOFT" 60, "WONK" 1;
+  }
+
+  h2,
+  .h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.85rem, 4vw, 2.75rem);
+    line-height: 1.12;
+    font-weight: 540;
+    color: var(--color-warm-brown);
+    font-variation-settings: "SOFT" 50, "WONK" 1;
+  }
+
+  h3,
+  .h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    line-height: 1.25;
+    font-weight: 500;
     color: var(--color-warm-brown);
   }
-  
-  h2, .h2 {
+
+  h4,
+  .h4 {
     font-family: var(--font-heading);
-    font-size: 2.25rem;
-    line-height: 1.3;
-    font-weight: 600;
-    color: var(--color-warm-brown);
-  }
-  
-  h3, .h3 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 1.4;
     font-weight: 500;
     color: var(--color-warm-brown);
   }
-  
-  h4, .h4 {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    line-height: 1.5;
-    font-weight: 500;
-    color: var(--color-warm-brown);
-  }
-  
-  /* Mobile Typography */
-  @media (max-width: 768px) {
-    h1, .h1 {
-      font-size: 2.25rem;
-    }
-    
-    h2, .h2 {
-      font-size: 1.75rem;
-    }
-    
-    h3, .h3 {
-      font-size: 1.25rem;
-    }
+
+  body {
+    background-color: hsl(var(--background));
+    background-image: url("/textures/paper-light.svg");
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
   }
 }
 
@@ -192,52 +152,69 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
-  /* Brand colors for direct Tailwind usage */
-  --color-cream: #F5F0E8;
-  --color-butter-gold: #D4A574;
-  --color-butter-gold-hover: #C49464;
-  --color-warm-brown: #8B6F4E;
-  --color-soft-white: #FDFBF7;
-  --color-blush-pink: #F2D7D5;
-  --color-blush-pink-hover: #E8C7C5;
-  --color-pistachio: #C5D5C5;
-  --color-raspberry: #D4738C;
+
+  /* Brand boje za direktnu Tailwind upotrebu */
+  --color-cream: #f5f0e8;
+  --color-butter-gold: #d4a574;
+  --color-butter-gold-hover: #c49464;
+  --color-warm-brown: #8b6f4e;
+  --color-warm-brown-deep: #6f5738;
+  --color-soft-white: #fdfbf7;
+  --color-blush-pink: #f2d7d5;
+  --color-blush-pink-hover: #e8c7c5;
+  --color-pistachio: #c5d5c5;
+  --color-raspberry: #d4738c;
   --color-charcoal: #333333;
   --color-medium-gray: #666666;
-  --color-light-gray: #E5E5E5;
-  
-  /* Shadow tokens for Tailwind */
-  --shadow-butter: 0 4px 12px rgba(212, 165, 116, 0.25);
-  --shadow-butter-lg: 0 8px 24px rgba(212, 165, 116, 0.3);
+  --color-light-gray: #e5e5e5;
 }
 
-body {
-  background-color: hsl(var(--background));
-  /* Subtle paper texture for authenticity */
-  background-image: url('/textures/paper-light.svg');
-  background-repeat: repeat;
-  background-size: 300px 300px;
-  color: hsl(var(--foreground));
-  font-family: var(--font-body);
+/* ============================================
+   DISPLAY / HERO tipografija (van @layer da
+   nadjača skalu kad je eksplicitno tražena)
+   ============================================ */
+.display-hero {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  line-height: 1.02;
+  font-weight: 580;
+  letter-spacing: -0.01em;
+  color: var(--color-warm-brown);
+  font-variation-settings: "SOFT" 80, "WONK" 1;
 }
 
-/* Body Text Utility Classes */
+.display-lg {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  font-weight: 560;
+  color: var(--color-warm-brown);
+  font-variation-settings: "SOFT" 70, "WONK" 1;
+}
+
+/* Rukopisni mikro-akcenat — SAMO za "s ljubavlju" i slično */
+.accent-script {
+  font-family: var(--font-script);
+  color: var(--color-warm-brown);
+  font-size: 1.5em;
+  line-height: 1.2;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* Body text utility */
 .body-large {
   font-size: 1.125rem;
   line-height: 1.7;
 }
-
 .body {
   font-size: 1rem;
   line-height: 1.6;
 }
-
 .body-small {
   font-size: 0.875rem;
   line-height: 1.6;
 }
-
 .caption {
   font-size: 0.75rem;
   line-height: 1.5;
@@ -245,48 +222,232 @@ body {
 }
 
 /* ============================================
-   TEXTURE SYSTEM
-   Subtle textures using pseudo-elements for premium feel
-   without impacting layout or performance
+   COLOR-BLOCK SEKCIJE (tarte.com.sg obrazac)
+   Pune širine, bez kartica/bordera/senki.
+   Ritam: krem → blush → pistać → krem → gold
    ============================================ */
-
-/* Direct background texture - lightweight paper texture */
-.bg-paper-texture {
-  background-color: var(--color-cream);
-  background-image: url('/textures/paper-light.svg');
-  background-repeat: repeat;
-  background-size: 300px 300px;
+.section-block {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+  transition: background-color var(--transition-slow);
 }
 
-/* Flour grain texture - subtle bakery feel */
-.bg-flour-texture {
-  background-color: var(--color-cream);
-  background-image: url('/textures/flour-grain.svg');
-  background-repeat: repeat;
-  background-size: 200px 200px;
+@media (min-width: 768px) {
+  .section-block {
+    padding-top: var(--section-padding-y-md);
+    padding-bottom: var(--section-padding-y-md);
+  }
 }
 
-/* Soft grain texture for cards/sections */
-.bg-soft-grain {
+.section-cream {
+  background-color: var(--color-cream);
+}
+.section-soft-white {
   background-color: var(--color-soft-white);
-  background-image: url('/textures/soft-grain.svg');
-  background-repeat: repeat;
-  background-size: 250px 250px;
+}
+.section-blush {
+  background-color: var(--color-blush-pink);
+}
+.section-pistachio {
+  background-color: var(--color-pistachio);
+}
+.section-gold {
+  background-color: var(--color-butter-gold);
+}
+.section-brown {
+  background-color: var(--color-warm-brown);
 }
 
 /* ============================================
-   PSEUDO-ELEMENT TEXTURE OVERLAYS
-   Use ::after for textures that don't affect content
+   „PUTERINA FILTER" — konzistentan topli ton
+   svih fotografija dok ne stigne pravi LUT
    ============================================ */
+.puterina-img {
+  filter: saturate(1.05) sepia(0.08) brightness(1.02) contrast(0.97);
+}
 
-/* Base texture overlay setup - use with specific texture modifier */
+.img-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.img-frame img {
+  transition: transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.img-frame:hover img {
+  transform: scale(1.04);
+}
+
+/* Organska "blob" forma za slike (dominiqueansel) */
+.img-blob {
+  border-radius: 58% 42% 55% 45% / 52% 55% 45% 48%;
+  overflow: hidden;
+}
+
+/* Organski blob iza naslova */
+.blob-behind {
+  position: relative;
+  isolation: isolate;
+}
+
+.blob-behind::before {
+  content: "";
+  position: absolute;
+  inset: -0.35em -0.6em;
+  background: var(--blob-color, var(--color-blush-pink));
+  border-radius: 58% 42% 55% 45% / 52% 55% 45% 48%;
+  z-index: -1;
+  opacity: 0.55;
+}
+
+/* Ručno crtano podvlačenje (aktivni tab / akcenat) */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hand-underline::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.15em;
+  height: 0.32em;
+  background-color: var(--color-raspberry);
+  opacity: 0.5;
+  border-radius: 60% 40% 55% 45% / 70% 60% 40% 30%;
+  transform: rotate(-0.8deg);
+}
+
+/* ============================================
+   MOTION SISTEM — reveal jednom, ≤400ms
+   (komponenta components/reveal.tsx dodaje
+   .is-visible preko IntersectionObserver-a)
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 80ms;
+}
+.reveal-delay-2 {
+  transition-delay: 160ms;
+}
+.reveal-delay-3 {
+  transition-delay: 240ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .img-frame:hover img {
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   CTA SISTEM v2 — pilule, jedan izvor istine
+   ============================================ */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-8);
+  background-color: var(--color-butter-gold);
+  color: var(--color-soft-white);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-base),
+    transform var(--transition-base);
+  min-height: 48px;
+}
+
+.cta-primary:hover {
+  background-color: var(--color-butter-gold-hover);
+  transform: translateY(-1px);
+}
+
+.cta-primary:active {
+  background-color: var(--color-butter-gold-active);
+  transform: translateY(0);
+}
+
+.cta-primary:focus-visible {
+  outline: 2px solid var(--color-warm-brown);
+  outline-offset: 3px;
+}
+
+.cta-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-8);
+  background-color: transparent;
+  color: var(--color-warm-brown);
+  font-weight: 500;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-base),
+    color var(--transition-base);
+  min-height: 48px;
+}
+
+.cta-outline:hover {
+  background-color: var(--color-warm-brown);
+  color: var(--color-soft-white);
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: transparent;
+  color: var(--color-warm-brown);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-base);
+}
+
+.cta-ghost:hover {
+  background-color: color-mix(in srgb, var(--color-warm-brown) 10%, transparent);
+}
+
+/* ============================================
+   TEKSTURE (zadržano iz v1 — spec ih traži)
+   ============================================ */
 .texture-overlay {
   position: relative;
   isolation: isolate;
 }
 
 .texture-overlay::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -295,106 +456,43 @@ body {
   opacity: 0.5;
 }
 
-/* Paper texture overlay (default, barely visible) */
 .texture-paper::after {
-  background-image: url('/textures/paper-light.svg');
+  background-image: url("/textures/paper-light.svg");
   background-size: 300px 300px;
   opacity: 0.4;
 }
 
-/* Flour/grain texture overlay - artisan bakery feel */
 .texture-flour::after {
-  background-image: url('/textures/flour-grain.svg');
+  background-image: url("/textures/flour-grain.svg");
   background-size: 200px 200px;
   opacity: 0.35;
 }
 
-/* Soft grain overlay - premium cards and highlights */
 .texture-grain::after {
-  background-image: url('/textures/soft-grain.svg');
+  background-image: url("/textures/soft-grain.svg");
   background-size: 250px 250px;
   opacity: 0.3;
 }
 
 /* ============================================
-   DECORATIVE ACCENTS (Use sparingly)
+   ACCORDION (Radix)
    ============================================ */
-
-/* Watercolor decorative element */
-.watercolor-accent {
-  position: relative;
-  overflow: hidden;
-}
-
-.watercolor-accent::before {
-  content: '';
-  position: absolute;
-  top: -10%;
-  right: -15%;
-  width: min(400px, 50vw);
-  height: min(400px, 50vw);
-  background-image: url('/textures/watercolor-accent.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Watercolor accent positioned bottom-left */
-.watercolor-accent-bl::before {
-  top: auto;
-  right: auto;
-  bottom: -10%;
-  left: -15%;
-}
-
-/* Section with subtle cream tint and paper texture */
-.section-textured {
-  position: relative;
-  background-color: var(--color-cream);
-  isolation: isolate;
-}
-
-.section-textured::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/textures/paper-light.svg');
-  background-repeat: repeat;
-  background-size: 300px 300px;
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Section with soft-white background and grain texture */
-.section-soft {
-  position: relative;
-  background-color: var(--color-soft-white);
-  isolation: isolate;
-}
-
-.section-soft::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/textures/soft-grain.svg');
-  background-repeat: repeat;
-  background-size: 250px 250px;
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: -1;
-}
-
 @keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
 }
 
 @keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 .animate-accordion-down {
@@ -405,206 +503,74 @@ body {
   animation: accordion-up 0.2s ease-out;
 }
 
-/* Dashed line utilities for step connectors */
-.dashed-line-horizontal {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--color-light-gray) 0,
-    var(--color-light-gray) 8px,
-    transparent 8px,
-    transparent 16px
-  );
-}
-
-.dashed-line-vertical {
-  background-image: repeating-linear-gradient(
-    180deg,
-    var(--color-light-gray) 0,
-    var(--color-light-gray) 4px,
-    transparent 4px,
-    transparent 8px
-  );
-}
-
 /* ============================================
-   SECTION SPACING UTILITIES
-   Ensures sections "breathe" with consistent whitespace
+   SPLIT-SCREEN MENI — slide, ne fade
    ============================================ */
-.section {
-  padding-top: var(--section-padding-y);
-  padding-bottom: var(--section-padding-y);
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  transform: translateX(100%);
+  transition: transform 350ms var(--ease-out-soft);
+  will-change: transform;
 }
 
-.section-lg {
-  padding-top: var(--section-padding-y-md);
-  padding-bottom: var(--section-padding-y-md);
+.menu-overlay.is-open {
+  transform: translateX(0);
 }
 
-@media (min-width: 768px) {
-  .section {
-    padding-top: var(--section-padding-y-md);
-    padding-bottom: var(--section-padding-y-md);
-  }
-  
-  .section-lg {
-    padding-top: var(--spacing-24);
-    padding-bottom: var(--spacing-24);
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay {
+    transition: none;
   }
 }
 
 /* ============================================
-   CARD VARIANTS
-   Consistent card styling across the site
+   POMOĆNE
    ============================================ */
-.card-base {
-  background-color: var(--color-soft-white);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-light-gray);
-  padding: var(--card-padding);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
+.container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-5);
 }
 
 @media (min-width: 768px) {
-  .card-base {
-    padding: var(--card-padding-md);
+  .container-site {
+    padding-inline: var(--spacing-10);
   }
 }
 
-.card-base:hover {
-  box-shadow: var(--shadow-lg);
-}
-
-.card-elevated {
+/* Chat-bubble za utiske (jedina dozvoljena "kartica" forma) */
+.bubble {
+  position: relative;
   background-color: var(--color-soft-white);
-  border-radius: var(--radius-lg);
-  padding: var(--card-padding);
-  box-shadow: var(--shadow-md);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-6) var(--spacing-8);
 }
 
-@media (min-width: 768px) {
-  .card-elevated {
-    padding: var(--card-padding-md);
-  }
-}
-
-.card-elevated:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-2px);
-}
-
-.card-interactive {
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 2.25rem;
+  width: 22px;
+  height: 22px;
   background-color: var(--color-soft-white);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-light-gray);
-  padding: var(--card-padding);
-  cursor: pointer;
-  transition: all var(--transition-base);
+  clip-path: polygon(0 0, 100% 0, 24% 100%);
 }
 
-@media (min-width: 768px) {
-  .card-interactive {
-    padding: var(--card-padding-md);
-  }
-}
-
-.card-interactive:hover {
-  border-color: var(--color-butter-gold);
-  box-shadow: var(--shadow-butter);
-  transform: translateY(-2px);
-}
-
-/* Cream tinted card for subtle sections */
+/* Legacy klase (koriste ih stranice koje se prepravljaju u ovoj iteraciji;
+   uklanjaju se u QA prolazu kada nijedna stranica više ne referencira) */
+.card-base,
+.card-elevated,
+.card-interactive,
 .card-cream {
-  background-color: color-mix(in srgb, var(--color-cream) 50%, transparent);
+  background-color: var(--color-soft-white);
   border-radius: var(--radius-lg);
-  border: 1px solid color-mix(in srgb, var(--color-light-gray) 30%, transparent);
-  padding: var(--card-padding);
-  transition: background-color var(--transition-base);
+  padding: var(--spacing-6);
 }
 
-@media (min-width: 768px) {
-  .card-cream {
-    padding: var(--card-padding-md);
-  }
-}
-
-.card-cream:hover {
-  background-color: color-mix(in srgb, var(--color-cream) 80%, transparent);
-}
-
-/* ============================================
-   CTA BUTTON CONSISTENCY HELPERS
-   Ensures all CTA buttons look identical across pages
-   ============================================ */
-.cta-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  background-color: var(--color-butter-gold);
-  color: white;
-  font-weight: 600;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
-}
-
-.cta-primary:hover {
-  background-color: var(--color-butter-gold-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-butter);
-}
-
-.cta-primary:active {
-  background-color: var(--color-butter-gold-active);
-  transform: translateY(0);
-}
-
-.cta-primary:focus-visible {
-  outline: 2px solid var(--color-butter-gold);
-  outline-offset: 2px;
-}
-
-.cta-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  background-color: var(--color-blush-pink);
-  color: var(--color-warm-brown);
-  font-weight: 500;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
-}
-
-.cta-secondary:hover {
-  background-color: var(--color-blush-pink-hover);
-}
-
-.cta-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
-  background-color: transparent;
-  color: var(--color-charcoal);
-  font-weight: 500;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
-}
-
-.cta-ghost:hover {
-  background-color: var(--color-pistachio);
-  color: var(--color-warm-brown);
-}
-
-/* ============================================
-   FORM INPUT STYLING
-   Consistent form elements with proper touch targets
-   ============================================ */
 .input-base {
   width: 100%;
   padding: var(--spacing-3) var(--spacing-4);
@@ -614,26 +580,20 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--color-charcoal);
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
-  /* Minimum touch target size for mobile (44px) */
   min-height: 44px;
 }
 
-.input-base:focus {
-  outline: none;
-  border-color: var(--color-butter-gold);
-  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+.section {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
 }
 
-.input-base::placeholder {
-  color: var(--color-medium-gray);
+.section-textured {
+  position: relative;
+  background-color: var(--color-cream);
 }
 
-/* Label styling */
-.input-label {
-  display: block;
-  margin-bottom: var(--spacing-2);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-warm-brown);
+.section-soft {
+  position: relative;
+  background-color: var(--color-soft-white);
 }

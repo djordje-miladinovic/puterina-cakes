@@ -1,10 +1,19 @@
 export default function Loading() {
   return (
-    <div className="container mx-auto px-4 py-24 flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-        <p className="text-muted-foreground">Učitavanje...</p>
-      </div>
+    <div
+      className="section-cream flex min-h-[60vh] items-center justify-center pt-24"
+      role="status"
+      aria-label="Učitavanje"
+    >
+      <p
+        className="animate-pulse text-3xl text-warm-brown"
+        style={{
+          fontFamily: "var(--font-heading)",
+          fontVariationSettings: '"SOFT" 70, "WONK" 1',
+        }}
+      >
+        Puterina
+      </p>
     </div>
   )
 }

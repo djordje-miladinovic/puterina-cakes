@@ -1,14 +1,13 @@
 import type { Metadata } from "next"
 import { PortableText } from "@portabletext/react"
 import type { PortableTextBlock } from "@portabletext/types"
-import { HelpCircle, Phone, Instagram } from "lucide-react"
+import { Phone, Instagram } from "lucide-react"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
 import { sanityFetch, FAQ_QUERY } from "@/lib/sanity"
 import { CONTACT, CANONICAL_BASE } from "@/lib/constants"
 
@@ -18,7 +17,7 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: "Često Postavljana Pitanja",
   description:
-    "Odgovori na najčešća pitanja o poručivanju, dostavi, proizvodima i uslovima saradnje sa Puterina Cakes.",
+    "Sve što Vas zanima pre poziva: rokovi, dostava, čuvanje torte, alergeni, avans. Puterina — butik torti, Beograd.",
 }
 
 // FAQ categories with display labels
@@ -389,7 +388,7 @@ const fallbackFaqItems: Omit<FaqItem, "_id">[] = [
         children: [
           {
             _type: "span",
-            text: `Dostupni smo svakog dana za poruke putem WhatsApp-a, Viber-a i Instagram DM-a. Na pozive i poruke odgovaramo u toku dana, najčešće u roku od nekoliko sati. Možete nas kontaktirati putem telefona (${CONTACT.phone}), Instagram profila (${CONTACT.instagramHandle}), ili nam pisati na WhatsApp i Viber. Radujemo se Vašoj poruci!`,
+            text: `Na pozive i poruke odgovaram radnim danima od 8 do 20h, najčešće u roku od nekoliko sati. Možete me pozvati na ${CONTACT.phoneDisplay}, pisati u DM na Instagramu (${CONTACT.instagramHandle}) ili poslati poruku na WhatsApp i Viber. Radujem se Vašoj poruci!`,
           },
         ],
       },
@@ -483,17 +482,18 @@ export default async function FaqPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="container mx-auto px-4 pt-24 md:pt-28 pb-12 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-4">Često Postavljana Pitanja</h1>
-        <p className="text-muted-foreground mb-8">
-          Ovde smo prikupili odgovore na pitanja koja nam najčešće postavljate u
-          vezi poručivanja, dostave i naših proizvoda. Želimo da Vam olakšamo
-          svaki korak ka Vašoj savršenoj torti. Ukoliko ne pronađete odgovor
-          koji tražite, slobodno nas{" "}
-          <a href="/kontakt" className="text-primary hover:underline">
-            kontaktirajte
-          </a>{" "}
-          – radujemo se Vašoj poruci!
+      <div className="container-site max-w-4xl pt-28 pb-16 md:pt-36">
+        <h1>Česta pitanja</h1>
+        <p className="body-large mt-4 mb-12 max-w-xl text-charcoal/75">
+          Sve što Vas zanima pre poziva — na jednom mestu. Ako odgovor ipak
+          nedostaje,{" "}
+          <a
+            href="/kontakt"
+            className="underline underline-offset-2 hover:text-warm-brown"
+          >
+            javite mi se
+          </a>
+          .
         </p>
 
         {/* FAQ sections by category */}
@@ -502,8 +502,8 @@ export default async function FaqPage() {
           if (categoryFaqs.length === 0) return null
 
           return (
-            <section key={categoryKey} className="mb-10">
-              <h2 className="text-2xl font-semibold mb-4">
+            <section key={categoryKey} className="mb-12">
+              <h2 className="!text-2xl mb-4">
                 {FAQ_CATEGORIES[categoryKey]}
               </h2>
               <Accordion type="single" collapsible className="w-full">
@@ -525,34 +525,23 @@ export default async function FaqPage() {
           )
         })}
 
-        {/* Contact CTA */}
-        <section className="mt-12 p-6 md:p-8 bg-muted rounded-xl text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <HelpCircle className="h-6 w-6 text-primary" aria-hidden="true" />
-            <h2 className="text-xl font-semibold">
-              Imate dodatno pitanje?
-            </h2>
-          </div>
-          <p className="text-muted-foreground mb-4">
-            Slobodno nam se javite, tu smo za sva pitanja oko vaših torti iz snova!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild size="lg">
-              <a href={`tel:${CONTACT.phone}`}>
-                <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
-                Pozovite nas
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a
-                href={CONTACT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="mr-2 h-5 w-5" aria-hidden="true" />
-                Instagram DM
-              </a>
-            </Button>
+        {/* Contact CTA — bez kartice, v2 stil */}
+        <section className="mt-20 text-center">
+          <h2>Niste pronašli odgovor?</h2>
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <a href={`tel:${CONTACT.phone}`} className="cta-primary !px-10">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Pozovite
+            </a>
+            <a
+              href={CONTACT.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-outline"
+            >
+              <Instagram className="h-4 w-4" aria-hidden="true" />
+              Instagram DM
+            </a>
           </div>
         </section>
       </div>

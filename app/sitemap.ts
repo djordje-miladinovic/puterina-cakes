@@ -1,26 +1,10 @@
 import type { MetadataRoute } from "next"
 import { CANONICAL_BASE } from "@/lib/constants"
-import { sanityFetch, PRODUCT_SLUGS_QUERY } from "@/lib/sanity"
-
-// Fallback product slugs in case Sanity fetch fails
-const FALLBACK_PRODUCT_SLUGS = ["cokoladna-torta", "vocna-torta"]
+import { getAllProducts } from "@/lib/products"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch product slugs from Sanity
-  let productSlugs: string[] = []
-  try {
-    productSlugs = await sanityFetch<string[]>({
-      query: PRODUCT_SLUGS_QUERY,
-    })
-  } catch (error) {
-    console.error("Error fetching product slugs for sitemap:", error)
-    productSlugs = FALLBACK_PRODUCT_SLUGS
-  }
-
-  // Use fallback if empty
-  if (!productSlugs || productSlugs.length === 0) {
-    productSlugs = FALLBACK_PRODUCT_SLUGS
-  }
+  const products = await getAllProducts()
+  const productSlugs = products.map((p) => p.slug)
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -34,6 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
+    },
+    {
+      url: `${CANONICAL_BASE}/o-meni`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${CANONICAL_BASE}/kontakt`,
