@@ -122,7 +122,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                 <ViberIcon className="h-6 w-6" />
               </a>
             </div>
-            <p className="accent-script pt-4">s ljubavlju</p>
+            <p className="accent-script pt-4">{SITE.signOff}</p>
           </div>
         </div>
 
@@ -162,7 +162,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                       <span
                         className={cn(
                           "display-lg leading-none",
-                          active && "hand-underline"
+                          active && "text-oliva"
                         )}
                       >
                         {item.name}

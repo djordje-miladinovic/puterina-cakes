@@ -2,8 +2,8 @@ import { WORKING_HOURS } from "@/lib/constants"
 import Reveal from "@/components/reveal"
 
 /**
- * „Kako do torte u 3 koraka" (ZA-PUTERINU §3.3) — blush color-block,
- * bez ikonica u krugovima; broj koraka u serif displeju.
+ * „Kako do torte u tri koraka" (mockup v6-1) — svetla sekcija,
+ * veliki serifni brojevi u oliva akcentu, završna linija u glasu.
  */
 const STEPS = [
   {
@@ -22,33 +22,37 @@ const STEPS = [
 
 export default function OrderStepsSection() {
   return (
-    <section className="section-block section-blush" aria-labelledby="koraci-naslov">
+    <section className="section-block section-cream" aria-labelledby="koraci-naslov">
       <div className="container-site">
-        <Reveal>
-          <h2 id="koraci-naslov" className="mb-14 md:mb-20">
-            Kako do torte u 3 koraka
-          </h2>
+        <Reveal className="mb-14">
+          <span className="label mb-4 block">02 — Dogovor</span>
+          <h2 id="koraci-naslov">Kako do torte u tri koraka</h2>
         </Reveal>
 
-        <ol className="grid gap-12 md:grid-cols-3 md:gap-10">
+        <ol className="grid gap-9 md:grid-cols-3 md:gap-12">
           {STEPS.map((step, i) => (
-            <Reveal
-              key={step.title}
-              as="li"
-              delay={(i as 0 | 1 | 2)}
-              className="max-w-sm"
-            >
+            <Reveal key={step.title} as="li" delay={(i as 0 | 1 | 2)}>
               <span
                 aria-hidden
-                className="display-lg block text-warm-brown/35 select-none"
+                className="block select-none text-[3.6rem] leading-none text-oliva opacity-50"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontVariationSettings: '"opsz" 144',
+                }}
               >
-                {i + 1}.
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-3">{step.title}</h3>
-              <p className="body mt-2 text-charcoal/80">{step.text}</p>
+              <h3 className="mb-2 mt-4">{step.title}</h3>
+              <p className="text-[15px] text-ink-muted">{step.text}</p>
             </Reveal>
           ))}
         </ol>
+
+        <Reveal delay={3}>
+          <p className="mt-12 text-[15px] italic text-ink-muted">
+            Toliko. Poruka, dogovor, torta.
+          </p>
+        </Reveal>
       </div>
     </section>
   )

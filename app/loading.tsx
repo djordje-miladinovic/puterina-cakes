@@ -6,11 +6,8 @@ export default function Loading() {
       aria-label="Učitavanje"
     >
       <p
-        className="animate-pulse text-3xl text-warm-brown"
-        style={{
-          fontFamily: "var(--font-heading)",
-          fontVariationSettings: '"SOFT" 70, "WONK" 1',
-        }}
+        className="animate-pulse text-3xl text-ink"
+        style={{ fontFamily: "var(--font-heading)" }}
       >
         Puterina
       </p>

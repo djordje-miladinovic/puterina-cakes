@@ -1,141 +1,121 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import Reveal from "@/components/reveal"
+import FilterBar, { buildFilterHref } from "@/components/catalog/FilterBar"
+import ProductCard from "@/components/catalog/ProductCard"
 import { SITE } from "@/lib/constants"
-import { formatPrice, cn } from "@/lib/utils"
 import { getAllProducts } from "@/lib/products"
+import type { Category, FlavorKey } from "@/lib/products-data"
 
 export const metadata: Metadata = {
-  title: "Katalog torti i kolača",
+  title: "Katalog torti i kolača | Puterina — butik torti Beograd",
   description:
-    "Sezonski ukusi: pistać-malina, kokos-vanila-malina i drugi. Sve cene su po kilogramu, dekoracija se naplaćuje posebno. Butik torti, Beograd.",
+    "Sezonski ukusi: pistać-malina, kokos-vanila-malina i drugi. Sve cene su po kilogramu, dekoracija se dogovara posebno. Butik torti, Beograd.",
 }
 
 export const revalidate = 60
 
+const VALID_VRSTE: Category[] = ["torte", "kolaci", "krofnice"]
+const VALID_UKUSI: FlavorKey[] = ["cokolada", "voce", "orasasto", "vanila-krem"]
+
 /**
- * Katalog (ZA-PUTERINU §4): samo dva izbora — Torte | Kolači, bez filtera
- * i pretrage. Uredna mreža bez okvira; signature torte krupnije, sa
- * diskretnom serif oznakom. Hover otkriva presek.
+ * Katalog V3 (mockup kat-2): filter traka (Vrsta · Ukus · Sezona) —
+ * server-side filtriranje preko searchParams, filteri su linkovi
+ * (rade bez JS, svaka kombinacija ima URL). Borderless kartice.
  */
 export default async function KatalogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ k?: string }>
+  searchParams: Promise<{ vrsta?: string; ukus?: string; sezona?: string }>
 }) {
-  const { k } = await searchParams
-  const activeTab: "torte" | "kolaci" = k === "kolaci" ? "kolaci" : "torte"
+  const params = await searchParams
+  const vrsta = VALID_VRSTE.includes(params.vrsta as Category)
+    ? (params.vrsta as Category)
+    : undefined
+  const ukus = VALID_UKUSI.includes(params.ukus as FlavorKey)
+    ? (params.ukus as FlavorKey)
+    : undefined
+  const sezona = params.sezona === "1"
 
   const products = await getAllProducts()
-  const shown = products.filter((p) => p.category === activeTab)
+  const shown = products.filter((p) => {
+    if (vrsta && p.category !== vrsta) return false
+    if (ukus && !p.flavors.includes(ukus)) return false
+    if (sezona && !p.seasonal) return false
+    return true
+  })
+
+  const prikazujeKolace = shown.some((p) => p.category === "kolaci")
 
   return (
-    <div className="section-cream min-h-screen pt-28 pb-24 md:pt-36 md:pb-32">
-      <div className="container-site">
+    <div className="section-cream min-h-screen pb-24 pt-28 md:pb-32 md:pt-32">
+      {/* Naslov strane */}
+      <div className="container-site pb-8 pt-8 md:pt-12">
         <Reveal>
-          <h1>Katalog</h1>
-          <p className="body-large mt-4 max-w-xl text-charcoal/75">
-            Ukusi se menjaju sezonski — ovo trenutno pravim za Vas.
+          <span className="label mb-4 block">Katalog</span>
+          <h1>
+            Ukusi koje
+            <br />
+            trenutno pravim
+          </h1>
+          <p className="mt-4 max-w-[46ch] text-ink-muted">
+            Sve cene su po kilogramu. Ukusi se menjaju sezonski. Za 20 gostiju
+            računajte tortu od 2–2,5 kg. Dekoracija se dogovara posebno.
           </p>
         </Reveal>
+      </div>
 
-        {/* Tabovi Torte | Kolači */}
-        <nav aria-label="Kategorije" className="mt-10 flex gap-8">
-          <Link
-            href="/katalog"
-            aria-current={activeTab === "torte" ? "page" : undefined}
-            className={cn(
-              "h3 transition-colors",
-              activeTab === "torte"
-                ? "hand-underline text-warm-brown"
-                : "text-charcoal/50 hover:text-warm-brown"
-            )}
-          >
-            Torte
-          </Link>
-          <Link
-            href="/katalog?k=kolaci"
-            aria-current={activeTab === "kolaci" ? "page" : undefined}
-            className={cn(
-              "h3 transition-colors",
-              activeTab === "kolaci"
-                ? "hand-underline text-warm-brown"
-                : "text-charcoal/50 hover:text-warm-brown"
-            )}
-          >
-            Kolači
-          </Link>
-        </nav>
+      {/* Filter traka — sticky */}
+      <FilterBar vrsta={vrsta} ukus={ukus} sezona={sezona} />
 
-        {/* Grid — signature krupnije (cyrillignac obrazac) */}
-        <div className="mt-14 grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-6 md:gap-x-8 md:gap-y-16">
-          {shown.map((product, i) => (
-            <Reveal
-              key={product.slug}
-              delay={((i % 3) as 0 | 1 | 2)}
-              className={cn(
-                "col-span-1",
-                product.isSignature ? "col-span-2 md:col-span-3" : "md:col-span-2"
-              )}
-            >
-              <Link href={`/proizvod/${product.slug}`} className="group block">
-                <div
-                  className={cn(
-                    "img-frame relative",
-                    product.isSignature ? "aspect-[4/3]" : "aspect-square"
-                  )}
-                >
-                  <Image
-                    src={product.image}
-                    alt={`${product.title} — Puterina, butik torti Beograd`}
-                    fill
-                    sizes={
-                      product.isSignature
-                        ? "(max-width: 768px) 100vw, 50vw"
-                        : "(max-width: 768px) 50vw, 33vw"
-                    }
-                    className="puterina-img object-cover"
-                  />
-                  <Image
-                    src={product.crossSectionImage}
-                    alt={`${product.title}, presek`}
-                    fill
-                    sizes={
-                      product.isSignature
-                        ? "(max-width: 768px) 100vw, 50vw"
-                        : "(max-width: 768px) 50vw, 33vw"
-                    }
-                    className="puterina-img object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  />
-                </div>
+      <div className="container-site pt-11">
+        {/* Krofnice uvodna linija (V3-COPY §11.4) */}
+        {vrsta === "krofnice" && (
+          <p className="mb-9 max-w-[52ch] text-[15px] text-ink-muted">
+            Punjene onim što i torte: pistać i malina, čokolada, pralina. Samo
+            manje čekaju red.
+          </p>
+        )}
 
-                {product.isSignature && (
-                  <p
-                    className="mt-4 text-sm italic text-raspberry"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    Signature
-                  </p>
-                )}
-                <h2
-                  className={cn(
-                    "!text-xl md:!text-2xl group-hover:text-warm-brown-deep transition-colors",
-                    product.isSignature ? "mt-1" : "mt-4"
-                  )}
-                >
-                  {product.title}
-                </h2>
-                <p className="body-small mt-1 text-charcoal/70">
-                  {formatPrice(product.pricePerKg)} RSD/kg
-                </p>
+        {shown.length > 0 ? (
+          <div className="grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 md:gap-x-10 md:gap-y-11">
+            {shown.map((product, i) => (
+              <Reveal key={product.slug} delay={((i % 3) as 0 | 1 | 2)}>
+                <ProductCard product={product} />
+              </Reveal>
+            ))}
+          </div>
+        ) : (
+          /* Prazan rezultat (V3-COPY §11.3) */
+          <div className="py-16 text-center">
+            <p className="mx-auto max-w-[46ch] text-ink-muted">
+              Ova kombinacija mi je trenutno prazna. Probajte bez jednog ukusa
+              — ili mi{" "}
+              <Link href="/kontakt" className="text-oliva hover:opacity-80">
+                pišite
               </Link>
-            </Reveal>
-          ))}
-        </div>
+              , možda baš to umem da napravim.
+            </p>
+            <Link
+              href={buildFilterHref({ sezona: false })}
+              className="tlink mt-6 inline-block"
+            >
+              poništi izbor
+            </Link>
+          </div>
+        )}
 
-        <p className="body-small mt-16 text-charcoal/60">
-          {SITE.catalogPriceNote}
+        {/* Lux kolači napomena (§12 #10) */}
+        {prikazujeKolace && (
+          <p className="mt-12 text-[14px] text-ink-muted">{SITE.luxNote}</p>
+        )}
+
+        <p className="mt-12 text-[14px] text-ink-muted">
+          Ne vidite ukus koji tražite? Ukusi se smenjuju kroz godinu —{" "}
+          <Link href="/kontakt" className="text-oliva hover:opacity-80">
+            javite mi se
+          </Link>
+          , možda baš to pravim ove nedelje. {SITE.minOrderNote}
         </p>
       </div>
     </div>

@@ -5,61 +5,53 @@ import { WhatsAppIcon, ViberIcon } from "@/components/icons"
 import { CONTACT, SITE, WORKING_HOURS } from "@/lib/constants"
 
 export const metadata: Metadata = {
-  title: "Kontakt",
+  title: "Kontakt | Puterina — butik torti Beograd",
   description:
     "Pozovite 065 37 993 34 (radnim danima 08–20h) ili pišite na Instagram, WhatsApp, Viber. Puterina — butik torti, Beograd.",
 }
 
 /**
- * Kontakt (ZA-PUTERINU §9): bez formulara i bez mape — samo direktan
- * kontakt. Telefon krupno, tri opcije za poruku (prefilled), blush
- * podsetnik "Pre poziva pripremite", bez adrese.
+ * Kontakt V3 (V3-COPY §8): bez formulara i bez mape. Telefon krupno,
+ * poziv primaran + poruke, „Pre poziva pripremite", kvalifikacioni
+ * blok, dostava BEZ zona (§12).
  */
 export default function KontaktPage() {
   return (
     <>
-      <div className="section-cream pt-28 pb-20 md:pt-36 md:pb-24">
+      <div className="section-cream pb-20 pt-28 md:pb-24 md:pt-36">
         <div className="container-site">
           <Reveal>
+            <span className="label mb-4 block">Kontakt</span>
             <h1>Kontakt</h1>
-            <p className="body-large mt-4 max-w-xl text-charcoal/75">
-              Najbrže se dogovaramo uz poziv ili poruku — bez formulara.
+            <p className="body-large mt-4 max-w-xl text-ink-muted">
+              Najbrže se dogovaramo porukom ili pozivom — bez formulara.
             </p>
           </Reveal>
 
-          {/* Telefon — krupno */}
-          <Reveal delay={1} className="mt-16">
+          {/* Telefon — krupno, kao tekst */}
+          <Reveal delay={1} className="mt-14">
             <a
               href={`tel:${CONTACT.phone}`}
-              className="display-lg block hover:text-warm-brown-deep transition-colors"
+              className="display-lg block transition-colors hover:text-oliva"
             >
               {CONTACT.phoneDisplay}
             </a>
-            <p className="body-large mt-3 text-charcoal/75">
+            <p className="body-large mt-3 text-ink-muted">
               {WORKING_HOURS.display}
             </p>
-            <a
-              href={`tel:${CONTACT.phone}`}
-              className="cta-primary mt-8 !px-10 text-lg"
-            >
-              <Phone className="h-5 w-5" aria-hidden />
+            <a href={`tel:${CONTACT.phone}`} className="cta-primary mt-7">
+              <Phone className="h-4 w-4" aria-hidden />
               Pozovite
             </a>
+            <p className="mt-3 text-[13px] text-ink-muted">
+              {SITE.responseNote}
+            </p>
           </Reveal>
 
-          {/* Tri opcije za poruku */}
-          <Reveal delay={2} className="mt-16">
-            <h2 className="!text-2xl">Ili pošaljite poruku</h2>
+          {/* Poruke — sekundarno (§12 hijerarhija) */}
+          <Reveal delay={2} className="mt-14">
+            <h2 className="!text-2xl">ili pišite</h2>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-              <a
-                href={CONTACT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-outline"
-              >
-                <Instagram className="h-4 w-4" aria-hidden />
-                Instagram DM
-              </a>
               <a
                 href={CONTACT.whatsapp}
                 target="_blank"
@@ -73,43 +65,72 @@ export default function KontaktPage() {
                 <ViberIcon className="h-4 w-4" />
                 Viber
               </a>
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-outline"
+              >
+                <Instagram className="h-4 w-4" aria-hidden />
+                Instagram DM
+              </a>
             </div>
-            <p className="body-small mt-4 max-w-lg text-charcoal/60">
+            <p className="mt-4 max-w-lg text-[14px] text-ink-muted">
               Na WhatsApp i Viber Vas čeka unapred upisana poruka — samo je
               dopunite datumom i brojem gostiju.
+            </p>
+            <p className="mt-6 max-w-[44ch] text-[15px] text-ink">
+              Pišite mi šta slavite. Ostalo je moja briga.
             </p>
           </Reveal>
         </div>
       </div>
 
-      {/* Blush podsetnik */}
-      <section className="section-block section-blush !py-16 md:!py-20" aria-labelledby="podsetnik">
+      {/* Podsetnik — tint blok */}
+      <section
+        className="section-tint py-16 md:py-20"
+        aria-labelledby="podsetnik"
+      >
         <div className="container-site">
           <Reveal>
             <h2 id="podsetnik" className="!text-2xl">
               Pre poziva pripremite:
             </h2>
-            <ul className="body-large mt-6 space-y-3 text-charcoal/85">
-              <li className="flex gap-3">
-                <span aria-hidden className="text-warm-brown">01</span>
-                datum proslave
-              </li>
-              <li className="flex gap-3">
-                <span aria-hidden className="text-warm-brown">02</span>
-                broj gostiju
-              </li>
-              <li className="flex gap-3">
-                <span aria-hidden className="text-warm-brown">03</span>
-                željeni ukus ili stil torte
-              </li>
+            <ul className="body-large mt-6 space-y-3 text-ink">
+              {["datum proslave", "broj gostiju", "željeni ukus ili stil torte"].map(
+                (item, i) => (
+                  <li key={item} className="flex gap-3">
+                    <span
+                      aria-hidden
+                      className="text-oliva"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {item}
+                  </li>
+                )
+              )}
             </ul>
           </Reveal>
         </div>
       </section>
 
-      <div className="section-cream py-14">
-        <div className="container-site">
-          <p className="body text-charcoal/70">{SITE.deliveryNote}</p>
+      {/* Dostava (§12 — BEZ zona) + kvalifikacioni blok (§11.2) */}
+      <div className="section-cream py-16 md:py-20">
+        <div className="container-site space-y-10">
+          <Reveal>
+            <p className="body text-ink-muted">{SITE.deliveryNote}</p>
+          </Reveal>
+          <Reveal delay={1}>
+            <div className="max-w-2xl bg-bg2 px-8 py-7">
+              <p className="body-large text-ink">
+                Puterina je za Vas ako mislite da torta treba da se pamti duže
+                od proslave. Ako Vam treba nešto za sutra popodne — iskreno,
+                nisam ja za to. Puter se ne požuruje.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </div>
     </>

@@ -1,34 +1,30 @@
-import { sanityFetch, PRODUCTS_QUERY, getImageUrl } from "@/lib/sanity"
-import type { SanityImage } from "@/lib/sanity"
+import { sanityFetch, PRODUCTS_QUERY } from "@/lib/sanity"
 import {
-  DUMMY_PRODUCTS,
-  getDummyProduct,
+  PRODUCTS,
+  getProductBySlug,
   type ProductData,
-} from "@/lib/dummy-data"
+} from "@/lib/products-data"
 
 /**
- * Jedinstven izvor proizvoda za sve stranice tokom pregleda dizajna:
- * kurirani dummy copy + lokalne fotografije pobeđuju, Sanity daje cenu.
- *
- * TODO(V3): kada vlasnica unese prave tekstove i profesionalne fotke u
- * Sanity, okrenuti merge u korist Sanity-ja (copy, slike preko urlFor)
- * i isprazniti DUMMY_PRODUCTS — vidi docs/RUNBOOK-novi-proizvod.md.
+ * Jedinstven izvor proizvoda za sve stranice — V3:
+ * lib/products-data.ts sadrži PRAVE podatke (cene sa IG cenovnika
+ * potvrđene sveskom, deklaracije iz Deklaracije.txt, prave fotografije).
+ * Sanity može da PREGAZI SAMO cenu (brza korekcija bez deploy-a);
+ * sav sadržaj (copy, slike, deklaracije) dolazi iz koda dok se
+ * u F5 fazi pravi katalog ne preseli u Sanity (vidi V3-PLAN).
  */
 
 interface SanityProductRow {
   _id: string
   title?: string
   slug?: { current?: string }
-  shortDescription?: string
   pricePerKg?: number
-  primaryImage?: SanityImage
-  secondaryImage?: SanityImage
   isSignature?: boolean
 }
 
 export type CatalogProduct = ProductData & { fromSanity: boolean }
 
-// Ispravka poznatog vulgarnog typo sluga u datasetu dok se ne zakrpi
+// Ispravka poznatog typo sluga u datasetu (zakrpljeno i u Sanity-ju)
 const SLUG_ALIASES: Record<string, string> = {
   "pizdac-malina": "pistac-malina",
 }
@@ -53,55 +49,14 @@ export async function getAllProducts(): Promise<CatalogProduct[]> {
     if (slug) bySlug.set(slug, row)
   }
 
-  const merged: CatalogProduct[] = DUMMY_PRODUCTS.map((dummy) => {
-    const sanity = bySlug.get(dummy.slug)
-    if (!sanity) return { ...dummy, fromSanity: false }
-    bySlug.delete(dummy.slug)
-    // Kurirani copy (title/shortDescription) uvek pobeđuje dok postojeći
-    // Sanity unosi sadrže radne/placeholder tekstove; Sanity daje cenu.
-    return {
-      ...dummy,
-      pricePerKg: sanity.pricePerKg ?? dummy.pricePerKg,
-      isSignature: dummy.isSignature || Boolean(sanity.isSignature),
-      fromSanity: true,
-    }
-  })
-
-  // Sanity proizvodi koji ne postoje u dummy setu (buduće prave torte)
-  for (const [slug, row] of bySlug) {
-    const image =
-      getImageUrl(row.primaryImage, 1200) ?? "/images/dummy/kolaci-1.jpg"
-    const crossSection =
-      getImageUrl(row.secondaryImage, 1200) ?? image
-    merged.push({
-      slug,
-      title: row.title ?? slug,
-      category: "torte",
-      isSignature: Boolean(row.isSignature),
-      pricePerKg: row.pricePerKg ?? 0,
-      shortDescription: row.shortDescription ?? "",
-      layers: [],
-      ingredients: "",
-      allergens: [],
-      storage: "",
-      nutrition: {
-        energy: "—",
-        protein: "—",
-        carbs: "—",
-        sugars: "—",
-        fat: "—",
-        saturatedFat: "—",
-        salt: "—",
-      },
-      image,
-      crossSectionImage: crossSection,
-      gallery: [image, crossSection],
-      declaration: "",
-      fromSanity: true,
-    })
-  }
-
-  return merged
+  // Pravi podaci iz koda pobeđuju — UKLJUČUJUĆI cenu: Sanity dataset još
+  // sadrži V2 dummy unose sa STARIM cenama (npr. pistac-malina 3.700
+  // umesto pravih 4.200). TODO(F5): kada se dataset očisti i dobije prave
+  // proizvode, okrenuti prioritet cene ka Sanity-ju (korekcija bez deploy-a).
+  return PRODUCTS.map((product) => ({
+    ...product,
+    fromSanity: bySlug.has(product.slug),
+  }))
 }
 
 export async function getProduct(
@@ -112,7 +67,7 @@ export async function getProduct(
 }
 
 export function getStaticProductSlugs(): string[] {
-  return DUMMY_PRODUCTS.map((p) => p.slug)
+  return PRODUCTS.map((p) => p.slug)
 }
 
-export { getDummyProduct }
+export { getProductBySlug }

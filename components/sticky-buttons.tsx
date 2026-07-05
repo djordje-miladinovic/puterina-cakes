@@ -19,7 +19,7 @@ export default function StickyButtons() {
     <div className="fixed inset-x-0 bottom-0 z-40 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden pointer-events-none">
       <a
         href={`tel:${CONTACT.phone}`}
-        className="cta-primary pointer-events-auto w-full shadow-lg shadow-warm-brown/15"
+        className="cta-primary pointer-events-auto w-full"
       >
         <Phone className="h-5 w-5" aria-hidden />
         Pozovite — {CONTACT.phoneDisplay}

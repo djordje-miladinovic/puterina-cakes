@@ -11,11 +11,11 @@ const AI_BOTS = [
   "OAI-SearchBot",
   "ChatGPT-User",
   "ClaudeBot",
-  "Claude-Web",
+  "Claude-User",
+  "Claude-SearchBot",
   "PerplexityBot",
   "Google-Extended",
   "CCBot",
-  "Bingbot",
 ]
 
 export default function robots(): MetadataRoute.Robots {

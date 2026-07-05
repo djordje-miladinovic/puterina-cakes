@@ -2,13 +2,9 @@
 
 import { useState, useCallback, useEffect } from "react"
 import Image from "next/image"
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 export interface GalleryImage {
   src: string
@@ -20,49 +16,57 @@ interface ProductGalleryProps {
   productName: string
 }
 
-export default function ProductGallery({ images, productName }: ProductGalleryProps) {
+/**
+ * Galerija proizvoda V3 (mockup prod-1): glavna slika 4:5 + red
+ * kvadratnih thumbova. Borderless — aktivni thumb se izdvaja
+ * opacity-jem, ne okvirom. Klik na glavnu otvara lightbox.
+ */
+export default function ProductGallery({
+  images,
+  productName,
+}: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
-  
-  // Keyboard navigation handler for thumbnails
-  const handleKeyDown = useCallback((e: React.KeyboardEvent, currentIndex: number) => {
-    if (e.key === "ArrowLeft" && currentIndex > 0) {
-      e.preventDefault()
-      setSelectedIndex(currentIndex - 1)
-    } else if (e.key === "ArrowRight" && currentIndex < images.length - 1) {
-      e.preventDefault()
-      setSelectedIndex(currentIndex + 1)
-    }
-  }, [images.length])
 
-  // Global keyboard handler for lightbox navigation
+  // Navigacija strelicama po thumbovima
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent, currentIndex: number) => {
+      if (e.key === "ArrowLeft" && currentIndex > 0) {
+        e.preventDefault()
+        setSelectedIndex(currentIndex - 1)
+      } else if (e.key === "ArrowRight" && currentIndex < images.length - 1) {
+        e.preventDefault()
+        setSelectedIndex(currentIndex + 1)
+      }
+    },
+    [images.length]
+  )
+
+  // Globalne strelice u lightboxu
   useEffect(() => {
     if (!lightboxOpen) return
-    
+
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft" && selectedIndex > 0) {
-        e.preventDefault() // Prevent page scrolling
+        e.preventDefault()
         setSelectedIndex(selectedIndex - 1)
       } else if (e.key === "ArrowRight" && selectedIndex < images.length - 1) {
-        e.preventDefault() // Prevent page scrolling
+        e.preventDefault()
         setSelectedIndex(selectedIndex + 1)
       } else if (e.key === "Escape") {
         e.preventDefault()
         setLightboxOpen(false)
       }
     }
-    
+
     window.addEventListener("keydown", handleGlobalKeyDown)
     return () => window.removeEventListener("keydown", handleGlobalKeyDown)
-  }, [lightboxOpen, selectedIndex, images.length, setSelectedIndex, setLightboxOpen])
-  
-  // If no images provided, show placeholder
+  }, [lightboxOpen, selectedIndex, images.length])
+
   if (!images || images.length === 0) {
     return (
-      <div className="space-y-4">
-        <div className="aspect-square bg-soft-white rounded-xl flex items-center justify-center border border-light-gray">
-          <p className="text-muted-foreground">Slika proizvoda</p>
-        </div>
+      <div className="flex aspect-[4/5] items-center justify-center bg-bg2">
+        <p className="text-ink-muted">Slika proizvoda</p>
       </div>
     )
   }
@@ -79,58 +83,52 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
 
   return (
     <>
-      <div className="space-y-4">
-        {/* Main Image - clickable for lightbox */}
+      <div>
+        {/* Glavna slika — 4:5, borderless, cursor zoom */}
         <button
           onClick={() => setLightboxOpen(true)}
-          className="relative w-full aspect-square bg-soft-white rounded-xl overflow-hidden group cursor-zoom-in border border-light-gray hover:border-butter-gold transition-all duration-200 hover:shadow-[var(--shadow-butter)]"
-          aria-label="Uvećaj sliku"
+          className="relative block aspect-[4/5] w-full cursor-zoom-in overflow-hidden bg-bg2"
+          aria-label="Uvećajte sliku"
         >
           <Image
             src={selectedImage.src}
             alt={selectedImage.alt || productName}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            sizes="(max-width: 1024px) 100vw, min(60vw, 672px)"
+            className="puterina-img object-cover"
+            sizes="(max-width: 1024px) 100vw, min(55vw, 680px)"
             priority
           />
-          {/* Zoom indicator overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200 flex items-center justify-center">
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
-              <ZoomIn className="w-6 h-6 text-warm-brown" />
-            </div>
-          </div>
         </button>
 
-        {/* Thumbnail Strip */}
+        {/* Thumbovi — kvadrati, opacity aktivni sistem (prod-1) */}
         {images.length > 1 && (
-          <div 
-            className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin" 
-            role="tablist" 
+          <div
+            className="mt-3 grid grid-cols-4 gap-3"
+            role="tablist"
             aria-label="Galerija slika proizvoda"
           >
-            {images.map((image, index) => (
+            {images.slice(0, 4).map((image, index) => (
               <button
-                key={index}
+                key={image.src}
                 onClick={() => setSelectedIndex(index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200",
+                  "relative aspect-square overflow-hidden bg-bg2 transition-opacity duration-300",
                   selectedIndex === index
-                    ? "border-butter-gold ring-2 ring-butter-gold/20 shadow-[var(--shadow-butter)]"
-                    : "border-light-gray hover:border-butter-gold/50 bg-soft-white"
+                    ? "opacity-100"
+                    : "opacity-70 hover:opacity-100"
                 )}
                 role="tab"
-                aria-label={`Prikaži sliku ${index + 1}`}
+                aria-label={`Prikažite sliku ${index + 1}`}
                 aria-selected={selectedIndex === index}
                 tabIndex={selectedIndex === index ? 0 : -1}
               >
                 <Image
                   src={image.src}
-                  alt={image.alt || `${productName} - slika ${index + 1}`}
+                  alt={image.alt || `${productName} — slika ${index + 1}`}
                   fill
-                  className="object-cover"
-                  sizes="80px"
+                  className="puterina-img object-cover"
+                  sizes="120px"
                 />
               </button>
             ))}
@@ -138,24 +136,25 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
         )}
       </div>
 
-      {/* Lightbox Dialog */}
+      {/* Lightbox */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
-        <DialogContent className="max-w-[95vw] max-h-[95vh] w-auto h-auto p-0 bg-black/95 border-none overflow-hidden">
+        <DialogContent
+          aria-describedby={undefined}
+          className="h-auto max-h-[95vh] w-auto max-w-[95vw] overflow-hidden border-none bg-[#2b251f]/95 p-0"
+        >
           <DialogTitle className="sr-only">
-            {selectedImage.alt || productName} - Uvećana slika
+            {selectedImage.alt || productName} — uvećana slika
           </DialogTitle>
-          
-          {/* Close button */}
+
           <button
             onClick={() => setLightboxOpen(false)}
-            className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-2 transition-colors"
-            aria-label="Zatvori"
+            className="absolute right-4 top-4 z-50 p-2 text-terra-ink/80 transition-colors hover:text-terra-ink"
+            aria-label="Zatvorite"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="h-6 w-6" />
           </button>
 
-          {/* Image container */}
-          <div className="relative w-[90vw] h-[85vh] flex items-center justify-center">
+          <div className="relative flex h-[85vh] w-[90vw] items-center justify-center">
             <Image
               src={selectedImage.src}
               alt={selectedImage.alt || productName}
@@ -166,51 +165,48 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             />
           </div>
 
-          {/* Navigation arrows */}
           {images.length > 1 && (
             <>
               <button
                 onClick={goToPrevious}
                 disabled={selectedIndex === 0}
                 className={cn(
-                  "absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all",
-                  selectedIndex === 0 && "opacity-30 cursor-not-allowed"
+                  "absolute left-4 top-1/2 -translate-y-1/2 p-3 text-terra-ink/80 transition-colors hover:text-terra-ink",
+                  selectedIndex === 0 && "cursor-not-allowed opacity-30"
                 )}
                 aria-label="Prethodna slika"
               >
-                <ChevronLeft className="w-6 h-6 text-white" />
+                <ChevronLeft className="h-7 w-7" />
               </button>
               <button
                 onClick={goToNext}
                 disabled={selectedIndex === images.length - 1}
                 className={cn(
-                  "absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all",
-                  selectedIndex === images.length - 1 && "opacity-30 cursor-not-allowed"
+                  "absolute right-4 top-1/2 -translate-y-1/2 p-3 text-terra-ink/80 transition-colors hover:text-terra-ink",
+                  selectedIndex === images.length - 1 &&
+                    "cursor-not-allowed opacity-30"
                 )}
                 aria-label="Sledeća slika"
               >
-                <ChevronRight className="w-6 h-6 text-white" />
+                <ChevronRight className="h-7 w-7" />
               </button>
-            </>
-          )}
 
-          {/* Thumbnail strip in lightbox */}
-          {images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedIndex(index)}
-                  className={cn(
-                    "w-2.5 h-2.5 rounded-full transition-all",
-                    selectedIndex === index
-                      ? "bg-white scale-110"
-                      : "bg-white/40 hover:bg-white/60"
-                  )}
-                  aria-label={`Idi na sliku ${index + 1}`}
-                />
-              ))}
-            </div>
+              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 px-4 py-2">
+                {images.map((image, index) => (
+                  <button
+                    key={image.src}
+                    onClick={() => setSelectedIndex(index)}
+                    className={cn(
+                      "h-2.5 w-2.5 rounded-full transition-all",
+                      selectedIndex === index
+                        ? "scale-110 bg-terra-ink"
+                        : "bg-terra-ink/40 hover:bg-terra-ink/60"
+                    )}
+                    aria-label={`Idite na sliku ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </DialogContent>
       </Dialog>

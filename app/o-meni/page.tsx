@@ -1,63 +1,66 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { Phone } from "lucide-react"
+import Link from "next/link"
 import Reveal from "@/components/reveal"
-import { CONTACT } from "@/lib/constants"
+import { CONTACT, SITE } from "@/lib/constants"
 
 export const metadata: Metadata = {
-  title: "Moja priča",
+  title: "Moja priča | Puterina — butik torti Beograd",
   description:
     "Kako je iz kućne kuhinje nastao butik torti: pravi puter, mali rituali i torta kao slikarsko platno. Puterina, Beograd.",
 }
 
 /**
- * „O meni" (ZA-PUTERINU §6): topla priča u 1. licu — hobi → butik torti,
- * džez + slatke umetnosti, proces kao ritual. Pull-quote na pistać bloku,
- * rukom ispisan potpis, CTA na dnu.
+ * „O meni" V3 (V3-COPY §7): priča u 1. licu SA IMENOM — „Ja sam Katarina."
+ * Pull-quote i teza epohe na tint blokovima (bez kartica), rukopisni
+ * potpis „s ljubavlju, Katarina", CTA na dnu.
  */
 export default function OMeniPage() {
   return (
     <>
-      <div className="section-cream pt-28 pb-20 md:pt-36 md:pb-28">
-        <div className="container-site grid items-start gap-12 md:grid-cols-2 md:gap-16">
+      <div className="section-cream pb-20 pt-28 md:pb-28 md:pt-36">
+        <div className="container-site grid items-start gap-10 md:grid-cols-2 md:gap-16">
           <Reveal>
+            <span className="label mb-4 block">Priča</span>
             <h1>Moja priča</h1>
-            <div className="body-large mt-8 space-y-6 text-charcoal/85">
+            <div className="body-large mt-8 space-y-6 text-ink">
               <p>
-                Sve je počelo u mojoj kuhinji — tortom za najdraže i mirisom
-                vanile koji se uvukao u svaki ćošak stana.
+                Ja sam Katarina. Sve je počelo u mojoj kuhinji — tortom za
+                najdraže i mirisom vanile koji se uvukao u svaki ćošak stana.
               </p>
               <p>
-                Volim džez i volim slatke umetnosti. Negde između te dve
-                ljubavi nastala je Puterina: mali butik torti u Beogradu, u
-                kome se i dalje sve pravi ručno — bez prečica, bez gotovih
-                smesa i bez fondana. Samo pravi puter, prave sirovine i vreme
-                koje svaka torta zasluži.
+                Volim džez i volim slatke umetnosti. Negde između nastala je
+                Puterina — ime je došlo slučajno, kao asocijacija na puter i
+                nežne torte, i ostalo je, jer bolje nije postojalo. Butik
+                torti u Beogradu u kome se sve pravi ručno. Bez gotovih smesa.
+                Bez fondana. Pravi puter, prave maline i vreme koje torta
+                zasluži.
               </p>
               <p>
-                Svaka torta kod mene počinje jednom porukom ili pozivom. Onda
-                kreću moji mali rituali: spisak sastojaka, miris tek ispečenih
-                korica, filovi koji dobijaju savršenu teksturu — i noć u kojoj
-                torta mirno spava u frižideru. A onda dolazi moj omiljeni deo:
+                Svaka torta počinje porukom ili pozivom. Onda kreću moji mali
+                rituali: spisak sastojaka, miris tek ispečenih korica, filovi
+                koji dobijaju savršenu teksturu — i noć u kojoj torta mirno
+                spava u frižideru. Radim uz instrumentalni džez, koji ispere
+                sve osim torte pred mojim rukama. A onda moj omiljeni deo:
                 trenutak kada torta prestane da bude desert i postane malo
-                slikarsko platno. Boje, potezi špatule, detalji… i svaka na
-                kraju dobije svoj lični pečat.
+                slikarsko platno. Boje, potezi špatule, teksture… i svaka
+                dobije svoj lični pečat.
               </p>
               <p>
                 Radim ograničen broj torti nedeljno — jer svaka zaslužuje
                 pažnju. Zato Vas molim samo jedno: javite se na vreme.
               </p>
             </div>
-            <p className="accent-script mt-10 text-xl" aria-hidden>
-              s ljubavlju, Puterina
+            <p className="accent-script mt-10" aria-hidden>
+              {SITE.signOff}
             </p>
           </Reveal>
 
           <Reveal delay={1} className="md:sticky md:top-28">
-            <div className="img-blob relative aspect-[4/5] w-full">
+            <div className="img-frame relative aspect-[4/5] w-full">
               <Image
-                src="/images/dummy/o-meni-ruke.jpg"
-                alt="Ruke dekorišu tortu puter kremom — Puterina radionica, Beograd"
+                src="/images/site/prica.jpg"
+                alt="Torta iz Puterina radionice — Puterina, butik torti Beograd"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 45vw"
@@ -68,30 +71,48 @@ export default function OMeniPage() {
         </div>
       </div>
 
-      {/* Pull-quote — pistać blok */}
-      <section className="section-block section-pistachio" aria-label="Moto">
-        <div className="container-site">
+      {/* Pull-quote — tint blok */}
+      <section className="section-block section-tint" aria-label="Moto">
+        <div className="container-narrow">
           <Reveal>
-            <blockquote className="display-lg mx-auto max-w-4xl text-center">
-              „Verujem u pravi puter, kvalitetne sastojke i u to da se ljubav
-              — oseti u zalogaju.”
+            <blockquote
+              className="manifest-line text-center"
+              style={{ fontStyle: "italic" }}
+            >
+              „Verujem u pravi puter, kvalitetne sastojke i u to da se ljubav —
+              oseti u zalogaju.“
             </blockquote>
           </Reveal>
         </div>
       </section>
 
+      {/* Teza epohe (V3-COPY §11.2) */}
+      <section className="section-cream py-20 md:py-28" aria-label="Zašto Puterina">
+        <div className="container-narrow text-center">
+          <Reveal>
+            <span className="label mb-5 block">Zašto Puterina</span>
+            <p className="manifest-line">
+              U vreme kada sve može da se naruči za sat vremena, najveći luksuz
+              postaje ono što se čeka. Moje torte se čekaju — i vrede čekanja.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Završni CTA */}
-      <section className="section-cream py-20 md:py-28" aria-label="Poručivanje">
-        <div className="container-site text-center">
+      <section className="section-tint py-20 text-center md:py-28" aria-label="Poručivanje">
+        <div className="container-narrow">
           <Reveal>
             <h2>Hajde da napravimo Vašu tortu.</h2>
-            <a
-              href={`tel:${CONTACT.phone}`}
-              className="cta-primary mt-8 !px-10 text-lg"
-            >
-              <Phone className="h-5 w-5" aria-hidden />
-              Pozovite
-            </a>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-7">
+              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+                Pozovite — {CONTACT.phoneDisplay}
+              </a>
+              <Link href="/kontakt" className="tlink">
+                Pošaljite poruku
+              </Link>
+            </div>
+            <p className="mt-5 text-[13px] text-ink-muted">{SITE.responseNote}</p>
           </Reveal>
         </div>
       </section>

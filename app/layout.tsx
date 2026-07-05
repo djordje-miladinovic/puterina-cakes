@@ -19,7 +19,7 @@ const inter = Inter({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 const caveat = Caveat({
@@ -31,14 +31,15 @@ const caveat = Caveat({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F5F0E8",
+  themeColor: "#F8F4EB",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_BASE),
   title: {
     default: "Puterina — butik torti | Beograd",
-    template: "%s | Puterina — butik torti Beograd",
+    // Stranice nose pun naslov (copy §14) — template ne dodaje sufiks
+    template: "%s",
   },
   description:
     "Ručno pravljene torte sa pravim puterom — bez fondana i gotovih smesa. Butik torti u Beogradu. Poručivanje pozivom ili porukom, radnim danima 08–20h.",
@@ -60,14 +61,23 @@ export const metadata: Metadata = {
     url: CANONICAL_BASE,
     siteName: "Puterina",
     title: "Puterina — butik torti | Beograd",
+    // OG default opis — copy §11
     description:
-      "Ručno pravljene torte sa pravim puterom — bez fondana i gotovih smesa. Poručivanje pozivom ili porukom.",
+      "Butik torti, Beograd. Pravi puter, bez fondana. Poručivanje porukom ili pozivom.",
+    images: [
+      {
+        url: "/images/site/hero.jpg",
+        width: 1600,
+        height: 2400,
+        alt: "Puterina — butik torti, Beograd",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Puterina — butik torti | Beograd",
     description:
-      "Ručno pravljene torte sa pravim puterom — bez fondana i gotovih smesa.",
+      "Butik torti, Beograd. Pravi puter, bez fondana. Poručivanje porukom ili pozivom.",
   },
   robots: {
     index: true,

@@ -1,38 +1,62 @@
 import Image from "next/image"
-import { Phone } from "lucide-react"
+import Link from "next/link"
 import { CONTACT, SITE } from "@/lib/constants"
+import Reveal from "@/components/reveal"
 
 /**
- * Full-bleed hero (ZA-PUTERINU §3.1, PLAN T3.1): jedna raskošna svetla
- * fotografija preko celog ekrana, BEZ crnog gradijenta. Preko nje samo
- * slogan i dugme "Pozovite" — prvi utisak nosi torta, ne tekst.
+ * Full-bleed hero (mockup v6-1): prava fotografija preko celog ekrana,
+ * svetli krem scrim pri dnu (bez tamnih preliva), sadržaj dole-levo:
+ * label → slogan → CTA par → response linija.
  */
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[100svh] w-full" aria-label="Puterina — butik torti">
+    <section
+      className="relative flex min-h-[640px] w-full items-end"
+      style={{ height: "100svh" }}
+      aria-label="Puterina — butik torti"
+    >
       <Image
-        src="/images/dummy/hero-pistac-malina.jpg"
-        alt="Signature torta sa malinama i svilenkastim puter kremom — Puterina, butik torti Beograd"
+        src="/images/site/hero.jpg"
+        alt="Bela puter-krem torta sa anturijumom — Puterina, butik torti Beograd"
         fill
         priority
         sizes="100vw"
         className="puterina-img object-cover"
+        style={{ objectPosition: "var(--hero-pos)" }}
       />
-      {/* Svetli (krem) preliv pri dnu — čitljivost bez tamnih preliva */}
+      {/* Svetli scrim pri dnu — čitljivost bez tamnog gradijenta (v6-1) */}
       <div
-        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-cream/95 via-cream/40 to-transparent"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, color-mix(in srgb, var(--bg) 78%, transparent) 0%, transparent 42%)",
+        }}
         aria-hidden
       />
 
-      <div className="container-site absolute inset-x-0 bottom-0 pb-24 sm:pb-20 md:pb-28">
-        <h1 className="display-hero max-w-4xl">{SITE.tagline}</h1>
-        <a
-          href={`tel:${CONTACT.phone}`}
-          className="cta-primary mt-8 text-lg !px-10"
-        >
-          <Phone className="h-5 w-5" aria-hidden />
-          Pozovite
-        </a>
+      <div className="container-site relative w-full pb-[9vh]">
+        <Reveal>
+          <span className="label mb-5 block">{SITE.heroEyebrow}</span>
+        </Reveal>
+        <Reveal delay={1}>
+          <h1 className="display-hero max-w-[15ch]">
+            Torte sa dušom
+            <br />i puterom.
+          </h1>
+        </Reveal>
+        <Reveal delay={2}>
+          <div className="mt-9 flex flex-wrap items-center gap-7">
+            <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+              Poručite tortu
+            </a>
+            <Link href="/katalog" className="tlink">
+              Pogledajte ukuse
+            </Link>
+          </div>
+          <p className="mt-5 text-[13px] tracking-[0.01em] text-ink-muted">
+            {SITE.responseNote}
+          </p>
+        </Reveal>
       </div>
     </section>
   )

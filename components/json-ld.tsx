@@ -12,8 +12,13 @@ const bakery = {
   name: "Puterina",
   alternateName: "Puterina — butik torti",
   description:
-    "Butik torti u Beogradu — ručno pravljene torte sa pravim puterom, bez fondana i gotovih smesa. Poručivanje pozivom ili porukom.",
+    "Butik torti u Beogradu — ručno pravljene torte sa pravim puterom, bez fondana i gotovih smesa. Poručivanje pozivom ili porukom, radnim danima 08–20h.",
   url: CANONICAL_BASE,
+  image: `${CANONICAL_BASE}/images/site/hero.jpg`,
+  founder: {
+    "@type": "Person",
+    name: "Katarina Miladinović",
+  },
   telephone: CONTACT.phone,
   areaServed: {
     "@type": "City",

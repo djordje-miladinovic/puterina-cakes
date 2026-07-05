@@ -4,13 +4,38 @@
 
 ## Osnovne činjenice
 
-- Lokacija: Beograd, Srbija (lično preuzimanje ili dostava; doplata po zoni dostave; bez javne adrese)
+- Vlasnica: Katarina — sve torte prolaze kroz njene ruke
+- Lokacija: Beograd, Srbija (lično preuzimanje ili dostava na adresu — po dogovoru; bez javne adrese)
 - Poručivanje: telefonom ili porukom — bez online korpe
 - Telefon: 065 37 993 34 (radnim danima 08–20h)
 - Instagram: https://www.instagram.com/puterinacakes/
+- Odgovor na poruke: obično u roku od 2–3 sata (radnim danima)
 - Rok za poručivanje: najmanje 10 dana unapred
-- Cene: po kilogramu; dekoracija (figurice, crtanje na torti, jestivi papir) se naplaćuje posebno
-- Ukusi se menjaju sezonski; potpisni ukusi: Pistać-malina i Kokos-vanila-malina
+- Najmanja porudžbina: 1 kg
+- Za 20 gostiju: torta 2–2,5 kg
+- Cene: po kilogramu; dekoracija (figurice, crtanje na torti, jestivi papir) se dogovara i naplaćuje posebno
+- Ukusi se menjaju sezonski; potpisni ukusi: Pistać malina i Kokos vanila i malina
+
+## Cenovnik torti (RSD / kg)
+
+- Pistać malina — 4.200 (signature)
+- Kokos vanila i malina — 3.800 (signature)
+- Lešnik grli čokoladu i malinu — 3.500
+- Lešnikova pralina sa malinom — 4.200
+- Čokoladna fantazija — 3.900
+- Čokoladna jagoda — 3.900 (sezonska — dok traju jagode)
+- Letnja torta — 3.800 (sezonska)
+- Bela makova fantazija — 3.900
+
+## Kolači (Lux linija)
+
+- Cena: 5.500 RSD / kg — u kilogram stane 35–40 kolača
+- Limun tart, Tart čokolada i slana karamela, Mini pavlova
+
+## Krofnice (Susu linija)
+
+- Cena na upit
+- Ukusi: pistać malina, pistać, čokolada, čoko malina, lešnik, vanila
 
 ## Šta Puterina ne radi
 
@@ -22,16 +47,17 @@
 
 1. Izaberite ukus u katalogu: /katalog
 2. Pozovite 065 37 993 34 — dogovor o veličini, dekoraciji i terminu
-3. Lično preuzimanje ili dostava u Beogradu
+3. Lično preuzimanje ili dostava u Beogradu — po dogovoru
 
 ## Stranice
 
-- Katalog torti i kolača (cene po kg): /katalog
+- Katalog torti, kolača i krofnica (cene po kg): /katalog
 - Svaki proizvod: sastojci, alergeni ("Sadrži:"), nutritivne vrednosti, čuvanje, deklaracija: /proizvod/pistac-malina
 - Priča o brendu: /o-meni
 - Česta pitanja (rokovi, dostava, avans, čuvanje torte): /faq
 - Kontakt (poziv, Instagram DM, WhatsApp, Viber): /kontakt
+- Utisci kupaca: /utisci
 
 ## Napomena
 
-Sajt je u pripremi — trenutni cenovnik i fotografije su radni primeri; važeće cene se potvrđuju pri poručivanju.
+Dekoracija se dogovara i naplaćuje posebno. Važeće cene se potvrđuju pri poručivanju.

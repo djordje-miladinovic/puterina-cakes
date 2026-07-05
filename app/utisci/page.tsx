@@ -1,51 +1,48 @@
 import type { Metadata } from "next"
-import { Phone } from "lucide-react"
+import Link from "next/link"
 import Reveal from "@/components/reveal"
 import { CONTACT } from "@/lib/constants"
-import { DUMMY_TESTIMONIALS } from "@/lib/dummy-data"
-import { cn } from "@/lib/utils"
+import { REAL_TESTIMONIALS } from "@/lib/products-data"
 
 export const metadata: Metadata = {
-  title: "Utisci",
+  title: "Poruke koje čuvam | Puterina — butik torti Beograd",
   description:
     "Poruke kupaca Puterina torti — najlepši utisak je kada se vratite. Butik torti, Beograd.",
 }
 
 /**
- * Utisci (ZA-PUTERINU §7): sve poruke kupaca kao nežni chat-oblačići,
- * razigrano poređani; veliki citat u sredini; CTA na dnu.
- * Trenutni utisci su PRIMERI — menjaju se pravim porukama (odluka #9).
+ * Utisci V3 — „Poruke koje čuvam": ISKLJUČIVO pravi citati
+ * (REAL_TESTIMONIALS — trenutno 2, sa Instagrama). Bez izmišljenih.
+ * Stranica raste kako stižu poruke uz dozvolu kupaca.
  */
 export default function UtisciPage() {
-  const half = Math.ceil(DUMMY_TESTIMONIALS.length / 2)
-  const firstHalf = DUMMY_TESTIMONIALS.slice(0, half)
-  const secondHalf = DUMMY_TESTIMONIALS.slice(half)
-
   return (
     <>
-      <div className="section-cream pt-28 pb-20 md:pt-36 md:pb-28">
+      <div className="section-cream pb-20 pt-28 md:pb-28 md:pt-36">
         <div className="container-site">
           <Reveal>
-            <h1>Utisci</h1>
-            <p className="body-large mt-4 max-w-xl text-charcoal/75">
-              Najlepše poruke koje su stigle uz vraćene tacne i osmehe.
+            <span className="label mb-4 block">06 — Reči kupaca</span>
+            <h1>Poruke koje čuvam</h1>
+            <p className="body-large mt-4 max-w-xl text-ink-muted">
+              Najviše me raduju poruke koje stignu posle proslave. Ovde ih
+              čuvam — uz dozvolu onih koji su ih poslali.
             </p>
           </Reveal>
 
           <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-x-14">
-            {firstHalf.map((t, i) => (
+            {REAL_TESTIMONIALS.map((t, i) => (
               <Reveal
-                key={t.name}
+                key={t.author}
                 delay={((i % 3) as 0 | 1 | 2)}
-                className={cn(i % 2 === 1 && "md:mt-10")}
+                className={i % 2 === 1 ? "md:mt-10" : ""}
               >
                 <figure>
-                  <blockquote className="bubble body-large text-charcoal/85">
-                    „{t.quote}”
+                  <blockquote className="bubble body-large text-ink">
+                    „{t.quote}“
                   </blockquote>
-                  <figcaption className="mt-6 pl-6 text-warm-brown">
-                    <span className="font-semibold">{t.name}</span>
-                    <span className="text-charcoal/60"> · {t.occasion}</span>
+                  <figcaption className="mt-5 pl-6 text-ink">
+                    <span className="font-medium">{t.author}</span>
+                    <span className="text-ink-muted"> · {t.context}</span>
                   </figcaption>
                 </figure>
               </Reveal>
@@ -55,47 +52,46 @@ export default function UtisciPage() {
       </div>
 
       {/* Veliki citat */}
-      <section className="section-block section-blush !py-20" aria-label="Citat">
-        <div className="container-site">
+      <section className="section-tint py-20 md:py-24" aria-label="Citat">
+        <div className="container-narrow">
           <Reveal>
-            <p className="display-lg mx-auto max-w-3xl text-center">
-              „Najlepši utisak je kada se vratite.”
+            <p className="manifest-line text-center">
+              „Najlepši utisak je kada se vratite.“
             </p>
           </Reveal>
         </div>
       </section>
 
+      {/* Poziv na deljenje utiska — recenzije-loop (V3-COPY §12 #40) */}
       <div className="section-cream py-20 md:py-28">
-        <div className="container-site">
-          <div className="grid gap-10 md:grid-cols-2 md:gap-x-14">
-            {secondHalf.map((t, i) => (
-              <Reveal
-                key={t.name}
-                delay={((i % 3) as 0 | 1 | 2)}
-                className={cn(i % 2 === 0 && "md:mt-10")}
+        <div className="container-narrow text-center">
+          <Reveal>
+            <h2>Vaš utisak ovde?</h2>
+            <p className="body-large mx-auto mt-5 max-w-[52ch] text-ink-muted">
+              Ako je moja torta bila deo Vašeg slavlja, napišite mi par reči —
+              najviše pomaže ako pomenete koji ste ukus uzeli i za koju
+              priliku.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-7">
+              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+                Pozovite — {CONTACT.phoneDisplay}
+              </a>
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tlink"
               >
-                <figure>
-                  <blockquote className="bubble body-large text-charcoal/85">
-                    „{t.quote}”
-                  </blockquote>
-                  <figcaption className="mt-6 pl-6 text-warm-brown">
-                    <span className="font-semibold">{t.name}</span>
-                    <span className="text-charcoal/60"> · {t.occasion}</span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="mt-24 text-center">
-            <h2>Napravimo i Vašu uspomenu.</h2>
-            <a
-              href={`tel:${CONTACT.phone}`}
-              className="cta-primary mt-8 !px-10 text-lg"
-            >
-              <Phone className="h-5 w-5" aria-hidden />
-              Pozovite
-            </a>
+                Pišite na Instagramu
+              </a>
+            </div>
+            <p className="mt-10 text-[14px] italic text-ink-muted">
+              Hajde da napravimo Vašu tortu —{" "}
+              <Link href="/katalog" className="text-oliva hover:opacity-80">
+                pogledajte ukuse
+              </Link>
+              .
+            </p>
           </Reveal>
         </div>
       </div>

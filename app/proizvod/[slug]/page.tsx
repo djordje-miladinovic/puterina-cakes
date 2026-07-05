@@ -2,12 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Script from "next/script"
 import { notFound } from "next/navigation"
-import { Instagram, Phone } from "lucide-react"
 import { ProductGallery } from "@/components/product"
-import AllergenList from "@/components/product/AllergenList"
-import { WhatsAppIcon, ViberIcon } from "@/components/icons"
 import { CANONICAL_BASE, CONTACT, SITE } from "@/lib/constants"
 import { formatPrice } from "@/lib/utils"
+import { CATEGORY_LABELS, NO_DECLARATION_NOTE } from "@/lib/products-data"
 import {
   getProduct,
   getStaticProductSlugs,
@@ -30,13 +28,17 @@ export async function generateMetadata({
   if (!product) return { title: "Proizvod nije pronađen" }
 
   return {
-    title: product.title,
+    title: `${product.title} | Puterina — butik torti Beograd`,
     description: product.shortDescription,
     alternates: { canonical: `${CANONICAL_BASE}/proizvod/${product.slug}` },
     openGraph: {
+      type: "website",
+      locale: "sr_RS",
+      siteName: "Puterina",
       title: product.title,
       description: product.shortDescription,
       url: `${CANONICAL_BASE}/proizvod/${product.slug}`,
+      images: [{ url: `${CANONICAL_BASE}${product.image}` }],
     },
   }
 }
@@ -49,21 +51,30 @@ function productJsonLd(product: CatalogProduct) {
     description: product.shortDescription,
     url: `${CANONICAL_BASE}/proizvod/${product.slug}`,
     image: `${CANONICAL_BASE}${product.image}`,
-    offers: {
-      "@type": "Offer",
-      price: product.pricePerKg,
-      priceCurrency: "RSD",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: product.pricePerKg,
-        priceCurrency: "RSD",
-        unitCode: "KGM",
-        unitText: "kg",
-      },
-      availability: "https://schema.org/InStock",
-      seller: { "@type": "Organization", name: "Puterina", url: CANONICAL_BASE },
-    },
     brand: { "@type": "Brand", name: "Puterina", url: CANONICAL_BASE },
+    // Offer samo kada cena postoji — „na upit" proizvodi bez offers bloka
+    ...(product.pricePerKg
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: product.pricePerKg,
+            priceCurrency: "RSD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: product.pricePerKg,
+              priceCurrency: "RSD",
+              unitCode: "KGM",
+              unitText: "kg",
+            },
+            availability: "https://schema.org/InStock",
+            seller: {
+              "@type": "Organization",
+              name: "Puterina",
+              url: CANONICAL_BASE,
+            },
+          },
+        }
+      : {}),
   }
 }
 
@@ -78,29 +89,22 @@ function DetailRow({
   defaultOpen?: boolean
 }) {
   return (
-    <details
-      className="group border-t border-warm-brown/15 py-4 last:border-b"
-      open={defaultOpen}
-    >
-      <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
-        <span className="h4">{title}</span>
-        <span
-          aria-hidden
-          className="text-2xl leading-none text-warm-brown transition-transform duration-200 group-open:rotate-45"
-        >
+    <details className="group" open={defaultOpen}>
+      <summary>
+        {title}
+        <span className="pl" aria-hidden>
           +
         </span>
       </summary>
-      <div className="pt-4">{children}</div>
+      <div className="acc-body">{children}</div>
     </details>
   )
 }
 
 /**
- * Strana proizvoda (ZA-PUTERINU §5, lamaisonduchocolat format):
- * levo galerija sa OBAVEZNIM presekom, desno ime → cena/kg → napomena
- * o dekoraciji → CTA Pozovite + IG/WA/Viber → opis → accordion sekcije.
- * BEZ related-products bloka.
+ * Strana proizvoda V3 (mockup prod-1): levo galerija sa OBAVEZNIM
+ * presekom, desno sticky info: label → ime → cena → gosti → dekoracija
+ * → CTA Pozovite + poruke → opis → accordion (deklaracija!).
  */
 export default async function ProizvodPage({
   params,
@@ -111,14 +115,19 @@ export default async function ProizvodPage({
   const product = await getProduct(slug)
   if (!product) notFound()
 
+  const dekl = product.declaration
+
+  // „presek" alt SAMO kada je presek zaista posebna slika (Susu linija
+  // nema presek — crossSectionImage pokazuje na glavnu fotografiju)
+  const imaPresek = product.crossSectionImage !== product.image
   const galleryImages = product.gallery.map((src, i) => ({
     src,
     alt:
-      src === product.crossSectionImage
+      imaPresek && src === product.crossSectionImage
         ? `${product.title}, presek — vide se slojevi`
         : `${product.title}, fotografija ${i + 1} — Puterina, butik torti Beograd`,
   }))
-  // Presek OBAVEZNO među slikama (tortik-annuchka zahtev)
+  // Presek OBAVEZNO među slikama
   if (!product.gallery.includes(product.crossSectionImage)) {
     galleryImages.push({
       src: product.crossSectionImage,
@@ -126,8 +135,14 @@ export default async function ProizvodPage({
     })
   }
 
+  const label = product.isSignature
+    ? "Signature ukus"
+    : product.seasonal
+      ? `✳ ${product.seasonal.badge}`
+      : CATEGORY_LABELS[product.category]
+
   return (
-    <div className="section-cream min-h-screen pt-24 pb-24 md:pt-32">
+    <div className="section-cream min-h-screen pb-24 pt-24 md:pt-28">
       <Script
         id="product-jsonld"
         type="application/ld+json"
@@ -138,157 +153,187 @@ export default async function ProizvodPage({
 
       <div className="container-site">
         {/* Breadcrumb */}
-        <nav aria-label="Putanja" className="body-small mb-8 text-charcoal/60">
-          <Link href="/katalog" className="hover:text-warm-brown">
+        <nav
+          aria-label="Putanja"
+          className="mb-7 pt-2 text-[13px] text-ink-muted"
+        >
+          <Link href="/katalog" className="hover:text-ink">
             Katalog
           </Link>
           <span aria-hidden> / </span>
           <Link
-            href={product.category === "kolaci" ? "/katalog?k=kolaci" : "/katalog"}
-            className="hover:text-warm-brown"
+            href={`/katalog?vrsta=${product.category}`}
+            className="hover:text-ink"
           >
-            {product.category === "kolaci" ? "Kolači" : "Torte"}
+            {CATEGORY_LABELS[product.category]}
           </Link>
           <span aria-hidden> / </span>
-          <span className="text-warm-brown">{product.title}</span>
+          <span className="text-ink">{product.title}</span>
         </nav>
 
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+        <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
           {/* Galerija — levo */}
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <div>
             <ProductGallery images={galleryImages} productName={product.title} />
           </div>
 
-          {/* Info — desno */}
-          <div>
-            {product.isSignature && (
-              <p
-                className="text-sm italic text-raspberry"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                Signature
+          {/* Info — desno, sticky */}
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <span className="label mb-3 block">{label}</span>
+            <h1 className="!text-[clamp(2.4rem,5vw,3.6rem)]">{product.title}</h1>
+            <p className="mt-2 text-[15px] text-ink-muted">
+              {product.shortDescription}
+            </p>
+
+            {/* Cena */}
+            <p
+              className="mt-5 text-[1.9rem] leading-tight text-ink"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontVariationSettings: '"opsz" 60',
+              }}
+            >
+              {product.pricePerKg ? (
+                <>
+                  {formatPrice(product.pricePerKg)}{" "}
+                  <span className="text-[0.7em] text-ink-muted">RSD / kg</span>
+                </>
+              ) : (
+                <span className="italic">{product.priceNote ?? "cena na upit"}</span>
+              )}
+            </p>
+            {product.category === "torte" && (
+              <p className="mt-1 text-[14px] text-ink-muted">
+                ≈ {SITE.servingNote} {SITE.minOrderNote}
               </p>
             )}
-            <h1 className="mt-1">{product.title}</h1>
 
-            <p className="mt-4 text-2xl font-semibold text-warm-brown md:text-3xl">
-              {formatPrice(product.pricePerKg)} RSD
-              <span className="text-lg font-normal text-charcoal/60">/kg</span>
-            </p>
-            <p className="body-small mt-2 italic text-charcoal/60">
+            <p
+              className="mt-4 max-w-[40ch] text-[14.5px] italic text-ink-muted"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               {SITE.decorationNote}
             </p>
 
-            <div className="mt-8">
-              <a href={`tel:${CONTACT.phone}`} className="cta-primary w-full sm:w-auto !px-12">
-                <Phone className="h-4 w-4" aria-hidden />
-                Pozovite
+            {/* CTA par (§12 hijerarhija) */}
+            <div className="mt-7">
+              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+                Pozovite — {CONTACT.phoneDisplay}
               </a>
-              <p className="body-small mt-3 text-charcoal/70">
-                Pošaljite poruku:{" "}
-                <a
-                  href={CONTACT.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-warm-brown"
-                >
-                  <Instagram className="h-3.5 w-3.5" aria-hidden />
-                  Instagram
-                </a>
-                {" · "}
+              <p className="mt-3.5 text-[13.5px] text-ink-muted">
+                ili pišite:{" "}
                 <a
                   href={CONTACT.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-warm-brown"
+                  className="text-oliva hover:opacity-80"
                 >
-                  <WhatsAppIcon className="h-3.5 w-3.5" />
                   WhatsApp
                 </a>
                 {" · "}
-                <a
-                  href={CONTACT.viber}
-                  className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-warm-brown"
-                >
-                  <ViberIcon className="h-3.5 w-3.5" />
+                <a href={CONTACT.viber} className="text-oliva hover:opacity-80">
                   Viber
                 </a>
+                {" · "}
+                <a
+                  href={CONTACT.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-oliva hover:opacity-80"
+                >
+                  Instagram
+                </a>
+              </p>
+              <p className="mt-2 text-[13px] text-ink-muted">
+                {SITE.responseNote}
               </p>
             </div>
 
-            <p className="body-large mt-8 text-charcoal/85">
-              {product.shortDescription}
+            {/* Opis u njenom glasu */}
+            <p className="mt-8 max-w-[44ch] text-[1.05rem] text-ink">
+              {product.description}
             </p>
 
-            {/* Accordion — tanke linije, bez kutija; SSR sadržaj */}
-            <div className="mt-10">
-              {product.layers.length > 0 && (
-                <DetailRow title="Opis" defaultOpen>
-                  <ul className="body list-inside space-y-1 text-charcoal/85">
-                    {product.layers.map((layer) => (
-                      <li key={layer} className="flex gap-2">
-                        <span aria-hidden className="text-butter-gold">—</span>
-                        {layer}
-                      </li>
-                    ))}
-                  </ul>
-                </DetailRow>
-              )}
+            {/* Sezonalnost (V3-COPY §11.3) — render samo kad tekst postoji */}
+            {(product.seasonal || product.category === "torte") && (
+              <p className="mt-3 text-[14px] italic text-ink-muted">
+                {product.seasonal
+                  ? product.seasonal.note
+                  : "Ovu tortu pravim cele godine — puter ne zna za godišnja doba."}
+              </p>
+            )}
 
-              {product.ingredients && (
-                <DetailRow title="Sastojci">
-                  <p className="body text-charcoal/85">{product.ingredients}</p>
-                </DetailRow>
-              )}
-
-              <DetailRow title="Nutritivne vrednosti">
-                <table className="body w-full text-left text-charcoal/85">
-                  <caption className="body-small mb-2 text-left text-charcoal/60">
-                    Prosečne vrednosti na 100 g (okvirno)
-                  </caption>
-                  <tbody>
-                    {[
-                      ["Energetska vrednost", product.nutrition.energy],
-                      ["Masti", product.nutrition.fat],
-                      ["— od toga zasićene", product.nutrition.saturatedFat],
-                      ["Ugljeni hidrati", product.nutrition.carbs],
-                      ["— od toga šećeri", product.nutrition.sugars],
-                      ["Proteini", product.nutrition.protein],
-                      ["So", product.nutrition.salt],
-                    ].map(([label, value]) => (
-                      <tr key={label} className="border-t border-warm-brown/10">
-                        <th scope="row" className="py-1.5 pr-4 font-normal">
-                          {label}
-                        </th>
-                        <td className="py-1.5 text-right">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            {/* Accordion — deklaracija i detalji (SSR u DOM) */}
+            <div className="prod-details mt-8">
+              <DetailRow title="Opis" defaultOpen>
+                <ul>
+                  {product.layers.map((layer) => (
+                    <li key={layer}>{layer}</li>
+                  ))}
+                </ul>
               </DetailRow>
 
-              <DetailRow title="Alergeni">
-                <AllergenList
-                  allergens={product.allergens}
-                  note={product.allergenNote}
-                />
+              <DetailRow title="Sastojci">
+                {dekl ? (
+                  <p>{dekl.sastojci}</p>
+                ) : (
+                  <>
+                    <p>{product.ingredientsShort}</p>
+                    <p className="mt-3 text-[13.5px]">{NO_DECLARATION_NOTE}</p>
+                  </>
+                )}
               </DetailRow>
 
-              {product.storage && (
-                <DetailRow title="Čuvanje">
-                  <p className="body text-charcoal/85">{product.storage}</p>
+              {dekl && dekl.nutritivno.length > 0 && (
+                <DetailRow title="Nutritivne vrednosti">
+                  <table>
+                    <tbody>
+                      {dekl.nutritivno.map((row) => (
+                        <tr key={row.label}>
+                          <td>{row.label}</td>
+                          <td>{row.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="mt-2 text-[12.5px]">
+                    Prosečne vrednosti na 100 g.
+                  </p>
                 </DetailRow>
               )}
 
-              {product.declaration && (
+              {dekl && (
+                <DetailRow title="Alergeni">
+                  <p>
+                    <strong className="font-medium text-oliva">Sadrži:</strong>{" "}
+                    <span className="text-ink">{dekl.alergeni}</span>
+                  </p>
+                </DetailRow>
+              )}
+
+              <DetailRow title="Čuvanje">
+                <p>
+                  {dekl?.cuvanje ?? "Čuvati na temperaturi do +5 °C."} Izvaditi
+                  30 minuta pre posluženja — da krem dobije svilenkastu
+                  teksturu.
+                </p>
+              </DetailRow>
+
+              {dekl && (
                 <DetailRow title="Deklaracija">
-                  <p className="body text-charcoal/85">{product.declaration}</p>
+                  {dekl.officialName !== product.title && (
+                    <p>Zvaničan naziv proizvoda: {dekl.officialName}.</p>
+                  )}
+                  <p className="mt-1">
+                    Neto masa: {dekl.netoMasa}. Rok trajanja: {dekl.rok}
+                  </p>
+                  <p className="mt-1">Proizvodnja: {dekl.proizvodjac}</p>
                 </DetailRow>
               )}
             </div>
 
-            <Link href="/katalog" className="cta-ghost mt-10 inline-flex">
-              ← Pogledajte ceo katalog
+            <Link href="/katalog" className="tlink mt-9 inline-block">
+              ← Ceo katalog
             </Link>
           </div>
         </div>

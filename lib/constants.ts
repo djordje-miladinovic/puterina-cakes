@@ -1,5 +1,6 @@
-// Contact information - centralized constants
-// Telefon i handle potvrđeni sa Instagram profila @puterinacakes (2026-07-02)
+// Kontakt i site-wide copy — V3 „Tihi atelje"
+// Izvor istine: V3-COPY.md §12 (Katarinina sveska, 2026-07-04) + V3-PLAN K1.
+// Telefon i handle potvrđeni sa Instagram profila @puterinacakes.
 
 const PREFILLED_MESSAGE =
   "Zdravo! Zanima me torta za [datum], za otprilike [broj] gostiju. Ukus/stil: [upišite]. Hvala!"
@@ -17,7 +18,27 @@ export const CONTACT = {
 
 export const CANONICAL_BASE = "https://puterinacakes.rs"
 
-// Navigation items — redosled po ZA-PUTERINU spec (odeljak 2)
+// Desktop header nav (v6-1 mockup: kategorije + O meni + Kontakt)
+export const NAV_DESKTOP = [
+  { name: "Torte", href: "/katalog?vrsta=torte" },
+  { name: "Kolači", href: "/katalog?vrsta=kolaci" },
+  { name: "Krofnice", href: "/katalog?vrsta=krofnice" },
+  { name: "O meni", href: "/o-meni" },
+  { name: "Kontakt", href: "/kontakt" },
+] as const
+
+// Footer nav (v6-1 fnav: kategorije + strane; Utisci dodati radi dostupnosti)
+export const NAV_FOOTER = [
+  { name: "Torte", href: "/katalog?vrsta=torte" },
+  { name: "Kolači", href: "/katalog?vrsta=kolaci" },
+  { name: "Krofnice", href: "/katalog?vrsta=krofnice" },
+  { name: "O meni", href: "/o-meni" },
+  { name: "Utisci", href: "/utisci" },
+  { name: "Česta pitanja", href: "/faq" },
+  { name: "Kontakt", href: "/kontakt" },
+] as const
+
+// Puna navigacija — meni overlay
 export const NAVIGATION = [
   { name: "Početna", href: "/" },
   { name: "Katalog", href: "/katalog" },
@@ -32,19 +53,35 @@ export const WORKING_HOURS = {
   display: "Radnim danima 08–20h",
 } as const
 
-// Brand / site-wide copy (docs/copy/COPY-DECK-V3.md §1–§2)
+// Brand / site-wide copy — V3-COPY.md §12 finalne verzije (ne menjati bez sveske!)
 export const SITE = {
   name: "Puterina",
+  ownerName: "Katarina",
   tagline: "Torte sa dušom i puterom.",
+  heroEyebrow: "Butik torti · Beograd",
+  manifest:
+    "Pravim torte od putera, jaja i strpljenja. Ničeg trećeg — i ništa se ne požuruje.",
+  signOff: "s ljubavlju, Katarina",
   brandLine: "Puterina — butik torti · Beograd · Radnim danima 08–20h",
   shortBrand: "Puterina — butik torti, Beograd",
   city: "Beograd",
-  decorationNote:
-    "Dekoracija (figurice, crtanje na torti, jestivi papir) se naplaćuje posebno.",
-  decorationNoteShort: "Dekoracija se naplaćuje posebno.",
-  catalogPriceNote: "Sve cene su po kilogramu. Dekoracija se naplaćuje posebno.",
-  exclusivityNote:
-    "Broj torti koje radim nedeljno je ograničen — pozovite na vreme.",
+  // §12 #15 — FINALNA response linija
+  responseNote: "Obično odgovaram u roku od 2–3 sata (radnim danima).",
+  // §12 #42/#43 — FINALNO, BEZ zona
   deliveryNote:
-    "Beograd — lično preuzimanje ili dostava (doplata po zoni dostave).",
+    "Dostava na adresu u Beogradu — po dogovoru. Van Beograda: takođe po dogovoru.",
+  // §12 #13
+  minOrderNote: "Najmanja porudžbina: 1 kg.",
+  // §12 #9 — SAMO kg varijanta, bez dinarske cifre
+  servingNote: "Za 20 gostiju: torta 2–2,5 kg.",
+  decorationNote:
+    "Dekoracija (figurice, crtanje, jestivi papir) se dogovara i naplaćuje posebno — jer je svaka torta drugačija.",
+  decorationNoteShort: "Dekoracija se dogovara posebno.",
+  catalogPriceNote:
+    "Sve cene su po kilogramu. Za 20 gostiju računajte 2–2,5 kg. Dekoracija se dogovara posebno.",
+  exclusivityNote:
+    "Broj torti koje radim nedeljno je ograničen — jer svaka zaslužuje pažnju.",
+  prepareChecklist: "Pripremite: datum · broj gostiju · željeni ukus",
+  // §12 #10 — Lux kolači, proverljiva činjenica
+  luxNote: "Lux kolači — 5.500 RSD/kg. U kilogram stane 35–40 kolača.",
 } as const
