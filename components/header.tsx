@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils"
 /**
  * Header V3 (mockup v6-1): fixed; na naslovnoj transparentan preko hero-a,
  * posle 60px skrola .solid (bg 94% + blur 10px). Levo Fraunces wordmark,
- * sredina desktop nav (NAV_DESKTOP), desno IG (UVEK vidljiva) + „Poruka"
- * + malina „Poručite" + hamburger za mobilni meni.
+ * sredina desktop nav (NAV_DESKTOP), desno IG (UVEK vidljiva) + malina
+ * „Pozovite" (kanonski CTA §12) + hamburger za mobilni meni.
  */
 export default function Header() {
   const pathname = usePathname()
@@ -101,18 +101,11 @@ export default function Header() {
               <Instagram className="h-5 w-5" aria-hidden />
             </a>
 
-            <Link
-              href="/kontakt"
-              className="hidden text-[12.5px] uppercase tracking-[0.06em] text-ink transition-colors duration-300 hover:text-oliva md:inline-block"
-            >
-              Poruka
-            </Link>
-
             <a
               href={`tel:${CONTACT.phone}`}
               className="cta-small hidden sm:inline-flex"
             >
-              Poručite
+              Pozovite
             </a>
 
             {/* Hamburger — samo mobilni (desktop ima punu nav) */}
