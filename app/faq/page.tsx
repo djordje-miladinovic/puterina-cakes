@@ -48,12 +48,6 @@ const FAQ_ITEMS: FaqItem[] = [
     category: "porucivanje",
   },
   {
-    question: "Kolika torta je potrebna za 20 osoba?",
-    answer:
-      "Računajte oko 100–120 g po osobi — za 20 osoba torta od 2–2,5 kg. Najmanja porudžbina: 1 kg.",
-    category: "porucivanje",
-  },
-  {
     question: "Zašto su cene po kilogramu?",
     answer:
       "Jer torta raste sa brojem gostiju, a Vi plaćate tačno koliko slavlja imate. Dekoracija (figurice, crtanje, jestivi papir) se dogovara i naplaćuje posebno — jer je svaka torta drugačija.",

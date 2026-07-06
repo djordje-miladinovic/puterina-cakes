@@ -16,7 +16,10 @@ import { cn } from "@/lib/utils"
  */
 export default function Header() {
   const pathname = usePathname()
-  const isHome = pathname === "/"
+  // U prod buildu usePathname() na prvom klijentskom renderu ume da vrati
+  // null/"" pre nego što se router context ustali → tada NE forsiraj solid
+  // (inače header bljesne u solidno na home hero-u dok scroll ne re-renderuje).
+  const isHome = !pathname || pathname === "/"
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const hamburgerRef = useRef<HTMLButtonElement>(null)
@@ -72,7 +75,7 @@ export default function Header() {
           <nav aria-label="Glavna navigacija" className="hidden md:flex md:gap-[34px]">
             {NAV_DESKTOP.map((item) => {
               // aktivna stavka (kat-2/prod-1: .on = oliva)
-              const active = pathname.startsWith(item.href)
+              const active = !!pathname && pathname.startsWith(item.href)
               return (
                 <Link
                   key={item.href}

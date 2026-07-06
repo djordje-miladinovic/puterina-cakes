@@ -58,13 +58,11 @@ export const SITE = {
     "Dostava na adresu u Beogradu — po dogovoru. Van Beograda: takođe po dogovoru.",
   // §12 #13
   minOrderNote: "Najmanja porudžbina: 1 kg.",
-  // §12 #9 — SAMO kg varijanta, bez dinarske cifre
-  servingNote: "Za 20 gostiju: torta 2–2,5 kg.",
   decorationNote:
     "Dekoracija (figurice, crtanje, jestivi papir) se dogovara i naplaćuje posebno — jer je svaka torta drugačija.",
   decorationNoteShort: "Dekoracija se dogovara posebno.",
   catalogPriceNote:
-    "Sve cene su po kilogramu. Za 20 gostiju računajte 2–2,5 kg. Dekoracija se dogovara posebno.",
+    "Sve cene su po kilogramu. Dekoracija se dogovara posebno.",
   exclusivityNote:
     "Broj torti koje radim nedeljno je ograničen — jer svaka zaslužuje pažnju.",
   prepareChecklist: "Pripremite: datum · broj gostiju · željeni ukus",

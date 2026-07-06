@@ -24,7 +24,7 @@
     --accent: #6e7043; /* pistać-oliva — labele, linkovi */
     --cta: #a83641; /* malina */
     --cta-dark: #8e2a34;
-    --dark: #be7c57; /* NUD terakota — „Šta ne radim" blok + footer */
+    --dark: #c68a68; /* NUD terakota (2026-07-06: za nijansu svetlija) — „Šta ne radim" blok + footer */
     --dark-ink: #fcf4ea;
     --dark-accent: #f3dfcb;
     --hero-pos: center 35%;
@@ -176,7 +176,7 @@
   --color-oliva: #6e7043;
   --color-malina: #a83641;
   --color-malina-dark: #8e2a34;
-  --color-terra: #be7c57;
+  --color-terra: #c68a68;
   --color-terra-ink: #fcf4ea;
   --color-terra-accent: #f3dfcb;
 

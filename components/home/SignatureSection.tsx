@@ -95,6 +95,12 @@ export default function SignatureSection({
             )
           })}
         </div>
+
+        <Reveal className="mt-16 text-center md:mt-20">
+          <Link href="/katalog" className="tlink-arrow">
+            Ceo katalog →
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

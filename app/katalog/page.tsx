@@ -51,8 +51,8 @@ export default async function KatalogPage({
             trenutno pravim
           </h1>
           <p className="mt-4 max-w-[46ch] text-ink-muted">
-            Sve cene su po kilogramu. Ukusi se menjaju sezonski. Za 20 gostiju
-            računajte tortu od 2–2,5 kg. Dekoracija se dogovara posebno.
+            Sve cene su po kilogramu. Ukusi se menjaju sezonski. Dekoracija se
+            dogovara posebno.
           </p>
         </Reveal>
       </div>

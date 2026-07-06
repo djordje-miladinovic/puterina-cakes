@@ -202,11 +202,9 @@ export default async function ProizvodPage({
                 <span className="italic">{product.priceNote ?? "cena na upit"}</span>
               )}
             </p>
-            {product.category === "torte" && (
-              <p className="mt-1 text-[14px] text-ink-muted">
-                ≈ {SITE.servingNote} {SITE.minOrderNote}
-              </p>
-            )}
+            <p className="mt-1 text-[14px] text-ink-muted">
+              {SITE.minOrderNote}
+            </p>
 
             <p
               className="mt-4 max-w-[40ch] text-[14.5px] italic text-ink-muted"
