@@ -86,38 +86,8 @@ export default function KontaktPage() {
         </div>
       </div>
 
-      {/* Podsetnik — tint blok */}
-      <section
-        className="section-tint py-16 md:py-20"
-        aria-labelledby="podsetnik"
-      >
-        <div className="container-site">
-          <Reveal>
-            <h2 id="podsetnik" className="!text-2xl">
-              Pre poziva pripremite:
-            </h2>
-            <ul className="body-large mt-6 space-y-3 text-ink">
-              {["datum proslave", "broj gostiju", "željeni ukus ili stil torte"].map(
-                (item, i) => (
-                  <li key={item} className="flex gap-3">
-                    <span
-                      aria-hidden
-                      className="text-oliva"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {item}
-                  </li>
-                )
-              )}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
       {/* Dostava (§12 — BEZ zona) + kvalifikacioni blok (§11.2) */}
-      <div className="section-cream py-16 md:py-20">
+      <div className="section-tint py-16 md:py-20">
         <div className="container-site space-y-10">
           <Reveal>
             <p className="body text-ink-muted">{SITE.deliveryNote}</p>

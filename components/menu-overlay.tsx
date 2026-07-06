@@ -141,10 +141,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
           <nav aria-label="Glavna navigacija">
             <ul className="space-y-2 md:space-y-4">
               {NAVIGATION.map((item, i) => {
-                const active =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(item.href)
+                const active = pathname.startsWith(item.href)
                 return (
                   <li key={item.href}>
                     <Link

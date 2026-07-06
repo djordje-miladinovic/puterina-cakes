@@ -11,22 +11,27 @@
 // ============================================================================
 
 /**
- * Fetch all products for the catalog page
+ * Svi proizvodi za katalog i stranu proizvoda (V3 model).
+ * Sanity je izvor istine; slike su putanje u /public.
  */
-export const PRODUCTS_QUERY = `*[_type == "product"] | order(isSignature desc, title asc) {
+export const PRODUCTS_QUERY = `*[_type == "product"] | order(coalesce(order, 100) asc, title asc) {
   _id,
   title,
-  slug,
-  shortDescription,
-  pricePerKg,
-  "primaryImage": image,
-  "secondaryImage": crossSectionImage,
+  "slug": slug.current,
+  category,
   isSignature,
-  category->{
-    _id,
-    title,
-    slug
-  }
+  pricePerKg,
+  priceNote,
+  seasonal,
+  flavors,
+  shortDescription,
+  description,
+  layers,
+  ingredientsShort,
+  imagePath,
+  crossSectionPath,
+  gallery,
+  declaration
 }`
 
 // ============================================================================

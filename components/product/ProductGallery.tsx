@@ -87,7 +87,7 @@ export default function ProductGallery({
         {/* Glavna slika — 4:5, borderless, cursor zoom */}
         <button
           onClick={() => setLightboxOpen(true)}
-          className="relative block aspect-[4/5] w-full cursor-zoom-in overflow-hidden bg-bg2"
+          className="img-soft relative block aspect-[4/5] w-full cursor-zoom-in overflow-hidden bg-bg2"
           aria-label="Uvećajte sliku"
         >
           <Image
@@ -113,7 +113,7 @@ export default function ProductGallery({
                 onClick={() => setSelectedIndex(index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "relative aspect-square overflow-hidden bg-bg2 transition-opacity duration-300",
+                  "img-soft relative aspect-square overflow-hidden bg-bg2 transition-opacity duration-300",
                   selectedIndex === index
                     ? "opacity-100"
                     : "opacity-70 hover:opacity-100"

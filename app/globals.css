@@ -29,6 +29,12 @@
     --dark-accent: #f3dfcb;
     --hero-pos: center 35%;
 
+    /* Slike — jedva primetna zakrivljenost ćoškova + vrlo suptilna topla
+       senka (Đorđeva odluka 2026-07-06, gazi ranije „bez senki/oštro"). */
+    --img-radius: 7px;
+    --img-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent),
+      0 12px 28px -14px color-mix(in srgb, var(--ink) 22%, transparent);
+
     /* Spacing (4/8px baza) */
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
@@ -136,6 +142,12 @@
     font-size: 16px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Nikad horizontalni scroll na mobilnom (npr. meni-overlay van ekrana).
+     `clip` ne pravi scroll-kontejner pa position:sticky i dalje radi. */
+  html {
+    overflow-x: clip;
   }
 }
 
@@ -331,6 +343,14 @@
   position: relative;
   overflow: hidden;
   background-color: var(--bg2);
+  border-radius: var(--img-radius);
+  box-shadow: var(--img-shadow);
+}
+
+/* Zajednička klasa za slike van .img-frame (galerija proizvoda) */
+.img-soft {
+  border-radius: var(--img-radius);
+  box-shadow: var(--img-shadow);
 }
 
 .img-frame img {
@@ -614,6 +634,8 @@
   overflow: hidden;
   background: var(--bg2);
   position: relative;
+  border-radius: var(--img-radius);
+  box-shadow: var(--img-shadow);
 }
 .card-product .ph img {
   width: 100%;

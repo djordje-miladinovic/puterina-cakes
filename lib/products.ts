@@ -3,69 +3,128 @@ import {
   PRODUCTS,
   getProductBySlug,
   type ProductData,
+  type Category,
+  type FlavorKey,
+  type Declaration,
 } from "@/lib/products-data"
 
 /**
- * Jedinstven izvor proizvoda za sve stranice — V3:
- * lib/products-data.ts sadrži PRAVE podatke (cene sa IG cenovnika
- * potvrđene sveskom, deklaracije iz Deklaracije.txt, prave fotografije).
- * Sanity može da PREGAZI SAMO cenu (brza korekcija bez deploy-a);
- * sav sadržaj (copy, slike, deklaracije) dolazi iz koda dok se
- * u F5 fazi pravi katalog ne preseli u Sanity (vidi V3-PLAN).
+ * V3: SANITY JE IZVOR ISTINE za katalog. getAllProducts() čita proizvode iz
+ * Sanity-ja i mapira ih u ProductData oblik koji stranice očekuju. Ako Sanity
+ * ne vrati ništa (prazan dataset / greška), pada nazad na kod (lib/products-data)
+ * da sajt nikad ne ostane bez kataloga.
+ *
+ * Slike se drže kao putanje u /public (imagePath/crossSectionPath/gallery) dok
+ * se ne pređe na Sanity asset upload (V4 — foto faza B).
  */
+
+export type CatalogProduct = ProductData & { fromSanity: boolean }
+
+interface SanityDeclaration {
+  officialName?: string
+  sastojci?: string
+  alergeni?: string
+  cuvanje?: string
+  rok?: string
+  netoMasa?: string
+  nutritivno?: { label?: string; value?: string }[]
+  proizvodjac?: string
+}
 
 interface SanityProductRow {
   _id: string
   title?: string
-  slug?: { current?: string }
-  pricePerKg?: number
+  slug?: string
+  category?: string
   isSignature?: boolean
+  pricePerKg?: number
+  priceNote?: string
+  seasonal?: { badge?: string; note?: string }
+  flavors?: string[]
+  shortDescription?: string
+  description?: string
+  layers?: string[]
+  ingredientsShort?: string
+  imagePath?: string
+  crossSectionPath?: string
+  gallery?: string[]
+  declaration?: SanityDeclaration
 }
 
-export type CatalogProduct = ProductData & { fromSanity: boolean }
+const VALID_CATEGORY: Category[] = ["torte", "kolaci", "krofnice"]
+const PLACEHOLDER = "/images/site/hero.jpg"
 
-// Ispravka poznatog typo sluga u datasetu (zakrpljeno i u Sanity-ju)
-const SLUG_ALIASES: Record<string, string> = {
-  "pizdac-malina": "pistac-malina",
+function mapDeclaration(d?: SanityDeclaration): Declaration | null {
+  // Deklaracija se smatra postojećom samo ako ima sastojke i alergene
+  if (!d || !d.sastojci || !d.alergeni) return null
+  return {
+    officialName: d.officialName ?? "",
+    sastojci: d.sastojci,
+    alergeni: d.alergeni,
+    cuvanje: d.cuvanje ?? "Čuvati na temperaturi do +5 °C.",
+    rok: d.rok ?? "7 dana od datuma proizvodnje.",
+    netoMasa: d.netoMasa ?? "",
+    nutritivno: (d.nutritivno ?? [])
+      .filter((n) => n.label && n.value)
+      .map((n) => ({ label: n.label as string, value: n.value as string })),
+    proizvodjac: d.proizvodjac ?? "",
+  }
 }
 
-function normalizeSlug(raw: string | undefined): string {
-  if (!raw) return ""
-  return SLUG_ALIASES[raw] ?? raw
+function mapSanityProduct(row: SanityProductRow): ProductData | null {
+  if (!row.slug || !row.title) return null
+  const category = VALID_CATEGORY.includes(row.category as Category)
+    ? (row.category as Category)
+    : "torte"
+  const image = row.imagePath || PLACEHOLDER
+  return {
+    slug: row.slug,
+    title: row.title,
+    category,
+    isSignature: Boolean(row.isSignature),
+    pricePerKg: typeof row.pricePerKg === "number" ? row.pricePerKg : null,
+    priceNote: row.priceNote,
+    seasonal:
+      row.seasonal?.badge && row.seasonal?.note
+        ? { badge: row.seasonal.badge, note: row.seasonal.note }
+        : undefined,
+    flavors: (row.flavors ?? []).filter(Boolean) as FlavorKey[],
+    shortDescription: row.shortDescription ?? "",
+    description: row.description ?? "",
+    layers: row.layers ?? [],
+    ingredientsShort: row.ingredientsShort,
+    image,
+    crossSectionImage: row.crossSectionPath || image,
+    gallery: row.gallery && row.gallery.length > 0 ? row.gallery : [image],
+    declaration: mapDeclaration(row.declaration),
+  }
 }
 
 export async function getAllProducts(): Promise<CatalogProduct[]> {
-  let sanityRows: SanityProductRow[] = []
   try {
-    sanityRows =
+    const rows =
       (await sanityFetch<SanityProductRow[]>({ query: PRODUCTS_QUERY })) ?? []
+    const mapped = rows
+      .map(mapSanityProduct)
+      .filter((p): p is ProductData => p !== null)
+    if (mapped.length > 0) {
+      return mapped.map((p) => ({ ...p, fromSanity: true }))
+    }
   } catch {
-    sanityRows = []
+    // pad na kod ispod
   }
-
-  const bySlug = new Map<string, SanityProductRow>()
-  for (const row of sanityRows) {
-    const slug = normalizeSlug(row.slug?.current)
-    if (slug) bySlug.set(slug, row)
-  }
-
-  // Pravi podaci iz koda pobeđuju — UKLJUČUJUĆI cenu: Sanity dataset još
-  // sadrži V2 dummy unose sa STARIM cenama (npr. pistac-malina 3.700
-  // umesto pravih 4.200). TODO(F5): kada se dataset očisti i dobije prave
-  // proizvode, okrenuti prioritet cene ka Sanity-ju (korekcija bez deploy-a).
-  return PRODUCTS.map((product) => ({
-    ...product,
-    fromSanity: bySlug.has(product.slug),
-  }))
+  // Fallback — dataset prazan ili nedostupan
+  return PRODUCTS.map((p) => ({ ...p, fromSanity: false }))
 }
 
 export async function getProduct(
   slug: string
 ): Promise<CatalogProduct | undefined> {
   const all = await getAllProducts()
-  return all.find((p) => p.slug === normalizeSlug(slug))
+  return all.find((p) => p.slug === slug)
 }
 
+/** Slugovi za generateStaticParams — stabilni iz koda (build-time). */
 export function getStaticProductSlugs(): string[] {
   return PRODUCTS.map((p) => p.slug)
 }

@@ -18,35 +18,21 @@ export const CONTACT = {
 
 export const CANONICAL_BASE = "https://puterinacakes.rs"
 
-// Desktop header nav (v6-1 mockup: kategorije + O meni + Kontakt)
-export const NAV_DESKTOP = [
-  { name: "Torte", href: "/katalog?vrsta=torte" },
-  { name: "Kolači", href: "/katalog?vrsta=kolaci" },
-  { name: "Krofnice", href: "/katalog?vrsta=krofnice" },
-  { name: "O meni", href: "/o-meni" },
-  { name: "Kontakt", href: "/kontakt" },
-] as const
-
-// Footer nav (v6-1 fnav: kategorije + strane; Utisci dodati radi dostupnosti)
-export const NAV_FOOTER = [
-  { name: "Torte", href: "/katalog?vrsta=torte" },
-  { name: "Kolači", href: "/katalog?vrsta=kolaci" },
-  { name: "Krofnice", href: "/katalog?vrsta=krofnice" },
-  { name: "O meni", href: "/o-meni" },
-  { name: "Utisci", href: "/utisci" },
-  { name: "Česta pitanja", href: "/faq" },
-  { name: "Kontakt", href: "/kontakt" },
-] as const
-
-// Puna navigacija — meni overlay
-export const NAVIGATION = [
-  { name: "Početna", href: "/" },
+// JEDNA kanonska navigacija — identična na desktopu, u mobilnom meniju i
+// u footeru (Katalog je JEDAN link; vrste se biraju filterom u katalogu).
+export const NAV_MAIN = [
   { name: "Katalog", href: "/katalog" },
   { name: "O meni", href: "/o-meni" },
   { name: "Utisci", href: "/utisci" },
   { name: "Česta pitanja", href: "/faq" },
   { name: "Kontakt", href: "/kontakt" },
 ] as const
+
+// Aliasi zadržani radi postojećih import-a — svi pokazuju na istu listu,
+// pa je meni svuda konzistentan.
+export const NAV_DESKTOP = NAV_MAIN
+export const NAV_FOOTER = NAV_MAIN
+export const NAVIGATION = NAV_MAIN
 
 // Working hours — jedino radno vreme na sajtu (brief: radnim danima 08–20h)
 export const WORKING_HOURS = {

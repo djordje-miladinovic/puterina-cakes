@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Reveal from "@/components/reveal"
-import FilterBar, { buildFilterHref } from "@/components/catalog/FilterBar"
+import FilterBar from "@/components/catalog/FilterBar"
 import ProductCard from "@/components/catalog/ProductCard"
 import { SITE } from "@/lib/constants"
 import { getAllProducts } from "@/lib/products"
-import type { Category, FlavorKey } from "@/lib/products-data"
+import type { Category } from "@/lib/products-data"
 
 export const metadata: Metadata = {
   title: "Katalog torti i kolača | Puterina — butik torti Beograd",
@@ -16,34 +16,26 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 const VALID_VRSTE: Category[] = ["torte", "kolaci", "krofnice"]
-const VALID_UKUSI: FlavorKey[] = ["cokolada", "voce", "orasasto", "vanila-krem"]
 
 /**
- * Katalog V3 (mockup kat-2): filter traka (Vrsta · Ukus · Sezona) —
- * server-side filtriranje preko searchParams, filteri su linkovi
- * (rade bez JS, svaka kombinacija ima URL). Borderless kartice.
+ * Katalog V3: jedan filter po vrsti (Sve · Torte · Kolači · Krofnice) —
+ * server-side preko searchParams, filteri su linkovi (rade bez JS, svaka
+ * vrsta ima URL). Borderless kartice.
  */
 export default async function KatalogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ vrsta?: string; ukus?: string; sezona?: string }>
+  searchParams: Promise<{ vrsta?: string }>
 }) {
   const params = await searchParams
   const vrsta = VALID_VRSTE.includes(params.vrsta as Category)
     ? (params.vrsta as Category)
     : undefined
-  const ukus = VALID_UKUSI.includes(params.ukus as FlavorKey)
-    ? (params.ukus as FlavorKey)
-    : undefined
-  const sezona = params.sezona === "1"
 
   const products = await getAllProducts()
-  const shown = products.filter((p) => {
-    if (vrsta && p.category !== vrsta) return false
-    if (ukus && !p.flavors.includes(ukus)) return false
-    if (sezona && !p.seasonal) return false
-    return true
-  })
+  const shown = vrsta
+    ? products.filter((p) => p.category === vrsta)
+    : products
 
   const prikazujeKolace = shown.some((p) => p.category === "kolaci")
 
@@ -66,7 +58,7 @@ export default async function KatalogPage({
       </div>
 
       {/* Filter traka — sticky */}
-      <FilterBar vrsta={vrsta} ukus={ukus} sezona={sezona} />
+      <FilterBar vrsta={vrsta} />
 
       <div className="container-site pt-11">
         {/* Krofnice uvodna linija (V3-COPY §11.4) */}
@@ -86,21 +78,17 @@ export default async function KatalogPage({
             ))}
           </div>
         ) : (
-          /* Prazan rezultat (V3-COPY §11.3) */
+          /* Prazan rezultat */
           <div className="py-16 text-center">
             <p className="mx-auto max-w-[46ch] text-ink-muted">
-              Ova kombinacija mi je trenutno prazna. Probajte bez jednog ukusa
-              — ili mi{" "}
+              Ovde trenutno nemam ništa. Pogledajte ostale vrste — ili mi{" "}
               <Link href="/kontakt" className="text-oliva hover:opacity-80">
                 pišite
               </Link>
               , možda baš to umem da napravim.
             </p>
-            <Link
-              href={buildFilterHref({ sezona: false })}
-              className="tlink mt-6 inline-block"
-            >
-              poništi izbor
+            <Link href="/katalog" className="tlink mt-6 inline-block">
+              prikaži sve
             </Link>
           </div>
         )}

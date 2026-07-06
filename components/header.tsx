@@ -71,10 +71,8 @@ export default function Header() {
           {/* Desktop navigacija — sakrivena ispod md */}
           <nav aria-label="Glavna navigacija" className="hidden md:flex md:gap-[34px]">
             {NAV_DESKTOP.map((item) => {
-              // aktivna stavka (kat-2/prod-1: .on = oliva) — samo pathname
-              // rute; vrsta-filteri aktivnost pokazuju u FilterBar traci
-              const base = item.href.split("?")[0]
-              const active = base !== "/katalog" && pathname.startsWith(base)
+              // aktivna stavka (kat-2/prod-1: .on = oliva)
+              const active = pathname.startsWith(item.href)
               return (
                 <Link
                   key={item.href}
