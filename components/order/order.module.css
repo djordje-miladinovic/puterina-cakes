@@ -1,0 +1,287 @@
+/* ============================================
+   ORDER SHEET — mobilni „Poručite" bottom sheet
+   V4 #12c (sheet) + #13b/c (radno vreme) + #11 (konfigurator)
+   Preslikano iz mockups/v4-mobilni.html — D paket.
+   Boje isključivo iz :root varijabli (globals.css).
+   ============================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--ink) 34%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-soft);
+}
+
+.overlayOn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  background: var(--bg);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -12px 40px -12px rgba(30, 22, 16, 0.35);
+  transform: translateY(105%);
+  transition: transform 350ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  padding: 14px 18px calc(26px + env(safe-area-inset-bottom, 0px));
+  max-height: 78dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  outline: none;
+}
+
+.sheetOn {
+  transform: translateY(0);
+}
+
+.grab {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+  margin: 0 auto 14px;
+}
+
+.close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 10px;
+}
+
+.close:hover {
+  color: var(--ink);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 450;
+  font-size: 1.25rem;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.wtime {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 14px;
+}
+
+.wtimeSep {
+  margin-left: 8px;
+  color: var(--ink-muted);
+}
+
+/* status radnog vremena (#13c) */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.statusOpen {
+  color: var(--accent);
+}
+.statusOpen .dot {
+  background: var(--accent);
+}
+
+.statusClosed {
+  color: var(--ink-muted);
+}
+.statusClosed .dot {
+  background: transparent;
+  border: 1.5px solid var(--ink-muted);
+}
+
+/* redovi kanala */
+.chan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 4px;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 250ms var(--ease-soft),
+    background-color 250ms var(--ease-soft);
+}
+
+.chan:hover {
+  border-color: var(--accent);
+}
+
+.chanPrimary {
+  background: var(--cta);
+  border-color: var(--cta);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.chanPrimary:hover {
+  background: var(--cta-dark);
+  border-color: var(--cta-dark);
+}
+
+.chanIc {
+  flex: 0 0 20px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.chanSub {
+  display: block;
+  font-size: 11px;
+  opacity: 0.75;
+  font-weight: 400;
+}
+
+.konfLink {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 10px 0 2px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ====== KONFIGURATOR „3 dodira" (#11) ====== */
+.kq {
+  font-family: var(--font-heading);
+  font-weight: 450;
+  font-size: 1.15rem;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  margin: 6px 0 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 6px;
+}
+
+.chip {
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  border-radius: 9999px;
+  padding: 9px 16px;
+  min-height: 40px;
+  font-size: 13.5px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 250ms var(--ease-soft),
+    background-color 250ms var(--ease-soft);
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+.chipSel {
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg));
+  border-color: var(--accent);
+}
+
+.kback {
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 10px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.kback:hover {
+  color: var(--ink);
+}
+
+.kpreview {
+  margin-top: 12px;
+  background: var(--bg2);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--ink);
+  font-style: italic;
+}
+
+.kdots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin: 10px 0 2px;
+}
+
+.kdot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
+}
+
+.kdotOn {
+  background: var(--accent);
+}
+
+/* fokus prsten — oliva, kao .cta-primary:focus-visible */
+.chan:focus-visible,
+.chip:focus-visible,
+.konfLink:focus-visible,
+.kback:focus-visible,
+.close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* mirna varijanta — bez klizanja i fade-a */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet,
+  .chan,
+  .chip {
+    transition: none;
+  }
+}

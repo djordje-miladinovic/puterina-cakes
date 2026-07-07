@@ -1,5 +1,9 @@
+import type { CSSProperties } from "react"
 import Image from "next/image"
-import Link from "next/link"
+// „Torta putuje" (E1c): Link iz next-view-transitions okida
+// document.startViewTransition na klik, pa se slika kartice glatko
+// pretopi u glavnu sliku galerije (isti viewTransitionName po slug-u).
+import { Link } from "next-view-transitions"
 import { formatPrice } from "@/lib/utils"
 import type { CatalogProduct } from "@/lib/products"
 
@@ -23,6 +27,11 @@ export default function ProductCard({ product }: { product: CatalogProduct }) {
           fill
           sizes="(max-width: 860px) 50vw, (max-width: 1280px) 33vw, 390px"
           className="puterina-img object-cover"
+          // „Torta putuje" (E1c) — isto ime nosi glavna slika galerije na
+          // strani proizvoda, pa se slike pretope tokom navigacije.
+          style={
+            { viewTransitionName: `torta-${product.slug}` } as CSSProperties
+          }
         />
       </div>
       {product.seasonal && <div className="sez">✳ {product.seasonal.badge}</div>}

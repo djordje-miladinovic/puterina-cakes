@@ -202,9 +202,6 @@ export default function FaqPage() {
                 Instagram DM
               </a>
             </div>
-            <p className="mt-5 text-[13px] text-ink-muted">
-              {SITE.responseNote}
-            </p>
           </section>
         </Reveal>
       </div>

@@ -25,7 +25,7 @@ export default function OrderStepsSection() {
     <section className="section-block section-cream" aria-labelledby="koraci-naslov">
       <div className="container-site">
         <Reveal className="mb-14">
-          <span className="label mb-4 block">02 — Dogovor</span>
+          <span className="label mb-4 block">Dogovor</span>
           <h2 id="koraci-naslov">Kako do torte u tri koraka</h2>
         </Reveal>
 

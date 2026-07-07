@@ -9,7 +9,7 @@ import { SITE } from "@/lib/constants"
  */
 export default function StoryTeaserSection() {
   return (
-    <section className="section-block section-cream" aria-labelledby="prica-naslov">
+    <section className="section-block section-tint" aria-labelledby="prica-naslov">
       <div className="container-site grid items-center gap-8 md:grid-cols-2 md:gap-16">
         <Reveal>
           <div className="img-frame relative aspect-[4/5]">
@@ -24,7 +24,7 @@ export default function StoryTeaserSection() {
         </Reveal>
 
         <Reveal delay={1}>
-          <span className="label mb-4 block">05 — Priča</span>
+          <span className="label mb-4 block">Priča</span>
           <h2 id="prica-naslov">Ja sam Katarina</h2>
           <p className="body mt-5 max-w-[42ch] text-ink-muted">
             Puterina je nastala u mojoj kuhinji — tortom za najdraže. Danas je

@@ -1,0 +1,48 @@
+/* ProductGallery — stilovi za C2 varijantu (v4-prod-2 mockup)
+   #10b pločica „pogledajte presek" + #22b fade kroz krem.
+   Drži se u modulu da globals.css ostane netaknut. */
+
+/* #10b — diskretna pločica preko donjeg desnog ugla glavne slike */
+.peek {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 7px 12px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-base, 0.3s ease);
+}
+.peek:hover {
+  color: var(--ink);
+}
+.peek:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* #22b — glavna slika: izranjanje 250ms; skrivena bledi u krem za 150ms
+   (kontejner iza je bg2, pa slika „nestaje u krem"). */
+.mainImg {
+  transition: opacity 250ms ease;
+}
+.mainImgHidden {
+  opacity: 0;
+  transition-duration: 150ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peek,
+  .mainImg {
+    transition: none;
+  }
+}

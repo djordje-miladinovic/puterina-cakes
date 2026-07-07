@@ -387,22 +387,56 @@
   transition-delay: 300ms;
 }
 
+/* Reduced-motion DVOSLOJNO (V4 #24b): gasi se sve što se KREĆE
+   (translate/scale/scroll-scrub/view-transitions/visina), ali tihi
+   opacity/color/background prelazi ostaju (dugmad, tlink boja, accordion
+   fade) — sajt miruje, ali ne deluje pokvareno. */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
-    transition: none;
+    transition: opacity 200ms;
   }
   .img-frame:hover img,
   .card-product:hover .ph img {
     transform: none;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  .cta-primary:hover,
+  .cta-small:hover {
+    transform: none;
   }
+  .tlink:hover {
+    animation: none;
+  }
+  .tlink-arrow:hover .ar {
+    transform: none;
+  }
+  /* View Transitions („torta putuje") — bez pokreta */
+  ::view-transition-group(*),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+  /* Accordion (promena visine = kretanje) — skrati */
+  .animate-accordion-down,
+  .animate-accordion-up {
+    animation-duration: 0.01ms;
+  }
+}
+
+/* ============================================
+   VIEW TRANSITIONS — „torta putuje" (V4 E1c)
+   Slika torte iz kartice kataloga glatko doklizi/uveća se u glavnu
+   sliku proizvoda (view-transition-name: torta-<slug> na obe strane);
+   ostatak strane tihi rez (root). Radi u Chromium; ostali graceful.
+   ============================================ */
+::view-transition-group(*) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
 }
 
 /* ============================================
@@ -460,22 +494,35 @@
   background-color: var(--cta-dark);
 }
 
-/* Tekst-link sa oliva podvlakom */
+/* Tekst-link sa oliva podvlakom (V4 #21c — „tiho krene napred"):
+   podvlaka je stalno tu, a na hover se iznova „otiče" sleva nadesno. */
 .tlink {
   display: inline-block;
   color: var(--ink);
   text-decoration: none;
   font-size: 14px;
   letter-spacing: 0.02em;
-  border-bottom: 1px solid var(--accent);
   padding-bottom: 3px;
-  transition: color var(--transition-base), border-color var(--transition-base);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  transition: color var(--transition-base);
 }
 .tlink:hover {
   color: var(--accent);
+  animation: tlinkFlow 350ms var(--ease-soft);
+}
+@keyframes tlinkFlow {
+  from {
+    background-size: 0 1px;
+  }
+  to {
+    background-size: 100% 1px;
+  }
 }
 
-/* Strelica-link (verzalni) */
+/* Strelica-link (verzalni) — strelica u <span class="ar"> klizne 4px udesno */
 .tlink-arrow {
   color: var(--accent);
   text-decoration: none;
@@ -483,10 +530,14 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 500;
-  transition: opacity var(--transition-base);
+  transition: color var(--transition-base);
 }
-.tlink-arrow:hover {
-  opacity: 0.7;
+.tlink-arrow .ar {
+  display: inline-block;
+  transition: transform 250ms var(--ease-soft);
+}
+.tlink-arrow:hover .ar {
+  transform: translateX(4px);
 }
 
 /* Legacy aliasi dugmadi → V3 izgled */

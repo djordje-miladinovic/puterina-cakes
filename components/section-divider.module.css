@@ -1,0 +1,25 @@
+/* SectionDivider (E3c) — 1px espresso linija, iscrtava se od sredine. */
+
+.wrap {
+  display: block;
+}
+
+.line {
+  display: block;
+  height: 1px;
+  background-color: color-mix(in srgb, var(--ink) 13%, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 800ms ease;
+}
+
+.drawn {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    transform: scaleX(1);
+    transition: none;
+  }
+}

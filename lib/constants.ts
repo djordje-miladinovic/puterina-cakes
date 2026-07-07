@@ -51,8 +51,8 @@ export const SITE = {
   brandLine: "Puterina — butik torti · Beograd · Radnim danima 08–20h",
   shortBrand: "Puterina — butik torti, Beograd",
   city: "Beograd",
-  // §12 #15 — FINALNA response linija
-  responseNote: "Obično odgovaram u roku od 2–3 sata (radnim danima).",
+  // NAPOMENA: responseNote („Obično odgovaram…") je uklonjen sa sajta
+  // (Đorđeva odluka 2026-07-06) — ne vraćati bez njegove potvrde.
   // §12 #42/#43 — FINALNO, BEZ zona
   deliveryNote:
     "Dostava na adresu u Beogradu — po dogovoru. Van Beograda: takođe po dogovoru.",

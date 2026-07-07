@@ -14,7 +14,7 @@ export default function InstagramSection() {
       <div className="container-site">
         <Reveal className="mb-14 flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
           <div>
-            <span className="label mb-4 block">07 — Iz ateljea</span>
+            <span className="label mb-4 block">Iz ateljea</span>
             <h2 id="ig-naslov">Sa Instagrama</h2>
           </div>
           <p className="body text-ink-muted">{CONTACT.instagramHandle}</p>

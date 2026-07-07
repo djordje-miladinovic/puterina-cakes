@@ -3,7 +3,8 @@ import Link from "next/link"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import { ProductGallery } from "@/components/product"
-import { CANONICAL_BASE, CONTACT, SITE } from "@/lib/constants"
+import { CANONICAL_BASE, CONTACT } from "@/lib/constants"
+import { getSiteSettings } from "@/lib/site-settings"
 import { formatPrice } from "@/lib/utils"
 import { CATEGORY_LABELS, NO_DECLARATION_NOTE } from "@/lib/products-data"
 import {
@@ -38,7 +39,15 @@ export async function generateMetadata({
       title: product.title,
       description: product.shortDescription,
       url: `${CANONICAL_BASE}/proizvod/${product.slug}`,
-      images: [{ url: `${CANONICAL_BASE}${product.image}` }],
+      // Namenska OG kartica (F2a): fotografija + traka „Puterina · naziv · cena"
+      images: [
+        {
+          url: `${CANONICAL_BASE}/og/${product.slug}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${product.title} — Puterina, butik torti Beograd`,
+        },
+      ],
     },
   }
 }
@@ -102,9 +111,12 @@ function DetailRow({
 }
 
 /**
- * Strana proizvoda V3 (mockup prod-1): levo galerija sa OBAVEZNIM
- * presekom, desno sticky info: label → ime → cena → gosti → dekoracija
- * → CTA Pozovite + poruke → opis → accordion (deklaracija!).
+ * Strana proizvoda V4 — varijanta C2 „Cenovni blok" (mockup v4-prod-2):
+ * levo galerija sa pločicom „pogledajte presek" (#10b) i fade-om kroz
+ * krem (#22b), desno sticky info (#9b): label → ime → podnaslov →
+ * cenovni blok na bg2 (cena + uslovi) → CTA Pozovite → utisci link
+ * (#16b) → poruke (WA/Viber sa imenom torte, #11a) → opis → sezona →
+ * accordion (deklaracija!).
  */
 export default async function ProizvodPage({
   params,
@@ -112,10 +124,29 @@ export default async function ProizvodPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const product = await getProduct(slug)
+  const [product, settings] = await Promise.all([
+    getProduct(slug),
+    getSiteSettings(),
+  ])
   if (!product) notFound()
 
   const dekl = product.declaration
+
+  // #9b — uslovi u cenovnom bloku, jedan sitan red:
+  // „Najmanja porudžbina: 1 kg · Dekoracija se dogovara posebno"
+  const usloviRed = [settings.minOrderNote, settings.decorationNoteShort]
+    .map((t) => t.trim().replace(/\.$/, ""))
+    .join(" · ")
+
+  // #11a — prefilled poruka sa imenom proizvoda (torta samo za torte;
+  // krofnice/kolači već nose vrstu u imenu)
+  const nazivZaPoruku =
+    product.category === "torte" ? `torta ${product.title}` : product.title
+  const poruka = encodeURIComponent(
+    `Zdravo! Zanima me ${nazivZaPoruku} za [datum], za otprilike [broj] gostiju. Hvala!`
+  )
+  const whatsappHref = `https://wa.me/${CONTACT.phone.replace("+", "")}?text=${poruka}`
+  const viberHref = `viber://chat?number=${encodeURIComponent(CONTACT.phone)}&draft=${poruka}`
 
   // „presek" alt SAMO kada je presek zaista posebna slika (Susu linija
   // nema presek — crossSectionImage pokazuje na glavnu fotografiju)
@@ -172,56 +203,76 @@ export default async function ProizvodPage({
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-          {/* Galerija — levo */}
+          {/* Galerija — levo (#10b pločica preseka + #22b fade kroz krem) */}
           <div>
-            <ProductGallery images={galleryImages} productName={product.title} />
+            <ProductGallery
+              images={galleryImages}
+              productName={product.title}
+              slug={product.slug}
+              crossSectionSrc={
+                imaPresek ? product.crossSectionImage : undefined
+              }
+            />
           </div>
 
-          {/* Info — desno, sticky */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          {/* Info — desno, sticky. Data-atributi: čita ih mobilni
+              OrderSheet za prefilled poruku (#11a) */}
+          <div
+            className="lg:sticky lg:top-24 lg:self-start"
+            data-product-title={product.title}
+            data-product-kind={product.category}
+          >
             <span className="label mb-3 block">{label}</span>
             <h1 className="!text-[clamp(2.4rem,5vw,3.6rem)]">{product.title}</h1>
             <p className="mt-2 text-[15px] text-ink-muted">
               {product.shortDescription}
             </p>
 
-            {/* Cena */}
-            <p
-              className="mt-5 text-[1.9rem] leading-tight text-ink"
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontVariationSettings: '"opsz" 60',
-              }}
-            >
-              {product.pricePerKg ? (
-                <>
-                  {formatPrice(product.pricePerKg)}{" "}
-                  <span className="text-[0.7em] text-ink-muted">RSD / kg</span>
-                </>
-              ) : (
-                <span className="italic">{product.priceNote ?? "cena na upit"}</span>
-              )}
-            </p>
-            <p className="mt-1 text-[14px] text-ink-muted">
-              {SITE.minOrderNote}
-            </p>
+            {/* Cenovni blok (#9b) — cena + uslovi na bg2, bez senke */}
+            <div className="mt-6 rounded-[4px] bg-bg2 p-[18px]">
+              <p
+                className="text-[2rem] leading-[1.15] text-ink"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontVariationSettings: '"opsz" 60',
+                }}
+              >
+                {product.pricePerKg ? (
+                  <>
+                    {formatPrice(product.pricePerKg)}{" "}
+                    <span className="text-[0.62em] text-ink-muted">
+                      RSD / kg
+                    </span>
+                  </>
+                ) : (
+                  <span className="italic">
+                    {product.priceNote ?? "cena na upit"}
+                  </span>
+                )}
+              </p>
+              <p className="mt-2 text-[13px] text-ink-muted">{usloviRed}</p>
+            </div>
 
-            <p
-              className="mt-4 max-w-[40ch] text-[14.5px] italic text-ink-muted"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              {SITE.decorationNote}
-            </p>
-
-            {/* CTA par (§12 hijerarhija) */}
-            <div className="mt-7">
+            {/* CTA odmah ispod cenovnog bloka (§12 hijerarhija) */}
+            <div className="mt-[18px]">
               <a href={`tel:${CONTACT.phone}`} className="cta-primary">
                 Pozovite — {CONTACT.phoneDisplay}
               </a>
-              <p className="mt-3.5 text-[13.5px] text-ink-muted">
+
+              {/* #16b — utisci link; strelica u span-u za budući hover */}
+              <p className="mt-4">
+                <Link href="/utisci" className="tlink-arrow">
+                  Šta kažu oni koji su je probali{" "}
+                  <span className="ar" aria-hidden>
+                    →
+                  </span>
+                </Link>
+              </p>
+
+              <p className="mt-4 text-[13.5px] text-ink-muted">
                 ili pišite:{" "}
                 <a
-                  href={CONTACT.whatsapp}
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-oliva hover:opacity-80"
@@ -229,7 +280,7 @@ export default async function ProizvodPage({
                   WhatsApp
                 </a>
                 {" · "}
-                <a href={CONTACT.viber} className="text-oliva hover:opacity-80">
+                <a href={viberHref} className="text-oliva hover:opacity-80">
                   Viber
                 </a>
                 {" · "}
@@ -241,9 +292,6 @@ export default async function ProizvodPage({
                 >
                   Instagram
                 </a>
-              </p>
-              <p className="mt-2 text-[13px] text-ink-muted">
-                {SITE.responseNote}
               </p>
             </div>
 

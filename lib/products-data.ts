@@ -417,11 +417,12 @@ export const PRODUCTS: ProductData[] = [
   },
 
   // ============================================================
-  // KROFNICE (Susu linija — punjene krofnice)
+  // KROFNICE (Šu-šu — punjene krofnice; #14: naslovi usklađeni sa Sanity-jem,
+  // slugovi ostaju "susu-*" — NE menjati)
   // ============================================================
   {
     slug: "susu-pistac-malina",
-    title: "Susu — pistać malina",
+    title: "Šu-šu krofnica — pistać malina",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -439,7 +440,7 @@ export const PRODUCTS: ProductData[] = [
   },
   {
     slug: "susu-pistac",
-    title: "Susu — pistać",
+    title: "Šu-šu krofnica — pistać",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -456,7 +457,7 @@ export const PRODUCTS: ProductData[] = [
   },
   {
     slug: "susu-cokolada",
-    title: "Susu — čokolada",
+    title: "Šu-šu krofnica — čokolada",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -473,7 +474,7 @@ export const PRODUCTS: ProductData[] = [
   },
   {
     slug: "susu-coko-malina",
-    title: "Susu — čoko malina",
+    title: "Šu-šu krofnica — čoko malina",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -490,7 +491,7 @@ export const PRODUCTS: ProductData[] = [
   },
   {
     slug: "susu-lesnik",
-    title: "Susu — lešnik",
+    title: "Šu-šu krofnica — lešnik",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -507,7 +508,7 @@ export const PRODUCTS: ProductData[] = [
   },
   {
     slug: "susu-vanila",
-    title: "Susu — vanila",
+    title: "Šu-šu krofnica — vanila",
     category: "krofnice",
     isSignature: false,
     pricePerKg: null,
@@ -535,9 +536,9 @@ export function getProductBySlug(slug: string): ProductData | undefined {
 }
 
 /** Generička izjava za proizvode bez pune deklaracije — NE tvrdi konkretne
- *  alergene; upućuje na upit. Formulacija čeka Katarininu potvrdu. */
+ *  alergene; upućuje na upit. Formulacija #33b — POTVRĐENA (topla verzija). */
 export const NO_DECLARATION_NOTE =
-  "Puna deklaracija (sastojci, alergeni, nutritivne vrednosti) dostupna je na upit. U radionici se koriste gluten, jaja, mleko, soja i orašasti plodovi."
+  "Punu deklaraciju (sastojci, alergeni, nutritivne vrednosti) Vam rado pošaljem — samo pitajte kad se čujemo. U mojoj radionici koriste se gluten, jaja, mleko, soja i orašasti plodovi."
 
 // ============================================================
 // UTISCI — SAMO pravi citati (izvor: IG ekosistem, PANEL analiza).
@@ -579,5 +580,5 @@ export const INSTAGRAM_PICKS: InstagramPick[] = [
   { image: "/images/site/til-u-letu.jpg", alt: "Torta sa tilom u pokretu — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
   { image: "/images/site/roze-karanfil.jpg", alt: "Torta sa roze karanfilom — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
   { image: "/images/site/dvostruki-presek.jpg", alt: "Presek dve torte, dva ukusa — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/krofnice-hero.jpg", alt: "Susu krofnice na čašama — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
+  { image: "/images/site/krofnice-hero.jpg", alt: "Šu-šu krofnice na čašama — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
 ]

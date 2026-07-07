@@ -1,12 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Caveat } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import StickyButtons from "@/components/sticky-buttons";
-import JsonLd from "@/components/json-ld";
 import { CANONICAL_BASE } from "@/lib/constants";
-import { SanityLive } from "@/lib/sanity";
 
 const fraunces = Fraunces({
   subsets: ["latin", "latin-ext"],
@@ -66,9 +62,9 @@ export const metadata: Metadata = {
       "Butik torti, Beograd. Pravi puter, bez fondana. Poručivanje porukom ili pozivom.",
     images: [
       {
-        url: "/images/site/hero.jpg",
-        width: 1600,
-        height: 2400,
+        url: "/og-home.jpg",
+        width: 1200,
+        height: 630,
         alt: "Puterina — butik torti, Beograd",
       },
     ],
@@ -101,18 +97,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="sr"
-      className={`${fraunces.variable} ${inter.variable} ${caveat.variable}`}
-    >
-      <body className="antialiased flex min-h-screen flex-col">
-        <JsonLd />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <StickyButtons />
-        <SanityLive />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="sr"
+        className={`${fraunces.variable} ${inter.variable} ${caveat.variable}`}
+      >
+        {/* Sajt-školjka (Header/Footer/JsonLd/Sticky) živi u app/(site)/layout.tsx
+            — root je minimalan da /studio ostane čist (V4 #37a).
+            ViewTransitions provider (next-view-transitions) omogućava
+            „torta putuje" prelaz katalog → proizvod (E1c). */}
+        <body className="antialiased flex min-h-screen flex-col">
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

@@ -43,9 +43,6 @@ export default function KontaktPage() {
               <Phone className="h-4 w-4" aria-hidden />
               Pozovite
             </a>
-            <p className="mt-3 text-[13px] text-ink-muted">
-              {SITE.responseNote}
-            </p>
           </Reveal>
 
           {/* Poruke — sekundarno (§12 hijerarhija) */}

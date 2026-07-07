@@ -6,7 +6,8 @@ import Reveal from "@/components/reveal"
 /**
  * Full-bleed hero (mockup v6-1): prava fotografija preko celog ekrana,
  * svetli krem scrim pri dnu (bez tamnih preliva), sadržaj dole-levo:
- * label → slogan → CTA par → response linija.
+ * label → slogan (italic „dušom") → CTA par. Response linija je UKLONJENA
+ * (Đorđeva odluka 2026-07-06) — ne vraćati je.
  */
 export default function HeroSection() {
   return (
@@ -40,7 +41,7 @@ export default function HeroSection() {
         </Reveal>
         <Reveal delay={1}>
           <h1 className="display-hero max-w-[15ch]">
-            Torte sa dušom
+            Torte sa <em>dušom</em>
             <br />i puterom.
           </h1>
         </Reveal>
@@ -53,9 +54,6 @@ export default function HeroSection() {
               Pogledajte ukuse
             </Link>
           </div>
-          <p className="mt-5 text-[13px] tracking-[0.01em] text-ink-muted">
-            {SITE.responseNote}
-          </p>
         </Reveal>
       </div>
     </section>

@@ -112,7 +112,6 @@ export default function OMeniPage() {
                 Pošaljite poruku
               </Link>
             </div>
-            <p className="mt-5 text-[13px] text-ink-muted">{SITE.responseNote}</p>
           </Reveal>
         </div>
       </section>

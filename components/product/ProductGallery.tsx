@@ -1,10 +1,16 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
+import {
+  useState,
+  useCallback,
+  useEffect,
+  type CSSProperties,
+} from "react"
 import Image from "next/image"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import styles from "./ProductGallery.module.css"
 
 export interface GalleryImage {
   src: string
@@ -14,19 +20,64 @@ export interface GalleryImage {
 interface ProductGalleryProps {
   images: GalleryImage[]
   productName: string
+  /** Slug proizvoda — za view-transition ime („torta putuje", E1c). */
+  slug: string
+  /**
+   * Putanja slike preseka — prosleđuje se SAMO kada je presek zaista
+   * posebna fotografija (crossSection !== image). Uključuje pločicu
+   * „pogledajte presek" preko donjeg desnog ugla glavne slike (#10b).
+   */
+  crossSectionSrc?: string
 }
 
 /**
- * Galerija proizvoda V3 (mockup prod-1): glavna slika 4:5 + red
- * kvadratnih thumbova. Borderless — aktivni thumb se izdvaja
- * opacity-jem, ne okvirom. Klik na glavnu otvara lightbox.
+ * Galerija proizvoda V4 — C2 „Cenovni blok" (mockup v4-prod-2):
+ * glavna slika 4:5 + red kvadratnih thumbova (opacity sistem, bez okvira).
+ * #10b: pločica „pogledajte presek →" preko donjeg desnog ugla — vidi se
+ * samo kad presek postoji i NIJE trenutno prikazan; klik prebacuje sliku.
+ * #22b: promena glavne slike = fade kroz krem (stara izbledi u bg2 za
+ * 150 ms, nova izroni za 250 ms); reduced-motion = trenutna promena.
+ * Klik na glavnu sliku otvara lightbox (strelice + Escape rade).
  */
 export default function ProductGallery({
   images,
   productName,
+  slug,
+  crossSectionSrc,
 }: ProductGalleryProps) {
+  // selectedIndex = ciljna slika (thumb/peek/lightbox); displayedIndex =
+  // slika trenutno u glavnom okviru (kasni 150 ms tokom fade-a kroz krem)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [displayedIndex, setDisplayedIndex] = useState(0)
+  const [mainVisible, setMainVisible] = useState(true)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+
+  // #22b faza 1: kad se izbor promeni — izbledi staru u krem (150 ms),
+  // pa tek onda zameni sliku. Reduced-motion: zameni odmah.
+  useEffect(() => {
+    if (selectedIndex === displayedIndex) return
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduce) {
+      setDisplayedIndex(selectedIndex)
+      setMainVisible(true)
+      return
+    }
+    setMainVisible(false)
+    const t = setTimeout(() => setDisplayedIndex(selectedIndex), 150)
+    return () => clearTimeout(t)
+  }, [selectedIndex, displayedIndex])
+
+  // #22b faza 2: nova slika je u DOM-u sa opacity 0 — pusti frame da se
+  // primeni, pa je izroni (250 ms kroz .mainImg tranziciju)
+  useEffect(() => {
+    if (mainVisible || displayedIndex !== selectedIndex) return
+    const raf = requestAnimationFrame(() =>
+      requestAnimationFrame(() => setMainVisible(true))
+    )
+    return () => cancelAnimationFrame(raf)
+  }, [mainVisible, displayedIndex, selectedIndex])
 
   // Navigacija strelicama po thumbovima
   const handleKeyDown = useCallback(
@@ -71,7 +122,16 @@ export default function ProductGallery({
     )
   }
 
+  // Lightbox prati izbor odmah; glavni okvir prati displayedIndex (fade)
   const selectedImage = images[selectedIndex]
+  const mainImage = images[displayedIndex]
+
+  // #10b: indeks preseka među slikama; pločica se vidi samo kad presek
+  // postoji i nije trenutno izabran
+  const crossIndex = crossSectionSrc
+    ? images.findIndex((img) => img.src === crossSectionSrc)
+    : -1
+  const showPeek = crossIndex >= 0 && selectedIndex !== crossIndex
 
   const goToPrevious = () => {
     if (selectedIndex > 0) setSelectedIndex(selectedIndex - 1)
@@ -84,21 +144,42 @@ export default function ProductGallery({
   return (
     <>
       <div>
-        {/* Glavna slika — 4:5, borderless, cursor zoom */}
-        <button
-          onClick={() => setLightboxOpen(true)}
-          className="img-soft relative block aspect-[4/5] w-full cursor-zoom-in overflow-hidden bg-bg2"
-          aria-label="Uvećajte sliku"
+        {/* Glavna slika — 4:5, bg2 iza (krem „provaljuje" tokom fade-a).
+            viewTransitionName: priprema za „torta putuje" (E1c, talas 2) */}
+        <div
+          className="img-soft relative aspect-[4/5] w-full overflow-hidden bg-bg2"
+          style={{ viewTransitionName: `torta-${slug}` } as CSSProperties}
         >
-          <Image
-            src={selectedImage.src}
-            alt={selectedImage.alt || productName}
-            fill
-            className="puterina-img object-cover"
-            sizes="(max-width: 1024px) 100vw, min(55vw, 680px)"
-            priority
-          />
-        </button>
+          <button
+            onClick={() => setLightboxOpen(true)}
+            className="absolute inset-0 block h-full w-full cursor-zoom-in"
+            aria-label="Uvećajte sliku"
+          >
+            <Image
+              src={mainImage.src}
+              alt={mainImage.alt || productName}
+              fill
+              className={cn(
+                "puterina-img object-cover",
+                styles.mainImg,
+                !mainVisible && styles.mainImgHidden
+              )}
+              sizes="(max-width: 1024px) 100vw, min(55vw, 680px)"
+              priority
+            />
+          </button>
+
+          {/* #10b — pločica „pogledajte presek" preko donjeg desnog ugla */}
+          {showPeek && (
+            <button
+              type="button"
+              className={styles.peek}
+              onClick={() => setSelectedIndex(crossIndex)}
+            >
+              pogledajte presek <span aria-hidden>→</span>
+            </button>
+          )}
+        </div>
 
         {/* Thumbovi — kvadrati, opacity aktivni sistem (prod-1) */}
         {images.length > 1 && (

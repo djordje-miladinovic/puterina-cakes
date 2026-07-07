@@ -34,7 +34,7 @@ export default function SignatureSection({
     >
       <div className="container-site">
         <Reveal className="mb-14">
-          <span className="label mb-4 block">01 — Potpis</span>
+          <span className="label mb-4 block">Potpis</span>
           <h2 id="signature-naslov">Ukusi po kojima me pamte</h2>
         </Reveal>
 
@@ -98,7 +98,7 @@ export default function SignatureSection({
 
         <Reveal className="mt-16 text-center md:mt-20">
           <Link href="/katalog" className="tlink-arrow">
-            Ceo katalog →
+            Ceo katalog <span className="ar" aria-hidden>→</span>
           </Link>
         </Reveal>
       </div>
