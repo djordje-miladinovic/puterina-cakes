@@ -104,11 +104,21 @@ export default function OMeniPage() {
         <div className="container-narrow">
           <Reveal>
             <h2>Hajde da napravimo Vašu tortu.</h2>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-7">
-              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+            <div className="mt-9 flex flex-col items-center gap-6 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-7">
+              {/* Mobilni: outline — malina nosi samo sticky „Poručite" */}
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-outline w-full max-w-[22rem] sm:hidden"
+              >
                 Pozovite — {CONTACT.phoneDisplay}
               </a>
-              <Link href="/kontakt" className="tlink">
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-primary hidden sm:inline-flex"
+              >
+                Pozovite — {CONTACT.phoneDisplay}
+              </a>
+              <Link href="/kontakt" className="tlink tlink-tap">
                 Pošaljite poruku
               </Link>
             </div>

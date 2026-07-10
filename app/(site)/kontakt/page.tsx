@@ -39,7 +39,12 @@ export default function KontaktPage() {
             <p className="body-large mt-3 text-ink-muted">
               {WORKING_HOURS.display}
             </p>
-            <a href={`tel:${CONTACT.phone}`} className="cta-primary mt-7">
+            {/* Mobilni: broj iznad je već ogroman tap-target, a malina nosi
+                sticky „Poručite" — dugme se prikazuje tek od sm naviše */}
+            <a
+              href={`tel:${CONTACT.phone}`}
+              className="cta-primary mt-7 hidden sm:inline-flex"
+            >
               <Phone className="h-4 w-4" aria-hidden />
               Pozovite
             </a>

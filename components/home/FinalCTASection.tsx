@@ -9,7 +9,7 @@ import { CONTACT, SITE, WORKING_HOURS } from "@/lib/constants"
 export default function FinalCTASection() {
   return (
     <section
-      className="section-tint py-28 text-center md:py-36"
+      className="section-tint py-20 text-center md:py-36"
       aria-labelledby="cta-naslov"
     >
       <div className="container-narrow">
@@ -26,11 +26,22 @@ export default function FinalCTASection() {
         </Reveal>
 
         <Reveal delay={1}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-7">
-            <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+          <div className="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-7">
+            {/* Mobilni: outline varijanta — malina je rezervisana za sticky
+                „Poručite" (jedno malina dugme po ekranu). Desktop: malina. */}
+            <a
+              href={`tel:${CONTACT.phone}`}
+              className="cta-outline w-full max-w-[22rem] sm:hidden"
+            >
               Pozovite — {CONTACT.phoneDisplay}
             </a>
-            <Link href="/kontakt" className="tlink">
+            <a
+              href={`tel:${CONTACT.phone}`}
+              className="cta-primary hidden sm:inline-flex"
+            >
+              Pozovite — {CONTACT.phoneDisplay}
+            </a>
+            <Link href="/kontakt" className="tlink tlink-tap">
               Pošaljite poruku
             </Link>
           </div>

@@ -202,7 +202,9 @@
 .display-hero {
   font-family: var(--font-heading);
   font-weight: 450;
-  font-size: clamp(3.2rem, 8vw, 7rem);
+  /* Mobilni min spušten (3.2rem → 2.75rem): na 390px naslov ne guta
+     trećinu ekrana; desktop maksimum nepromenjen. */
+  font-size: clamp(2.75rem, 7.5vw + 1rem, 7rem);
   line-height: 1;
   letter-spacing: -0.015em;
   font-variation-settings: "opsz" 144;
@@ -442,7 +444,14 @@
 /* ============================================
    CTA SISTEM V3 — malina, pravougaono (2px),
    plus tekst-linkovi sa oliva podvlakom
+
+   VAŽNO: ceo blok je u @layer components. Tailwind v4 drži utility
+   klase u @layer utilities, a NELAYEROVANI CSS pobeđuje svaki layer —
+   zato `hidden`/`sm:hidden` na .cta-* ranije NISU radili (bug „3 ista
+   dugmeta na mobilnom", 2026-07-10). U components layeru responsive
+   utility klase ispravno nadjačavaju dugmad.
    ============================================ */
+@layer components {
 .cta-primary {
   display: inline-flex;
   align-items: center;
@@ -513,6 +522,14 @@
   color: var(--accent);
   animation: tlinkFlow 350ms var(--ease-soft);
 }
+
+/* Veći dodirni cilj za tlink (WCAG 44px) — vertikalni padding, a podvlaka
+   ostaje priljubljena uz tekst (background-position kompenzuje padding). */
+.tlink-tap {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-position: 0 calc(100% - 9px);
+}
 @keyframes tlinkFlow {
   from {
     background-size: 0 1px;
@@ -578,27 +595,43 @@
 .cta-ghost:hover {
   background-color: color-mix(in srgb, var(--ink) 8%, transparent);
 }
+} /* kraj @layer components (CTA sistem) */
 
 /* ============================================
    KATALOG — filter traka + borderless kartice
    (mockups/_katalog_template.html)
    ============================================ */
 .filter-bar {
-  padding: 22px 0 30px;
+  padding: 16px 0 20px;
   border-top: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
   position: sticky;
-  top: 64px;
+  /* Mobilni header = 72px (py-2 + h-14) → 71px da nema proreza;
+     desktop override u FilterBar (md:top-20 = 80px header) */
+  top: 71px;
   background: color-mix(in srgb, var(--bg) 96%, transparent);
   backdrop-filter: blur(6px);
   z-index: 40;
 }
 
+@media (min-width: 768px) {
+  .filter-bar {
+    padding: 22px 0 30px;
+  }
+}
+
 .filter-vrsta {
   display: flex;
-  gap: 30px;
-  margin-bottom: 18px;
+  gap: 22px;
+  /* bez chips reda ispod — samo prostor za malina podvlaku aktivne vrste */
+  margin-bottom: 2px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .filter-vrsta {
+    gap: 30px;
+  }
 }
 .filter-vrsta a,
 .filter-vrsta button {

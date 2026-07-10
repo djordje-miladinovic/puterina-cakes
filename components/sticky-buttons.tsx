@@ -25,17 +25,20 @@ export default function StickyButtons() {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 z-40 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden pointer-events-none">
-        <button
-          ref={triggerRef}
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-haspopup="dialog"
-          aria-expanded={open}
-          className="cta-primary pointer-events-auto w-full"
-        >
-          Poručite
-        </button>
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 sm:hidden">
+        {/* Blagi krem gradijent iza dugmeta — da ne „lebdi" preko sadržaja */}
+        <div className="bg-gradient-to-t from-bg via-bg/70 to-transparent px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-7">
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            className="cta-primary pointer-events-auto w-full"
+          >
+            Poručite
+          </button>
+        </div>
       </div>
 
       <OrderSheet open={open} onClose={close} />

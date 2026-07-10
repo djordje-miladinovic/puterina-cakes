@@ -25,17 +25,20 @@ export default function HeroSection() {
         className="puterina-img object-cover"
         style={{ objectPosition: "var(--hero-pos)" }}
       />
-      {/* Svetli scrim pri dnu — čitljivost bez tamnog gradijenta (v6-1) */}
+      {/* Svetli scrim pri dnu — čitljivost bez tamnog gradijenta (v6-1);
+          na mobilnom jači i viši (label + naslov preko fotografije) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, color-mix(in srgb, var(--bg) 78%, transparent) 0%, transparent 42%)",
+            "linear-gradient(to top, color-mix(in srgb, var(--bg) 84%, transparent) 0%, transparent 52%)",
         }}
         aria-hidden
       />
 
-      <div className="container-site relative w-full pb-[9vh]">
+      {/* pb-28 na mobilnom: prostor za sticky „Poručite" traku (ne sme
+          da prekrije hero linkove); od sm naviše mockup ritam 9vh */}
+      <div className="container-site relative w-full pb-28 sm:pb-[9vh]">
         <Reveal>
           <span className="label mb-5 block">{SITE.heroEyebrow}</span>
         </Reveal>
@@ -46,11 +49,17 @@ export default function HeroSection() {
           </h1>
         </Reveal>
         <Reveal delay={2}>
-          <div className="mt-9 flex flex-wrap items-center gap-7">
-            <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+          <div className="mt-7 flex flex-wrap items-center gap-7 sm:mt-9">
+            {/* CTA hijerarhija na mobilnom: JEDNO malina dugme po ekranu —
+                sticky „Poručite" pri dnu. Zato je hero malina CTA sakriven
+                ispod sm, a ostaje samo tihi link ka ukusima. */}
+            <a
+              href={`tel:${CONTACT.phone}`}
+              className="cta-primary hidden sm:inline-flex"
+            >
               Poručite tortu
             </a>
-            <Link href="/katalog" className="tlink">
+            <Link href="/katalog" className="tlink tlink-tap">
               Pogledajte ukuse
             </Link>
           </div>

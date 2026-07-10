@@ -8,7 +8,7 @@ import { SITE } from "@/lib/constants"
 export default function ManifestSection() {
   return (
     <section
-      className="py-24 text-center md:py-32"
+      className="py-16 text-center md:py-32"
       aria-label="Puterina manifest"
     >
       <div className="container-narrow">

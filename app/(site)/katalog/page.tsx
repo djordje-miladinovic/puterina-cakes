@@ -18,9 +18,10 @@ export const revalidate = 60
 const VALID_VRSTE: Category[] = ["torte", "kolaci", "krofnice"]
 
 /**
- * Katalog V3: jedan filter po vrsti (Sve · Torte · Kolači · Krofnice) —
+ * Katalog V3: jedan filter po vrsti (Torte · Kolači · Krofnice) —
  * server-side preko searchParams, filteri su linkovi (rade bez JS, svaka
- * vrsta ima URL). Borderless kartice.
+ * vrsta ima URL). Bez „Sve": /katalog se uvek otvara na tortama
+ * (odluka 2026-07-10). Borderless kartice.
  */
 export default async function KatalogPage({
   searchParams,
@@ -28,21 +29,19 @@ export default async function KatalogPage({
   searchParams: Promise<{ vrsta?: string }>
 }) {
   const params = await searchParams
-  const vrsta = VALID_VRSTE.includes(params.vrsta as Category)
+  const vrsta: Category = VALID_VRSTE.includes(params.vrsta as Category)
     ? (params.vrsta as Category)
-    : undefined
+    : "torte"
 
   const products = await getAllProducts()
-  const shown = vrsta
-    ? products.filter((p) => p.category === vrsta)
-    : products
+  const shown = products.filter((p) => p.category === vrsta)
 
   const prikazujeKolace = shown.some((p) => p.category === "kolaci")
 
   return (
-    <div className="section-cream min-h-screen pb-24 pt-28 md:pb-32 md:pt-32">
+    <div className="section-cream min-h-screen pb-24 pt-24 md:pb-32 md:pt-32">
       {/* Naslov strane */}
-      <div className="container-site pb-8 pt-8 md:pt-12">
+      <div className="container-site pb-8 pt-4 md:pt-12">
         <Reveal>
           <span className="label mb-4 block">Katalog</span>
           <h1>
@@ -87,8 +86,8 @@ export default async function KatalogPage({
               </Link>
               , možda baš to umem da napravim.
             </p>
-            <Link href="/katalog" className="tlink mt-6 inline-block">
-              prikaži sve
+            <Link href="/katalog" className="tlink tlink-tap mt-4 inline-block">
+              pogledajte torte
             </Link>
           </div>
         )}

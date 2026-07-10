@@ -56,7 +56,8 @@ export default function Header() {
             : undefined
         }
       >
-        <div className="container-site flex h-16 items-center justify-between gap-4">
+        {/* Mobilni header niži (72px ukupno) — više fotografije na ekranu */}
+        <div className="container-site flex h-14 items-center justify-between gap-4 md:h-16">
           <Link
             href="/"
             aria-label="Puterina — početna strana"

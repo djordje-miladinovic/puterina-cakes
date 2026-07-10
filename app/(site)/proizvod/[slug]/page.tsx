@@ -3,6 +3,7 @@ import Link from "next/link"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import { ProductGallery } from "@/components/product"
+import { buildFilterHref } from "@/components/catalog/FilterBar"
 import { CANONICAL_BASE, CONTACT } from "@/lib/constants"
 import { getSiteSettings } from "@/lib/site-settings"
 import { formatPrice } from "@/lib/utils"
@@ -193,7 +194,7 @@ export default async function ProizvodPage({
           </Link>
           <span aria-hidden> / </span>
           <Link
-            href={`/katalog?vrsta=${product.category}`}
+            href={buildFilterHref(product.category)}
             className="hover:text-ink"
           >
             {CATEGORY_LABELS[product.category]}
@@ -253,9 +254,20 @@ export default async function ProizvodPage({
               <p className="mt-2 text-[13px] text-ink-muted">{usloviRed}</p>
             </div>
 
-            {/* CTA odmah ispod cenovnog bloka (§12 hijerarhija) */}
+            {/* CTA odmah ispod cenovnog bloka (§12 hijerarhija).
+                Mobilni: outline — malina nosi samo sticky „Poručite"
+                (jedno malina dugme po ekranu). Desktop: malina. */}
             <div className="mt-[18px]">
-              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-outline w-full sm:hidden"
+              >
+                Pozovite — {CONTACT.phoneDisplay}
+              </a>
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-primary hidden sm:inline-flex"
+              >
                 Pozovite — {CONTACT.phoneDisplay}
               </a>
 

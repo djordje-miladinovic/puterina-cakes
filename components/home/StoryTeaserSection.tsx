@@ -35,7 +35,7 @@ export default function StoryTeaserSection() {
             frižideru. Prečica nema.
           </p>
           <div className="mt-7 flex flex-col items-start gap-6">
-            <Link href="/o-meni" className="tlink">
+            <Link href="/o-meni" className="tlink tlink-tap">
               Moja priča
             </Link>
             <span className="accent-script" aria-hidden>

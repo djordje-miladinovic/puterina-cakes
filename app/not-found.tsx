@@ -18,7 +18,11 @@ export default function NotFound() {
         Ova stranica se istopila kao puter.
       </h1>
       <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-        <Link href="/" className="cta-primary">
+        {/* Mobilni: outline — malina nosi samo sticky „Poručite" */}
+        <Link href="/" className="cta-outline sm:hidden">
+          Nazad na početnu
+        </Link>
+        <Link href="/" className="cta-primary hidden sm:inline-flex">
           Nazad na početnu
         </Link>
         <Link href="/katalog" className="cta-outline">

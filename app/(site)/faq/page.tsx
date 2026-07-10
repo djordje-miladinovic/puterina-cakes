@@ -188,7 +188,18 @@ export default function FaqPage() {
           <section className="mt-20 text-center">
             <h2>Niste pronašli odgovor?</h2>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <a href={`tel:${CONTACT.phone}`} className="cta-primary">
+              {/* Mobilni: outline — malina nosi samo sticky „Poručite" */}
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-outline sm:hidden"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                Pozovite
+              </a>
+              <a
+                href={`tel:${CONTACT.phone}`}
+                className="cta-primary hidden sm:inline-flex"
+              >
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 Pozovite
               </a>

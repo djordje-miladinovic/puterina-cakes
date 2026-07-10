@@ -85,7 +85,7 @@ export default function SignatureSection({
                     )}
                     <Link
                       href={`/proizvod/${product.slug}`}
-                      className="tlink mt-6 inline-block"
+                      className="tlink tlink-tap mt-3 inline-block"
                     >
                       Pogledajte presek
                     </Link>
