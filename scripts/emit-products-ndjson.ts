@@ -1,7 +1,9 @@
 /**
  * Emituje NDJSON pravih proizvoda iz lib/products-data.ts za uvoz u Sanity.
  * Pokretanje:  npx tsx scripts/emit-products-ndjson.ts <izlazni-fajl.ndjson>
- * Zatim:       npx sanity documents create <izlazni-fajl.ndjson> --replace
+ * Zatim:       npx sanity dataset import <izlazni-fajl.ndjson> production --replace
+ *              (NDJSON ide kroz `dataset import`, NE `documents create` —
+ *              ovaj drugi očekuje jedan JSON dokument i pada na 2. liniji)
  *
  * Slike ostaju putanje u /public (imagePath/crossSectionPath/gallery).
  * Deterministički _id (`product-<slug>`) → ponovno pokretanje je idempotentno.

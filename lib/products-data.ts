@@ -5,8 +5,13 @@
 //    potvrđeno Katarininom sveskom #8) — cene se retko menjaju
 //  · deklaracije: C:/Puterina/Deklaracije.txt (pravopis očišćen,
 //    sadržaj sastojaka/alergena NETAKNUT — autor: Katarina)
-//  · slike: kanonsko pravilo — sortirani folderi → galerija
-//    proizvoda; loose root → landing/ostale strane
+//  · slike: IZVOR = C:/Puterina/Slike nove - sortirane (2026-07-10);
+//    redosled u folderu (po datumu snimanja) = redosled galerije;
+//    1. slika = glavna (i na katalog strani); folder LEPE ZA SAJT →
+//    naslovna; pulovi „Puterina torte"/„Krofnice" → ostalo.
+//    Folderi KROFNICE 1–6 = redosled krofnica u katalogu (potvrdio
+//    Đorđe 2026-07-10): pistać malina, lešnik, pistać, vanila,
+//    čoko malina, čokolada.
 //  · opisi: napisani u Katarininom glasu (V3-COPY voice bible;
 //    njena IG imena torti su gotov copy — ne prevoditi u generičko)
 // NAPOMENA: proizvodi BEZ deklaracije (declaration: null) prikazuju
@@ -115,7 +120,7 @@ export const PRODUCTS: ProductData[] = [
     ],
     image: img("pistac-malina", 1),
     crossSectionImage: img("pistac-malina", 2),
-    gallery: gal("pistac-malina", 5),
+    gallery: gal("pistac-malina", 2),
     declaration: {
       officialName: "Pistać nežnica",
       sastojci:
@@ -152,7 +157,7 @@ export const PRODUCTS: ProductData[] = [
     ingredientsShort: "kokos, Burbon vanila, malina, puter, bela čokolada",
     image: img("kokos-vanila-malina", 1),
     crossSectionImage: img("kokos-vanila-malina", 2),
-    gallery: gal("kokos-vanila-malina", 4),
+    gallery: gal("kokos-vanila-malina", 2),
     declaration: null,
   },
   {
@@ -172,7 +177,7 @@ export const PRODUCTS: ProductData[] = [
     ],
     image: img("lesnik-grli-cokoladu-i-malinu", 1),
     crossSectionImage: img("lesnik-grli-cokoladu-i-malinu", 2),
-    gallery: gal("lesnik-grli-cokoladu-i-malinu", 5),
+    gallery: gal("lesnik-grli-cokoladu-i-malinu", 2),
     declaration: {
       officialName: "Lešnik grli čokoladu i malinu",
       sastojci:
@@ -208,7 +213,7 @@ export const PRODUCTS: ProductData[] = [
     ],
     image: img("lesnikova-pralina-sa-malinom", 1),
     crossSectionImage: img("lesnikova-pralina-sa-malinom", 2),
-    gallery: gal("lesnikova-pralina-sa-malinom", 5),
+    gallery: gal("lesnikova-pralina-sa-malinom", 2),
     declaration: {
       officialName: "Đanduja-malina",
       sastojci:
@@ -279,7 +284,7 @@ export const PRODUCTS: ProductData[] = [
     ingredientsShort: "crna čokolada, kakao, sveže jagode, puter, slatka pavlaka",
     image: img("cokoladna-jagoda", 1),
     crossSectionImage: img("cokoladna-jagoda", 2),
-    gallery: gal("cokoladna-jagoda", 5),
+    gallery: gal("cokoladna-jagoda", 2),
     declaration: null,
   },
   {
@@ -304,7 +309,7 @@ export const PRODUCTS: ProductData[] = [
     ],
     image: img("letnja-torta", 1),
     crossSectionImage: img("letnja-torta", 2),
-    gallery: gal("letnja-torta", 3),
+    gallery: gal("letnja-torta", 2),
     declaration: {
       officialName: "Letnja torta",
       sastojci:
@@ -375,8 +380,8 @@ export const PRODUCTS: ProductData[] = [
     layers: ["hrskavo testo", "limun krem"],
     ingredientsShort: "limun, puter, jaja, brašno, šećer",
     image: img("limun-tart", 1),
-    crossSectionImage: img("limun-tart", 2),
-    gallery: gal("limun-tart", 4),
+    crossSectionImage: img("limun-tart", 3),
+    gallery: gal("limun-tart", 3),
     declaration: null,
   },
   {
@@ -394,7 +399,7 @@ export const PRODUCTS: ProductData[] = [
     ingredientsShort: "tamna čokolada, karamela, so, puter, slatka pavlaka",
     image: img("tart-cokolada-slana-karamela", 1),
     crossSectionImage: img("tart-cokolada-slana-karamela", 2),
-    gallery: gal("tart-cokolada-slana-karamela", 4),
+    gallery: gal("tart-cokolada-slana-karamela", 3),
     declaration: null,
   },
   {
@@ -419,6 +424,8 @@ export const PRODUCTS: ProductData[] = [
   // ============================================================
   // KROFNICE (Šu-šu — punjene krofnice; #14: naslovi usklađeni sa Sanity-jem,
   // slugovi ostaju "susu-*" — NE menjati)
+  // Redosled = folderi KROFNICE 1–6 (Đorđe, 2026-07-10).
+  // Slika 3 u svakoj galeriji = presek (celo + presečeno na dasci).
   // ============================================================
   {
     slug: "susu-pistac-malina",
@@ -434,59 +441,8 @@ export const PRODUCTS: ProductData[] = [
     layers: ["krofnica", "pistać krem", "malina fil"],
     ingredientsShort: "pistać, malina, puter, brašno, jaja",
     image: img("susu-pistac-malina", 1),
-    crossSectionImage: img("susu-pistac-malina", 1),
+    crossSectionImage: img("susu-pistac-malina", 3),
     gallery: gal("susu-pistac-malina", 3),
-    declaration: null,
-  },
-  {
-    slug: "susu-pistac",
-    title: "Šu-šu krofnica — pistać",
-    category: "krofnice",
-    isSignature: false,
-    pricePerKg: null,
-    priceNote: "cena na upit",
-    flavors: ["orasasto"],
-    shortDescription: "Krofnica punjena kremom od pistaća.",
-    description: "Za one kojima je pistać dovoljan sam sebi — bez ometanja.",
-    layers: ["krofnica", "krem od pistaća"],
-    ingredientsShort: "pistać, puter, brašno, jaja, mleko",
-    image: img("susu-pistac", 1),
-    crossSectionImage: img("susu-pistac", 1),
-    gallery: gal("susu-pistac", 3),
-    declaration: null,
-  },
-  {
-    slug: "susu-cokolada",
-    title: "Šu-šu krofnica — čokolada",
-    category: "krofnice",
-    isSignature: false,
-    pricePerKg: null,
-    priceNote: "cena na upit",
-    flavors: ["cokolada"],
-    shortDescription: "Krofnica punjena čokoladnim kremom.",
-    description: "Klasik koji ne pita za povod: topao čokoladni krem u mekoj krofnici.",
-    layers: ["krofnica", "čokoladni krem"],
-    ingredientsShort: "čokolada, puter, brašno, jaja, mleko",
-    image: img("susu-cokolada", 1),
-    crossSectionImage: img("susu-cokolada", 1),
-    gallery: gal("susu-cokolada", 3),
-    declaration: null,
-  },
-  {
-    slug: "susu-coko-malina",
-    title: "Šu-šu krofnica — čoko malina",
-    category: "krofnice",
-    isSignature: false,
-    pricePerKg: null,
-    priceNote: "cena na upit",
-    flavors: ["cokolada", "voce"],
-    shortDescription: "Krofnica punjena čokoladom i malinom.",
-    description: "Čokolada i malina — par koji nikad nije pogrešio. Ni u krofnici.",
-    layers: ["krofnica", "čokoladni krem", "malina fil"],
-    ingredientsShort: "čokolada, malina, puter, brašno, jaja",
-    image: img("susu-coko-malina", 1),
-    crossSectionImage: img("susu-coko-malina", 1),
-    gallery: gal("susu-coko-malina", 3),
     declaration: null,
   },
   {
@@ -502,8 +458,25 @@ export const PRODUCTS: ProductData[] = [
     layers: ["krofnica", "lešnik krem"],
     ingredientsShort: "lešnik, čokolada, puter, brašno, jaja",
     image: img("susu-lesnik", 1),
-    crossSectionImage: img("susu-lesnik", 1),
-    gallery: gal("susu-lesnik", 4),
+    crossSectionImage: img("susu-lesnik", 3),
+    gallery: gal("susu-lesnik", 3),
+    declaration: null,
+  },
+  {
+    slug: "susu-pistac",
+    title: "Šu-šu krofnica — pistać",
+    category: "krofnice",
+    isSignature: false,
+    pricePerKg: null,
+    priceNote: "cena na upit",
+    flavors: ["orasasto"],
+    shortDescription: "Krofnica punjena kremom od pistaća.",
+    description: "Za one kojima je pistać dovoljan sam sebi — bez ometanja.",
+    layers: ["krofnica", "krem od pistaća"],
+    ingredientsShort: "pistać, puter, brašno, jaja, mleko",
+    image: img("susu-pistac", 1),
+    crossSectionImage: img("susu-pistac", 3),
+    gallery: gal("susu-pistac", 3),
     declaration: null,
   },
   {
@@ -519,8 +492,42 @@ export const PRODUCTS: ProductData[] = [
     layers: ["krofnica", "krem od Burbon vanile"],
     ingredientsShort: "Burbon vanila, mleko, puter, brašno, jaja",
     image: img("susu-vanila", 1),
-    crossSectionImage: img("susu-vanila", 1),
+    crossSectionImage: img("susu-vanila", 3),
     gallery: gal("susu-vanila", 3),
+    declaration: null,
+  },
+  {
+    slug: "susu-coko-malina",
+    title: "Šu-šu krofnica — čoko malina",
+    category: "krofnice",
+    isSignature: false,
+    pricePerKg: null,
+    priceNote: "cena na upit",
+    flavors: ["cokolada", "voce"],
+    shortDescription: "Krofnica punjena čokoladom i malinom.",
+    description: "Čokolada i malina — par koji nikad nije pogrešio. Ni u krofnici.",
+    layers: ["krofnica", "čokoladni krem", "malina fil"],
+    ingredientsShort: "čokolada, malina, puter, brašno, jaja",
+    image: img("susu-coko-malina", 1),
+    crossSectionImage: img("susu-coko-malina", 3),
+    gallery: gal("susu-coko-malina", 3),
+    declaration: null,
+  },
+  {
+    slug: "susu-cokolada",
+    title: "Šu-šu krofnica — čokolada",
+    category: "krofnice",
+    isSignature: false,
+    pricePerKg: null,
+    priceNote: "cena na upit",
+    flavors: ["cokolada"],
+    shortDescription: "Krofnica punjena čokoladnim kremom.",
+    description: "Klasik koji ne pita za povod: topao čokoladni krem u mekoj krofnici.",
+    layers: ["krofnica", "čokoladni krem"],
+    ingredientsShort: "čokolada, puter, brašno, jaja, mleko",
+    image: img("susu-cokolada", 1),
+    crossSectionImage: img("susu-cokolada", 3),
+    gallery: gal("susu-cokolada", 3),
     declaration: null,
   },
 ]
@@ -575,10 +582,10 @@ export interface InstagramPick {
 }
 
 export const INSTAGRAM_PICKS: InstagramPick[] = [
+  { image: "/images/site/anturijum.jpg", alt: "Bela torta sa anturijumom — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
+  { image: "/images/site/krofnice-kasika.jpg", alt: "Šu-šu krofnice i kašika u letu — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
+  { image: "/images/site/ruke-bela-torta.jpg", alt: "Katarinine ruke nameštaju belu tortu — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
+  { image: "/images/site/coko-tart-rez.jpg", alt: "Serviranje čokoladnog tarta sa slanom karamelom — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
   { image: "/images/site/zute-viole.jpg", alt: "Torta sa žutim violama — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/anturijum-1.jpg", alt: "Bela torta sa anturijumom — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/til-u-letu.jpg", alt: "Torta sa tilom u pokretu — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/roze-karanfil.jpg", alt: "Torta sa roze karanfilom — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/dvostruki-presek.jpg", alt: "Presek dve torte, dva ukusa — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
-  { image: "/images/site/krofnice-hero.jpg", alt: "Šu-šu krofnice na čašama — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
+  { image: "/images/site/zlatni-escajg.jpg", alt: "Parče torte i zlatni escajg u rukama — Puterina, butik torti Beograd", href: "https://www.instagram.com/puterinacakes/" },
 ]

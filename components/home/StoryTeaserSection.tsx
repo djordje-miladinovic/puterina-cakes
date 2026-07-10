@@ -15,7 +15,7 @@ export default function StoryTeaserSection() {
           <div className="img-frame relative aspect-[4/5]">
             <Image
               src="/images/site/prica.jpg"
-              alt="Torta iz Puterina radionice — Puterina, butik torti Beograd"
+              alt="Katarina u kecelji postavlja tortu na postolje — Puterina, butik torti Beograd"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="puterina-img object-cover"

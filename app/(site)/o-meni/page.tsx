@@ -60,7 +60,7 @@ export default function OMeniPage() {
             <div className="img-frame relative aspect-[4/5] w-full">
               <Image
                 src="/images/site/prica.jpg"
-                alt="Torta iz Puterina radionice — Puterina, butik torti Beograd"
+                alt="Katarina u kecelji postavlja tortu na postolje — Puterina, butik torti Beograd"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 45vw"

@@ -18,7 +18,7 @@ export default function HeroSection() {
     >
       <Image
         src="/images/site/hero.jpg"
-        alt="Bela puter-krem torta sa anturijumom — Puterina, butik torti Beograd"
+        alt="Bela puter-krem torta sa jestivim cvećem na postolju — Puterina, butik torti Beograd"
         fill
         priority
         sizes="100vw"
