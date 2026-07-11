@@ -168,7 +168,9 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
-  /* Brand boje za direktnu Tailwind upotrebu (bg-bg2, text-ink, …) */
+  /* Brand boje za direktnu Tailwind upotrebu (bg-bg2, text-ink, …)
+     Legacy imena (cream/warm-brown/blush-pink…) uklonjena 2026-07-11 —
+     poslednji potrošač (menu-overlay) prebačen na V3 tokene. */
   --color-bg: #f8f4eb;
   --color-bg2: #efe8dc;
   --color-ink: #423a31;
@@ -179,21 +181,6 @@
   --color-terra: #c68a68;
   --color-terra-ink: #fcf4ea;
   --color-terra-accent: #f3dfcb;
-
-  /* Legacy imena → mapirana na V3 (postojeće komponente ne pucaju) */
-  --color-cream: #f8f4eb;
-  --color-soft-white: #f8f4eb;
-  --color-warm-brown: #423a31;
-  --color-warm-brown-deep: #423a31;
-  --color-butter-gold: #a83641;
-  --color-butter-gold-hover: #8e2a34;
-  --color-blush-pink: #efe8dc;
-  --color-blush-pink-hover: #e6dcc9;
-  --color-pistachio: #6e7043;
-  --color-raspberry: #a83641;
-  --color-charcoal: #423a31;
-  --color-medium-gray: #877c6c;
-  --color-light-gray: #e6dfd2;
 }
 
 /* ============================================
@@ -301,22 +288,6 @@
 }
 .section-tint {
   background-color: var(--bg2);
-}
-/* Legacy aliasi — sve stare „color-block" sekcije sada su miran tint */
-.section-soft-white {
-  background-color: var(--bg);
-}
-.section-blush {
-  background-color: var(--bg2);
-}
-.section-pistachio {
-  background-color: var(--bg2);
-}
-.section-gold {
-  background-color: var(--bg2);
-}
-.section-brown {
-  background-color: var(--dark);
 }
 
 /* Tamni predah — NUD terakota (nikad crno) */
@@ -579,22 +550,6 @@
   color: var(--accent);
 }
 
-.cta-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  padding: var(--spacing-2) var(--spacing-4);
-  background-color: transparent;
-  color: var(--ink);
-  font-weight: 500;
-  border-radius: var(--radius-btn);
-  transition: background-color var(--transition-base);
-}
-
-.cta-ghost:hover {
-  background-color: color-mix(in srgb, var(--ink) 8%, transparent);
-}
 } /* kraj @layer components (CTA sistem) */
 
 /* ============================================
@@ -645,7 +600,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  /* Mobilni tap-target: 8px vertikalno diže dodirnu zonu na ≥44px
+     (90–95% saobraćaja je telefon); na md se vraća na 0. */
+  padding: 8px 0;
   transition: color var(--transition-base);
 }
 .filter-vrsta .on {
@@ -656,7 +613,8 @@
   position: absolute;
   left: -2%;
   right: -2%;
-  bottom: -4px;
+  /* 4px = kompenzacija mobilnog padding-bottom (8px − 4px ispod teksta) */
+  bottom: 4px;
   height: 0.28em;
   background: var(--cta);
   opacity: 0.42;
@@ -664,47 +622,14 @@
   transform: rotate(-0.8deg);
 }
 
-.chips {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.chips .grp {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-right: 4px;
-}
-.chip {
-  font-size: 13px;
-  color: var(--ink);
-  background: transparent;
-  border: none;
-  padding: 6px 13px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  opacity: 0.72;
-  transition: opacity var(--transition-fast),
-    background-color var(--transition-fast);
-}
-.chip.on {
-  opacity: 1;
-  background: color-mix(in srgb, var(--accent) 20%, var(--bg));
-  color: var(--ink);
-}
-.chip-sezona {
-  margin-left: auto;
-  font-size: 13px;
-  color: var(--ink-muted);
-  cursor: pointer;
-  background: none;
-  border: none;
-  transition: color var(--transition-fast);
-}
-.chip-sezona.on {
-  color: var(--accent);
+@media (min-width: 768px) {
+  .filter-vrsta a,
+  .filter-vrsta button {
+    padding: 0;
+  }
+  .filter-vrsta .on::after {
+    bottom: -4px;
+  }
 }
 
 /* Kartica proizvoda — borderless, bez senki, oštre ivice */
@@ -958,38 +883,3 @@
   padding: var(--spacing-6) var(--spacing-8);
 }
 
-/* Legacy klase (dok ih poslednja stranica ne prestane koristiti) */
-.card-base,
-.card-elevated,
-.card-interactive,
-.card-cream {
-  background-color: var(--bg2);
-  padding: var(--spacing-6);
-}
-
-.input-base {
-  width: 100%;
-  padding: var(--spacing-3) var(--spacing-4);
-  background-color: var(--bg);
-  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
-  border-radius: var(--radius-btn);
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--ink);
-  min-height: 44px;
-}
-
-.section {
-  padding-top: var(--spacing-16);
-  padding-bottom: var(--spacing-16);
-}
-
-.section-textured {
-  position: relative;
-  background-color: var(--bg2);
-}
-
-.section-soft {
-  position: relative;
-  background-color: var(--bg);
-}

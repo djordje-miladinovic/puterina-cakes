@@ -30,7 +30,8 @@ export default function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[13px] uppercase tracking-[0.06em] text-terra-ink/70 transition-opacity duration-300 hover:text-terra-ink"
+                // py-1: veća dodirna zona na telefonu (glavna publika)
+                className="py-1 text-[13px] uppercase tracking-[0.06em] text-terra-ink/70 transition-opacity duration-300 hover:text-terra-ink"
               >
                 {item.name}
               </Link>

@@ -8,7 +8,10 @@ const fraunces = Fraunces({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-fraunces",
-  axes: ["SOFT", "WONK", "opsz"],
+  // Samo osa koja se zaista koristi (font-variation-settings "opsz");
+  // SOFT/WONK izbačene 2026-07-11 — niko ih ne postavlja (default 0),
+  // a znatno su uvećavale font fajl (mobilni saobraćaj 90–95%).
+  axes: ["opsz"],
 });
 
 const inter = Inter({

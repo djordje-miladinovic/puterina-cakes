@@ -77,7 +77,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
     >
       <div className="flex h-full flex-col md:flex-row">
         {/* Leva kolona — brend + info */}
-        <div className="hidden md:flex md:w-2/5 flex-col justify-between bg-blush-pink p-10 lg:p-14">
+        <div className="hidden md:flex md:w-2/5 flex-col justify-between bg-bg2 p-10 lg:p-14">
           <span
             className="h2"
             style={{ fontFamily: "var(--font-heading)" }}
@@ -86,11 +86,11 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
             Puterina
           </span>
 
-          <div className="space-y-5 text-warm-brown">
+          <div className="space-y-5 text-ink">
             <p className="body-large font-medium">{WORKING_HOURS.display}</p>
             <a
               href={`tel:${CONTACT.phone}`}
-              className="body-large block font-semibold hover:text-warm-brown-deep"
+              className="body-large block font-semibold hover:text-oliva"
             >
               {CONTACT.phoneDisplay}
             </a>
@@ -126,18 +126,22 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
           </div>
         </div>
 
-        {/* Desna kolona — navigacija */}
-        <div className="relative flex flex-1 flex-col justify-center bg-cream px-6 py-20 md:px-14 lg:px-20">
+        {/* Desna kolona — navigacija. Scroll kontejner + my-auto wrapper:
+            centrirano kad sadržaj staje na ekran, a skroluje se na niskim
+            telefonima i u landscape-u (justify-center bi odsekao vrh). */}
+        <div className="relative flex flex-1 flex-col bg-bg">
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label="Zatvorite meni"
-            className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-full text-warm-brown hover:bg-blush-pink transition-colors"
+            className="absolute right-5 top-5 z-10 flex h-12 w-12 items-center justify-center rounded-full text-ink hover:bg-bg2 transition-colors"
           >
             <X className="h-7 w-7" aria-hidden />
           </button>
 
+          <div className="flex flex-1 flex-col overflow-y-auto px-6 py-20 md:px-14 lg:px-20">
+            <div className="my-auto">
           <nav aria-label="Glavna navigacija">
             <ul className="space-y-2 md:space-y-4">
               {NAVIGATION.map((item, i) => {
@@ -150,10 +154,10 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "group flex items-baseline gap-4 py-1",
-                        "text-warm-brown hover:text-warm-brown-deep transition-colors"
+                        "text-ink hover:text-oliva transition-colors"
                       )}
                     >
-                      <span className="caption w-6 text-medium-gray" aria-hidden>
+                      <span className="caption w-6 text-ink-muted" aria-hidden>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span
@@ -172,7 +176,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
           </nav>
 
           {/* Mobile info (leva kolona je skrivena) */}
-          <div className="mt-12 space-y-2 text-warm-brown md:hidden">
+          <div className="mt-12 space-y-2 text-ink md:hidden">
             <p className="body-small font-medium">{WORKING_HOURS.display}</p>
             <a
               href={`tel:${CONTACT.phone}`}
@@ -205,12 +209,14 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
 
           <a
             href={`tel:${CONTACT.phone}`}
-            className="cta-primary mt-10 self-start md:hidden"
+            className="cta-primary mt-10 md:hidden"
             onClick={onClose}
           >
             <Phone className="h-4 w-4" aria-hidden />
             Pozovite
           </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

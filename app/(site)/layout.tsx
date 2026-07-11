@@ -22,6 +22,11 @@ export default async function SiteLayout({
 
   return (
     <>
+      {/* No-JS fallback: bez JS-a IntersectionObserver nikad ne doda
+          .is-visible, pa bi sav .reveal sadržaj ostao na opacity 0. */}
+      <noscript>
+        <style>{`.reveal { opacity: 1 !important; transform: none !important; }`}</style>
+      </noscript>
       <JsonLd />
       <PauseBanner
         aktivna={settings.pauzaAktivna}

@@ -21,7 +21,7 @@ export default function UtisciPage() {
       <div className="section-cream pb-20 pt-28 md:pb-28 md:pt-36">
         <div className="container-site">
           <Reveal>
-            <span className="label mb-4 block">06 — Reči kupaca</span>
+            <span className="label mb-4 block">Reči kupaca</span>
             <h1>Poruke koje čuvam</h1>
             <p className="body-large mt-4 max-w-xl text-ink-muted">
               Najviše me raduju poruke koje stignu posle proslave. Ovde ih

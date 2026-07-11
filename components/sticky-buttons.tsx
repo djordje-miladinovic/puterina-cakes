@@ -20,8 +20,10 @@ export default function StickyButtons() {
     triggerRef.current?.focus()
   }, [])
 
-  // Sanity Studio ne treba sticky CTA
-  if (pathname.startsWith("/studio")) return null
+  // Sanity Studio ne treba sticky CTA. (?.: usePathname ume da vrati
+  // null/"" na prvom klijentskom renderu u prod buildu — isti guard
+  // kao u header.tsx, inače sticky CTA obara celu stranicu.)
+  if (pathname?.startsWith("/studio")) return null
 
   return (
     <>
